@@ -134,9 +134,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 " python-related stuff (linter, etc)
 Plugin 'klen/python-mode'
-
-" Powerline-related
-Plugin 'powerline/powerline'
+" Airline
+Plugin 'bling/vim-airline'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -175,10 +174,9 @@ let g:pyflakes_use_quickfix = 0
 let g:pep8_map='<leader>8'
 
 
-" -- setup powerline
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-set t_Co=256          " 256-color terminal
-set laststatus=2      " always show the status line
+" -- setup airline
+set t_Co=256                    " 256-color terminal
+let g:airline_powerline_fonts=1 " if funny symbols show in the status line, set this to 0
 
 " -- special mappings
 "  putty note: if having issues, switch to using Xterm R6 function keys
