@@ -21,5 +21,10 @@ vim -c ":BundleInstall"
 echo "* tmux"
 ln -sf `pwd`/tmux.conf ~/.tmux.conf
 
-echo "* bash/aliases"
+echo "* bash"
+echo "** aliases"
 ln -sf `pwd`/aliases ~/.bash_aliases
+
+echo "** source bashrc"
+echo "source `pwd`/bashrc" >> ~/.bashrc
+
