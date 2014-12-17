@@ -1,0 +1,195 @@
+" .vimrc
+"
+" Use Vim settings, rather then Vi settings
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+colorscheme desert
+" change dir to file location
+set acd                " current directory follows file being edited
+set ic                 " case-insensitive search by default
+set guifont=Consolas:h10
+
+set imdisable          " Disable the IME (gvim and unicode don't play well on different locale)
+set guioptions=cmgtTr 
+set autoindent         " always set autoindenting on
+set history=500        " keep x lines of command line history
+set ruler              " show the cursor position all the time
+set showcmd            " display incomplete commands
+set incsearch          " do incremental searching
+
+" Don't use Ex mode, use Q for formatting
+map Q gq
+
+" Make p in Visual mode replace the selected text with the "" register.
+vnoremap p <Esc>:let current_reg = @"<CR>gvs<C-R>=current_reg<CR><Esc>
+
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Enable file type detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indenting.
+  " filetype plugin indent on
+
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=78
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+endif " has("autocmd")
+
+" set the 'cpoptions' to its Vim default
+if 1    " only do this when compiled with expression evaluation
+  let s:save_cpo = &cpoptions
+endif
+
+" set 'selection', 'selectmode', 'mousemodel' and 'keymodel' for MS-Windows
+behave mswin
+
+" backspace and cursor keys wrap to previous/next line
+set backspace=2 whichwrap+=<,>,[,]
+
+" backspace in Visual mode deletes selection
+vnoremap <BS> d
+
+" Alt-Space is System menu
+if has("gui")
+  noremap <M-Space> :simalt ~<CR>
+  inoremap <M-Space> <C-O>:simalt ~<CR>
+  cnoremap <M-Space> <C-C>:simalt ~<CR>
+endif
+
+set tabstop=4 shiftwidth=4 autoindent
+set expandtab          " tabs -> spaces (:retab)
+set smartindent        " smartindent when starting new line
+set foldmethod=indent
+set foldlevel=99
+set vb                 " ** visual bell, no beeping! **
+set nobackup
+set nowritebackup
+set wrap
+
+" Floats -> double
+map <C-F> :s/\([0-9]\)f/\1/ <cr>
+map <C-T> :s/;\s*$// <cr>
+
+" Simplified window motion (ctrl+direction)
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
+map <c-=> <c-w>=
+
+" remap arrow keys to open up quickfix
+map <Left> :copen<cr>
+map <Right> :cclose<cr>
+map <Up> :cp<cr>
+map <Down> :cn<cr>
+let mapleader = ","
+
+" Camel case conversion stuff on line
+vnoremap <leader>c :s/\C\%V_\([a-z]\)/\u\1/g<CR>gUl<cr>:nohlsearch<cr>
+vnoremap <leader>u :s/\C\%V\<\@!\([A-Z]\)/\_\l\1/g<CR>gul<CR>:nohlsearch<CR>
+
+map <leader>j :bn<cr>
+map <leader>k :bp<cr>
+
+set mouse+=a
+if &term =~ '^screen'
+    " tmux knows the extended mouse mode
+    set ttymouse=xterm2
+endif
+
+if &diff
+  set diffopt=filler,context:3
+endif
+
+" ----- vundle ------
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+" Ctrl-P - fuzzy file searching
+Plugin 'kien/ctrlp.vim'
+" ease tmux integration
+Plugin 'christoomey/vim-tmux-navigator'
+" python-related stuff (linter, etc)
+Plugin 'klen/python-mode'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+syntax on
+
+" ----- vundle ------
+
+
+" Ctrl-P setup:
+" -> r = nearest ancestor with repo directory
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
+" -- python mode
+" E501 = line too long, C901 = too complex
+" let g:pymode_indent = 0 " use python-indent not from python-mode
+" autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class  
+let g:pymode_lint_ignore = "E501,C901"
+highlight LineNr ctermfg=red
+highlight LineNr guifg=#FF0000
+" let NERDTreeIgnore = ['\.pyc$']
+let g:netrw_list_hide='.git,'
+let g:netrw_list_hide.='\.svn,'
+let g:netrw_list_hide.='\.hg,'
+let g:netrw_list_hide.='\.py[co],'
+let g:netrw_list_hide.='\.sw[op],'
+let g:pyflakes_use_quickfix = 0
+let g:pep8_map='<leader>8'
+
+
+" -- special mappings
+"  putty note: if having issues, switch to using Xterm R6 function keys
+"
+" F3 recursively searches all files in the current directory (with the same
+"    extension as the current file) for the word under the cursor
+map <F3> <ESC>:vs<CR><ESC> :execute "lvimgrep /" . expand("<cword>") . "./**/*." . expand("%:e")<CR><ESC>:lw<CR>
+" F4 recursively searches all files in the current directory for the word
+"    under the cursor
+map <F4> <ESC>:vs<CR><ESC> :execute "lvimgrep /" . expand("<cword>") . "./**"<CR><ESC>:lw<CR>
+" F5 writes the current file and runs make
+map <F5> :w<cr>:make<cr>
+imap <F5> <esc>:w<cr>:make<cr>
+
+" Sudo write (not so safe...)
+if executable('sudo') && executable('tee')
+  command! SUwrite
+        \ execute 'w !sudo tee % > /dev/null' |
+        \ setlocal nomodified
+endif
+
+cmap w!! :SUwrite<cr>
