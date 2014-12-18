@@ -162,6 +162,11 @@ let g:ctrlp_custom_ignore = {
 " let g:pymode_indent = 0 " use python-indent not from python-mode
 " autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class  
 let g:pymode_lint_ignore = "E501,C901"
+
+" disable the 80char vertical line
+let g:pymode_options_colorcolumn = 0
+" disable code completion
+let g:pymode_rope_completion = 0
 highlight LineNr ctermfg=red
 highlight LineNr guifg=#FF0000
 " let NERDTreeIgnore = ['\.pyc$']
