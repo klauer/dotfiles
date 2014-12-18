@@ -173,7 +173,6 @@ let g:netrw_list_hide.='\.sw[op],'
 let g:pyflakes_use_quickfix = 0
 let g:pep8_map='<leader>8'
 
-
 " -- setup airline
 set t_Co=256                    " 256-color terminal
 let g:airline_powerline_fonts=1 " if funny symbols show in the status line, set this to 0
