@@ -98,10 +98,10 @@ map <c-h> <c-w>h
 map <c-=> <c-w>=
 
 " remap arrow keys to open up quickfix
-map <Left> :copen<cr>
-map <Right> :cclose<cr>
-map <Up> :cp<cr>
-map <Down> :cn<cr>
+map <Left> :lopen<cr>
+map <Right> :lclose<cr>
+map <Up> :lprev<cr>
+map <Down> :lnext<cr>
 let mapleader = ","
 
 " Camel case conversion stuff on line
@@ -162,6 +162,7 @@ let g:ctrlp_custom_ignore = {
 " let g:pymode_indent = 0 " use python-indent not from python-mode
 " autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class  
 let g:pymode_lint_ignore = "E501,C901"
+let g:pymode_syntax_slow_sync = 1
 
 " disable the 80char vertical line
 let g:pymode_options_colorcolumn = 0
@@ -206,3 +207,13 @@ if executable('sudo') && executable('tee')
 endif
 
 cmap w!! :SUwrite<cr>
+
+" Move visual block - select and move with J/K
+vnoremap J :m '>+1<CR>gv=gv 
+vnoremap K :m '<-2<CR>gv=gv
+
+noremap <S-return> <cr>
+noremap <C-return> <cr>
+inoremap <S-return> <cr>
+inoremap <C-return> <cr>
+" * to select word, %s//repl_with/cg
