@@ -1,4 +1,6 @@
 export EPICS_BASE=/usr/lib/epics
 export EDMDATAFILES=.:/usr/lib/epics/op/edl
 
-export TERM=xterm-256color
+export PATH=$HOME/dotfiles/bin:$PATH
+
+export TERM=screen-256color
