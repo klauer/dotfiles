@@ -91,17 +91,18 @@ map <C-F> :s/\([0-9]\)f/\1/ <cr>
 map <C-T> :s/;\s*$// <cr>
 
 " Simplified window motion (ctrl+direction)
-map <c-j> <c-w>j
+" map <c-j> <c-w>j
+map <c-j> itest
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
 map <c-=> <c-w>=
 
 " remap arrow keys to open up quickfix
-map <Left> :copen<cr>
-map <Right> :cclose<cr>
-map <Up> :cp<cr>
-map <Down> :cn<cr>
+map <Left> :lopen<cr>
+map <Right> :lclose<cr>
+map <Up> :lprev<cr>
+map <Down> :lnext<cr>
 let mapleader = ","
 
 " Camel case conversion stuff on line
@@ -131,12 +132,14 @@ call vundle#begin("$HOME/.nvim/bundle")
 Plugin 'gmarik/Vundle.vim'
 " Ctrl-P - fuzzy file searching
 Plugin 'kien/ctrlp.vim'
-" ease tmux integration
-Plugin 'christoomey/vim-tmux-navigator'
+" " ease tmux integration
+" Plugin 'christoomey/vim-tmux-navigator'
 " python-related stuff (linter, etc)
 Plugin 'klen/python-mode'
 " Airline
 Plugin 'bling/vim-airline'
+" New neovim linter
+Plugin 'benekastah/neomake'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -166,8 +169,10 @@ let g:pymode_lint_ignore = "E501,C901"
 
 " disable the 80char vertical line
 let g:pymode_options_colorcolumn = 0
-" disable code completion
+" disable rope project / code completion
+let g:pymode_rope = 0
 let g:pymode_rope_completion = 0
+
 highlight LineNr ctermfg=red
 highlight LineNr guifg=#FF0000
 " let NERDTreeIgnore = ['\.pyc$']
@@ -177,7 +182,13 @@ let g:netrw_list_hide.='\.hg,'
 let g:netrw_list_hide.='\.py[co],'
 let g:netrw_list_hide.='\.sw[op],'
 let g:pyflakes_use_quickfix = 0
+let g:pymode_lint = 0
 let g:pep8_map='<leader>8'
+
+" -- neomake linter
+" E501 = line too long, C901 = too complex
+let g:neomake_python_pep8_maker = {'args': ['--ignore', 'E501,C901']}
+autocmd BufWritePost *.py Neomake
 
 " -- setup airline
 set t_Co=256                    " 256-color terminal
@@ -207,3 +218,13 @@ if executable('sudo') && executable('tee')
 endif
 
 cmap w!! :SUwrite<cr>
+
+" Move visual block - select and move with J/K
+vnoremap J :m '>+1<CR>gv=gv 
+vnoremap K :m '<-2<CR>gv=gv
+
+noremap <S-return> <cr>
+noremap <C-return> <cr>
+inoremap <S-return> <cr>
+inoremap <C-return> <cr>
+" * to select word, %s//repl_with/cg
