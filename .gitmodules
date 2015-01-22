@@ -1,0 +1,3 @@
+[submodule "remote/git-remote-hg"]
+	path = remote/git-remote-hg
+	url = https://github.com/felipec/git-remote-hg
