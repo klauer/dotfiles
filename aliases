@@ -4,6 +4,8 @@ alias l='ls'
 alias ll='ls -al'
 alias lh='ls -Alh'
 
+alias ue='tmux update-env'
+
 alias vim='vim -X'
 alias ssh='ssh -Y'
 alias sudo='sudo ' # this allows for aliases to be passed through to sudo
