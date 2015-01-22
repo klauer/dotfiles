@@ -47,3 +47,4 @@ ln -sf `pwd`/aliases ~/.bash_aliases
 echo "** source bashrc"
 echo "source `pwd`/bashrc" >> ~/.bashrc
 
+source remote/init.sh
