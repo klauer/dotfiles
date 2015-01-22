@@ -7,7 +7,7 @@ VIM_VUNDLE_PATH=~/.vim/bundle/Vundle.vim
 
 echo "* vim"
 ln -sf `pwd`/vim/ ~/.vim
-ln -sf ~/.vim/vimrc ~/.vimrc
+ln -sf ~/.nvim/nvimrc ~/.vimrc
 
 mkdir -p vim/bundle
 
