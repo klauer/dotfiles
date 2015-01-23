@@ -19,6 +19,7 @@ set history=500        " keep x lines of command line history
 set ruler              " show the cursor position all the time
 set showcmd            " display incomplete commands
 set incsearch          " do incremental searching
+let mapleader = ","    " prefix when using <leader> in map
 
 " Don't use Ex mode, use Q for formatting
 map Q gq
@@ -243,7 +244,6 @@ map <leader>J :lopen<cr>
 map <leader>L :lclose<cr>
 map <leader>K :lprev<cr>
 map <leader>J :lnext<cr>
-let mapleader = ","
 
 " Camel case conversion stuff on line
 vnoremap <leader>c :s/\C\%V_\([a-z]\)/\u\1/g<CR>gUl<cr>:nohlsearch<cr>
