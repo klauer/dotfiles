@@ -122,6 +122,10 @@ Plugin 'klen/python-mode'
 Plugin 'bling/vim-airline'
 " better tmux integration
 Plugin 'christoomey/vim-tmux-navigator'
+" git wrapper fugitive
+Plugin 'tpope/vim-fugitive'
+" fugitive extension for managing/merging git branches
+Plugin 'idanarye/vim-merginal'
 
 if has('nvim')
     " (neovim)
