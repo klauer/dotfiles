@@ -126,6 +126,8 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-fugitive'
 " fugitive extension for managing/merging git branches
 Plugin 'idanarye/vim-merginal'
+" jedi-vim completion
+Plugin 'davidhalter/jedi-vim'
 
 if has('nvim')
     " (neovim)
@@ -164,6 +166,10 @@ let g:pymode_options_colorcolumn = 0
 " disable rope project / code completion
 let g:pymode_rope = 0
 let g:pymode_rope_completion = 0
+
+" only use jedi completion with ctrl-space, not after '.'
+let g:jedi#completions_command = "<C-space>"
+let g:jedi#popup_on_dot = 0
 
 highlight LineNr ctermfg=red
 highlight LineNr guifg=#FF0000
