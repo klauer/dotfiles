@@ -23,6 +23,11 @@ function tmux() {
     esac
 }
 
+# disable ctrl-s/ctrl-q
+stty stop ''
+stty start ''
+stty -ixon
+stty -ixoff
 
 export EPICS_BASE=/usr/lib/epics
 export EDMDATAFILES=.:/usr/lib/epics/op/edl

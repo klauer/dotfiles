@@ -62,7 +62,7 @@ if 1    " only do this when compiled with expression evaluation
 endif
 
 " set 'selection', 'selectmode', 'mousemodel' and 'keymodel' for MS-Windows
-behave mswin
+" behave mswin
 
 " backspace and cursor keys wrap to previous/next line
 set backspace=2 whichwrap+=<,>,[,]
@@ -110,6 +110,7 @@ endif
 let vundle_path=bundle_path . "/Vundle.vim"
 
 let &rtp .= ',' . vundle_path
+filetype off  " <-- required for vundle
 call vundle#begin(bundle_path)
 
 " let Vundle manage Vundle, required
@@ -128,6 +129,9 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'idanarye/vim-merginal'
 " jedi-vim completion
 Plugin 'davidhalter/jedi-vim'
+" snippets
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 if has('nvim')
     " (neovim)
@@ -170,6 +174,18 @@ let g:pymode_rope_completion = 0
 " only use jedi completion with ctrl-space, not after '.'
 let g:jedi#completions_command = "<C-space>"
 let g:jedi#popup_on_dot = 0
+
+" snippets with ctrl-s (ensure bashrc has:
+"   stty stop ''; stty start ''; stty -ixon; stty -ixoff;
+" )
+let g:UltiSnipsExpandTrigger="<c-s>"
+let g:UltiSnipsListSnippets="<c-e>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEnableSnipMate=0
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 highlight LineNr ctermfg=red
 highlight LineNr guifg=#FF0000
@@ -223,9 +239,9 @@ endif
 
 cmap w!! :SUwrite<cr>
 
-" Move visual block - select and move with J/K
-vnoremap J :m '>+1<CR>gv=gv 
-vnoremap K :m '<-2<CR>gv=gv
+" Move visual block - select and move with R/F
+vnoremap F :m '>+1<CR>gv=gv 
+vnoremap R :m '<-2<CR>gv=gv
 
 noremap <S-return> <cr>
 noremap <C-return> <cr>
@@ -234,8 +250,8 @@ inoremap <C-return> <cr>
 " * to select word, %s//repl_with/cg
 
 " Floats -> double
-map <C-F> :s/\([0-9]\)f/\1/ <cr>
-map <C-T> :s/;\s*$// <cr>
+" map <C-F> :s/\([0-9]\)f/\1/ <cr>
+" map <C-T> :s/;\s*$// <cr>
 
 " Simplified window motion (ctrl+direction)
 map <c-j> <c-w>j
