@@ -132,6 +132,8 @@ Plugin 'davidhalter/jedi-vim'
 " snippets
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+" Tabular alignment :Tab/,
+Plugin 'godlygeek/tabular.git'
 
 if has('nvim')
     " (neovim)
