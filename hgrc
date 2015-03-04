@@ -1,0 +1,45 @@
+[ui]
+username = K Lauer <klauer@bnl.gov>
+editor = vim
+verbose = True
+
+[http_proxy]
+host = proxy:8888
+
+[alias]
+id = id -ivnb
+
+[extensions]
+#hgext.shelve = 
+#forest = /home/klauer/tmp/hgforest/forest.py
+#hgext.convert = 
+#hgext.glog = 
+hgext.pager = 
+record =
+graphlog =
+pager =
+#color = 
+transplant =
+patchbomb =
+convert =
+mq =
+rebase =
+#histedit=
+
+[diff]
+git = True
+#ignorews = True
+#ignorewsamount = True
+#ignoreblanklines = True
+
+#[pager]
+#application = LESS= 'FRSXQ' less
+#quiet = True
+#ignore = version,update,push,pull,merge,fetch,convert,clone,record,crecord,incoming,outgoing
+
+#[color]
+#mode = terminfo
+
+# [trusted]
+# users = softioc
+# groups = operator

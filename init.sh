@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # TODO: use rcm? https://github.com/thoughtbot/rcm
+# TODO: or dotbot? https://github.com/anishathalye/dotbot
 
 # -- vim
 VIM_VUNDLE_PATH=~/.vim/bundle/Vundle.vim
@@ -46,5 +47,18 @@ ln -sf `pwd`/aliases ~/.bash_aliases
 
 echo "** source bashrc"
 echo "source `pwd`/bashrc" >> ~/.bashrc
+
+# -- git
+echo "* git"
+ln -sf `pwd`/gitconfig ~/.gitconfig
+
+# -- hg
+echo "* hg"
+ln -sf `pwd`/hgrc ~/.hgrc
+
+# -- conda
+echo "* conda"
+ln -sf `pwd`/.condarc ~/.condarc
+
 
 source remote/init.sh

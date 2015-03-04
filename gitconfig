@@ -1,0 +1,18 @@
+[user]
+	name = K Lauer
+	email = klauer@bnl.gov
+
+[url "http://git.code.sf.net/"]
+	insteadOf = git://git.code.sf.net/
+
+[http]
+	proxy = http://proxy:8888
+
+[apply]
+    whitespace = nowarn
+
+[color]
+    ui = auto
+
+[core]
+    editor = /usr/bin/vim
