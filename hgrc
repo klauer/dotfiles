@@ -42,6 +42,6 @@ git = True
 #[color]
 #mode = terminfo
 
-# [trusted]
-# users = softioc
-# groups = operator
+[trusted]
+users = softioc
+groups = operator
