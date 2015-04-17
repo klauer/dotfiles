@@ -6,7 +6,7 @@ set nocompatible
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
-colorscheme desert
+colorscheme ir_black
 " change dir to file location
 set acd                " current directory follows file being edited
 set ic                 " case-insensitive search by default
