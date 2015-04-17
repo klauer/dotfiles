@@ -5,6 +5,9 @@
 [url "http://git.code.sf.net/"]
 	insteadOf = git://git.code.sf.net/
 
+[url "https://github.com/"]
+	insteadOf = git://github.com
+
 [http]
 	proxy = http://proxy:8888
 
