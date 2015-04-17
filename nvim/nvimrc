@@ -61,9 +61,6 @@ if 1    " only do this when compiled with expression evaluation
   let s:save_cpo = &cpoptions
 endif
 
-" set 'selection', 'selectmode', 'mousemodel' and 'keymodel' for MS-Windows
-" behave mswin
-
 " backspace and cursor keys wrap to previous/next line
 set backspace=2 whichwrap+=<,>,[,]
 
@@ -157,7 +154,7 @@ set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'file': '\v\.(exe|so|dll|pyc|pyo)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
 
