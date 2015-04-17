@@ -29,6 +29,7 @@ stty start ''
 stty -ixon
 stty -ixoff
 
+export EDITOR=vim
 export EPICS_BASE=/usr/lib/epics
 export EDMDATAFILES=.:/usr/lib/epics/op/edl
 
