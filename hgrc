@@ -8,6 +8,8 @@ host = proxy:8888
 
 [alias]
 id = id -ivnb
+pull = pull --insecure
+push = push --insecure
 
 [extensions]
 #hgext.shelve = 
