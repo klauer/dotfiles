@@ -131,6 +131,9 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 " Tabular alignment :Tab/,
 Plugin 'godlygeek/tabular.git'
+" QFEnter - quickfix open target window customization
+Plugin 'yssl/QFEnter'
+
 
 if has('nvim')
     " (neovim)
@@ -188,8 +191,14 @@ let g:ultisnips_python_style='numpy'
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
+" make QFEnter behavior map to the same keys as Ctrl-P
+let g:qfenter_vopen_map = ['<C-v>']
+let g:qfenter_hopen_map = ['<C-CR>', '<C-s>', '<C-x>']
+let g:qfenter_topen_map = ['<C-t>']
+
 highlight LineNr ctermfg=red
 highlight LineNr guifg=#FF0000
+
 " let NERDTreeIgnore = ['\.pyc$']
 let g:netrw_list_hide='.git,'
 let g:netrw_list_hide.='\.svn,'
