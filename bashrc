@@ -38,7 +38,7 @@ export http_proxy="http://proxy:8888"
 export https_proxy="http://proxy:8888"
 
 # path
-export PATH=$HOME/dotfiles/bin:$PATH
+export PATH=$HOME/dotfiles/bin:$HOME/.local/bin:$PATH
 export TERM=screen-256color
 
 # EPICS
@@ -46,3 +46,5 @@ export EPICS_CA_AUTO_ADDR_LIST=NO
 export EPICS_CA_ADDR_LIST="`python $HOME/dotfiles/bin/get_ca_bcast_addr.py`"
 export EPICS_CA_MAX_ARRAY_BYTES=20000000
 
+# neovim TUI config (note: may change)
+export NVIM_TUI_ENABLE_CURSOR_SHAPE=1

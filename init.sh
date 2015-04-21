@@ -17,6 +17,8 @@ if [ ! -d $VIM_VUNDLE_PATH ]; then
     git clone https://github.com/gmarik/Vundle.vim.git $VIM_VUNDLE_PATH
 fi
 
+pip install --user flake8
+
 echo "** installing bundles"
 vim -c ":BundleInstall"
 
@@ -60,5 +62,8 @@ ln -sf `pwd`/hgrc ~/.hgrc
 echo "* conda"
 ln -sf `pwd`/.condarc ~/.condarc
 
+# -- flake8 settings
+echo "* flake8"
+ln -sf `pwd`/flake8 ~/.config/flake8
 
 source remote/init.sh

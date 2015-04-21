@@ -114,12 +114,12 @@ call vundle#begin(bundle_path)
 Plugin 'gmarik/Vundle.vim'
 " Ctrl-P - fuzzy file searching
 Plugin 'kien/ctrlp.vim'
-" python-related stuff (linter, etc)
-Plugin 'klen/python-mode'
 " Airline
 Plugin 'bling/vim-airline'
 " better tmux integration
 Plugin 'christoomey/vim-tmux-navigator'
+" Python PEP8 checking
+Plugin 'nvie/vim-flake8'
 " git wrapper fugitive
 Plugin 'tpope/vim-fugitive'
 " fugitive extension for managing/merging git branches
@@ -148,6 +148,9 @@ syntax on
 
 " ----- end vundle ------
 
+" line numbering
+set number
+set numberwidth=5
 
 " Ctrl-P setup:
 " -> r = nearest ancestor with repo directory
@@ -160,18 +163,6 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|pyc|pyo)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
-
-" -- python mode
-" E501 = line too long, C901 = too complex
-" let g:pymode_indent = 0 " use python-indent not from python-mode
-" autocmd BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class  
-let g:pymode_lint_ignore = "E501,C901"
-
-" disable the 80char vertical line
-let g:pymode_options_colorcolumn = 0
-" disable rope project / code completion
-let g:pymode_rope = 0
-let g:pymode_rope_completion = 0
 
 " only use jedi completion with ctrl-space, not after '.'
 let g:jedi#completions_command = "<C-space>"
@@ -205,19 +196,21 @@ let g:netrw_list_hide.='\.svn,'
 let g:netrw_list_hide.='\.hg,'
 let g:netrw_list_hide.='\.py[co],'
 let g:netrw_list_hide.='\.sw[op],'
-let g:pyflakes_use_quickfix = 0
-let g:pep8_map='<leader>8'
 
 if has('nvim')
     " (neovim)
-    " turn off pymode's linter
-    let g:pymode_lint = 0
-
-    " -- and use neomake's linter
+    " use neomake's linter
     " E501 = line too long, C901 = too complex
-    let g:neomake_python_pep8_maker = {'args': ['--ignore', 'E501,C901']}
-    autocmd BufWritePost *.py Neomake
+    " let g:neomake_python_pep8_maker = {'args': ['--ignore', 'E501,C901']}
+    " autocmd BufWritePost *.py Neomake
 
+endif
+
+if has("autocmd")
+    " Flake8 settings
+    " for regular vim, use flake8 linter
+    autocmd BufWritePost *.py call Flake8()
+    " flake8 config is in ~/.config/flake8
 endif
 
 " -- setup airline
