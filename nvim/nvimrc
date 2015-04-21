@@ -165,8 +165,36 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 " only use jedi completion with ctrl-space, not after '.'
-let g:jedi#completions_command = "<C-space>"
+let g:jedi#usages_command = "<Leader>z"
+let g:jedi#goto_assignments_command = "<Leader>g"
+let g:jedi#goto_definitions_command = "<Leader>d"
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<Leader>n"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<Leader>r"
 let g:jedi#popup_on_dot = 0
+let g:jedi#popup_select_first = 0
+
+" background color for omnicomplete
+highlight Pmenu ctermbg=blue gui=bold
+
+" " Better navigating through omnicomplete option list
+" " See
+" http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
+set completeopt=longest,menuone
+function! OmniPopup(action)
+    if pumvisible()
+        if a:action == 'j'
+            return "\<C-N>"
+        elseif a:action == 'k'
+            return "\<C-P>"
+        endif
+    endif
+    return a:action
+endfunction
+
+inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
+inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 
 " snippets with ctrl-s (ensure bashrc has:
 "   stty stop ''; stty start ''; stty -ixon; stty -ixoff;
