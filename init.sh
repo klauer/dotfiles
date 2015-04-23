@@ -35,6 +35,8 @@ if [ ! -d $NVIM_VUNDLE_PATH ]; then
     git clone https://github.com/gmarik/Vundle.vim.git $NVIM_VUNDLE_PATH
 fi
 
+pip install --user neovim
+
 echo "** installing bundles"
 nvim -c ":BundleInstall"
 
