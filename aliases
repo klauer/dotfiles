@@ -8,7 +8,19 @@ alias lh='ls -Alh'
 
 alias ue='tmux update-env'
 
-alias vim='vim -X'
+# Use neovim if available:
+(which nvim > /dev/null) && use_nvim=1
+if [[ -n "$use_nvim" ]]; then
+    # -X stops from connecting to X server
+    alias vi='nvim -X'
+    alias vim='nvim -X'
+    alias view='nvim -XR'
+else
+    alias vi='vim -X'
+    alias vim='vim -X'
+    alias view='vim -XR'
+fi
+
 alias ssh='ssh -Y'
 alias sudo='sudo ' # this allows for aliases to be passed through to sudo
 
