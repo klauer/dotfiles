@@ -79,7 +79,7 @@ set expandtab          " tabs -> spaces (:retab)
 set smartindent        " smartindent when starting new line
 set foldmethod=indent
 set foldlevel=99
-set vb                 " ** visual bell, no beeping! **
+set novb                 " ** visual bell, no beeping! **
 set nobackup
 set nowritebackup
 set wrap
@@ -237,6 +237,8 @@ if has("autocmd")
     " Flake8 settings
     " for regular vim, use flake8 linter
     autocmd BufWritePost *.py call Flake8()
+    autocmd FileType python,c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
+
     " flake8 config is in ~/.config/flake8
 endif
 
@@ -307,3 +309,7 @@ vnoremap <leader>u :s/\C\%V\<\@!\([A-Z]\)/\_\l\1/g<CR>gul<CR>:nohlsearch<CR>
 
 map <leader>j :bn<cr>
 map <leader>k :bp<cr>
+
+" filetype plugin indent off
+" set cindent
+" set cino=(0
