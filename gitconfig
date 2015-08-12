@@ -9,7 +9,10 @@
 	insteadOf = git://github.com
 
 [http]
-	proxy = http://proxy:8888
+	proxy = https://proxy:8888
+
+[https]
+	proxy = https://proxy:8888
 
 [apply]
     whitespace = nowarn

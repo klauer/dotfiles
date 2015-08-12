@@ -44,4 +44,4 @@ git = True
 
 [trusted]
 users = softioc
-groups = operator
+groups = operator olog-logs
