@@ -3,12 +3,38 @@
 # TODO: use rcm? https://github.com/thoughtbot/rcm
 # TODO: or dotbot? https://github.com/anishathalye/dotbot
 
+# -- bash
+echo "* bash"
+echo "** aliases"
+ln -sf `pwd`/aliases $HOME/.bash_aliases
+
+conf_line="$(grep `pwd`/bashrc $HOME/.bashrc)"
+
+echo "** source bashrc"
+if [ -z "$grep" ]; then
+    echo "Adding bashrc config"
+    echo "source `pwd`/bashrc" >> $HOME/.bashrc
+    source $HOME/.bashrc
+else
+    echo "bashrc config already set"
+fi
+
 # -- vim
-VIM_VUNDLE_PATH=~/.vim/bundle/Vundle.vim
+VIM_VUNDLE_PATH=$HOME/.vim/bundle/Vundle.vim
 
 echo "* vim"
-ln -sf `pwd`/vim/ ~/.vim
-ln -sf ~/.nvim/nvimrc ~/.vimrc
+
+if [ ! -d $HOME/.vim ]; then
+    ln -sf `pwd`/vim/ $HOME/.vim
+else
+    echo "** vim config directory already exists"
+fi
+
+if [ ! -a $HOME/.vimrc ]; then
+    ln -sf $HOME/.nvim/nvimrc $HOME/.vimrc
+else
+    echo "** vimrc already exists"
+fi
 
 mkdir -p vim/bundle
 
@@ -24,9 +50,14 @@ vim -c ":BundleInstall"
 
 # -- neovim
 echo "* neovim"
-NVIM_VUNDLE_PATH=~/.nvim/bundle/Vundle.vim
-ln -sf `pwd`/nvim/ ~/.nvim
-ln -sf ~/.nvim/nvimrc ~/.nvimrc
+NVIM_VUNDLE_PATH=$HOME/.nvim/bundle/Vundle.vim
+if [ ! -d $HOME/.vim ]; then
+    ln -sf `pwd`/nvim/ $HOME/.nvim
+fi
+
+if [ ! -a $HOME/.nvimrc ]; then
+    ln -sf $HOME/.nvim/nvimrc $HOME/.nvimrc
+fi
 
 mkdir -p nvim/bundle
 
@@ -42,30 +73,43 @@ nvim -c ":BundleInstall"
 
 # -- tmux
 echo "* tmux"
-ln -sf `pwd`/tmux.conf ~/.tmux.conf
+if [ ! -a $HOME/.nvimrc ]; then
+    ln -sf `pwd`/tmux.conf $HOME/.tmux.conf
+else
+    echo "** tmux configuration already exists"
+fi
 
-# -- bash
-echo "* bash"
-echo "** aliases"
-ln -sf `pwd`/aliases ~/.bash_aliases
-
-echo "** source bashrc"
-echo "source `pwd`/bashrc" >> ~/.bashrc
 
 # -- git
 echo "* git"
-ln -sf `pwd`/gitconfig ~/.gitconfig
+if [ ! -a $HOME/.gitconfig ]; then
+    ln -sf `pwd`/gitconfig $HOME/.gitconfig
+else
+    echo "** git configuration already exists"
+fi
 
 # -- hg
 echo "* hg"
-ln -sf `pwd`/hgrc ~/.hgrc
+if [ ! -a $HOME/.hgrc ]; then
+    ln -sf `pwd`/hgrc $HOME/.hgrc
+else
+    echo "** hg configuration already exists"
+fi
 
 # -- conda
 echo "* conda"
-ln -sf `pwd`/.condarc ~/.condarc
+if [ ! -a $HOME/.condarc ]; then
+    ln -sf `pwd`/condarc $HOME/.condarc
+else
+    echo "** conda configuration already exists"
+fi
 
 # -- flake8 settings
 echo "* flake8"
-ln -sf `pwd`/flake8 ~/.config/flake8
+if [ ! -a $HOME/.config/flake8 ]; then
+    ln -sf `pwd`/flake8 $HOME/.config/flake8
+else
+    echo "** flake8 configuration already exists"
+fi
 
 source remote/init.sh

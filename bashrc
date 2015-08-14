@@ -35,7 +35,7 @@ export EDMDATAFILES=.:/usr/lib/epics/op/edl
 
 # proxy settings
 export http_proxy="http://proxy:8888"
-export https_proxy="http://proxy:8888"
+export https_proxy="https://proxy:8888"
 
 # path
 export PATH=$HOME/dotfiles/bin:$HOME/.local/bin:$PATH
