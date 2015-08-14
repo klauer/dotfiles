@@ -10,6 +10,7 @@ def replace_bcast(inp):
     l[-1] = '.255'
     return ''.join(l)
 
+
 def get_bcast():
     try:
         outp = subprocess.check_output(['/sbin/ifconfig'])
@@ -27,7 +28,7 @@ def get_bcast():
     elif len(nics) == 1:
         return replace_bcast(nics[0])
     else:
-        nic = [nic for nic in nics 
+        nic = [nic for nic in nics
                if '.0.' in nic]
         return replace_bcast(nic[0])
 
