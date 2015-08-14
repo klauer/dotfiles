@@ -39,19 +39,18 @@ export PATH=$DOTFILES/bin:$HOME/.local/bin:$PATH
 
 # proxy settings
 export LOCATION="`python $DOTFILES/bin/get_location.py`"
-export http_proxy=
-export https_proxy=
 
-if [ -z "${LOCATION}" ]; then
-    echo "(Location unknown; proxy unset)"
-    # "http://proxy:8888"
-    # "https://proxy:8888"
-elif [ "${LOCATION}" == "beamline" ]; then
+if [ "${LOCATION}" == "beamline" ]; then
     source $DOTFILES/bin/proxy-beamline.sh
 elif [ "${LOCATION}" == "campus" ]; then
     source $DOTFILES/bin/proxy-campus.sh
 else
-    echo "(Location ${LOCATION}; proxy unset)"
+    if [ -z "${LOCATION}" ]; then
+        echo "* Unknown location; clearing proxy settings"
+    else
+        echo "* Location \"${LOCATION}\": clearing proxy settings"
+    fi
+    source $DOTFILES/bin/clear_proxy.sh
 fi
 
 # EPICS address listings
