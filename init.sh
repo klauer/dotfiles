@@ -11,7 +11,7 @@ ln -sf `pwd`/aliases $HOME/.bash_aliases
 conf_line="$(grep `pwd`/bashrc $HOME/.bashrc)"
 
 echo "** source bashrc"
-if [ -z "$grep" ]; then
+if [ -z "$conf_line" ]; then
     echo "Adding bashrc config"
     echo "source `pwd`/bashrc" >> $HOME/.bashrc
     source $HOME/.bashrc
