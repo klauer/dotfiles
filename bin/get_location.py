@@ -4,8 +4,8 @@ import subprocess
 import re
 
 
-def get_location_by_gateway(gateway):
-    if gateway.startswith('130.199'):
+def get_location_by_gateway(interface, gateway):
+    if interface in ('en0', ) or gateway.startswith('130.199'):
         return 'campus'
     elif gateway.startswith('10.'):
         return 'beamline'
@@ -19,12 +19,18 @@ def get_location_osx():
     except OSError:
         return ''
 
+    m = re.search('interface: (.*)$', outp, flags=re.MULTILINE)
+    if not m:
+        return ''
+
+    interface = m.groups()[0]
+
     m = re.search('gateway: (.*)$', outp, flags=re.MULTILINE)
     if not m:
         return ''
 
     gateway = m.groups()[0]
-    return get_location_by_gateway(gateway)
+    return get_location_by_gateway(interface, gateway)
 
 
 def get_location_linux():
