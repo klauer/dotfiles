@@ -5,8 +5,13 @@ import re
 
 
 def get_location_by_gateway(interface, gateway):
-    if interface in ('en0', ) or gateway.startswith('130.199'):
+    if gateway.startswith('130.199'):
         return 'campus'
+    elif interface in ('en0', ):
+        if gateway.startswith('10.2.'):
+            return 'campus'
+        else:
+            return ''
     elif gateway.startswith('10.'):
         return 'beamline'
     else:
