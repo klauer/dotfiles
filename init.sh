@@ -104,6 +104,17 @@ else
     echo "** conda configuration already exists"
 fi
 
+# -- binstar
+echo "* binstar"
+
+mkdir -p $HOME/.config/binstar
+
+if [ ! -a $HOME/.config/binstar/config.yaml ]; then
+    ln -sf `pwd`/binstar_config.yaml $HOME/.config/binstar/config.yaml
+else
+    echo "** binstar configuration already exists"
+fi
+
 # -- flake8 settings
 echo "* flake8"
 if [ ! -a $HOME/.config/flake8 ]; then

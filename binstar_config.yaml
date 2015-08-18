@@ -1,0 +1,4 @@
+sites:
+  alpha: {url: 'http://api.alpha.binstar.org'}
+  binstar: {url: 'https://api.binstar.org'}
+url: https://conda.nsls2.bnl.gov/api

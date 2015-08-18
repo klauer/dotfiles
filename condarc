@@ -1,4 +1,7 @@
 channels:
-    - ericdill
-    - tacaswell
-    - defaults
+  - HXN
+  - Nikea
+  - defaults
+
+create_default_packages:
+  - pip
