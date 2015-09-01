@@ -18,6 +18,7 @@ def get_bcast():
         outp = subprocess.check_output(['ifconfig'])
 
     # print outp
+    outp = outp.decode('latin-1')
     lines = re.findall('10\..*', outp)
     matches = [line.split() for line in lines]
     nics = [match[0] for match in matches if match[0].startswith('10')]
