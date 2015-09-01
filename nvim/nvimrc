@@ -227,17 +227,15 @@ if has('nvim')
     " use neomake's linter
     " E501 = line too long, C901 = too complex
     " let g:neomake_python_pep8_maker = {'args': ['--ignore', 'E501,C901']}
-    " autocmd BufWritePost *.py Neomake
-
+    autocmd BufWritePost *.py Neomake
+else
+    " for regular vim, use flake8 linter
+    " flake8 config is in ~/.config/flake8
+    autocmd BufWritePost *.py call Flake8()
 endif
 
 if has("autocmd")
-    " Flake8 settings
-    " for regular vim, use flake8 linter
-    autocmd BufWritePost *.py call Flake8()
     autocmd FileType python,c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
-
-    " flake8 config is in ~/.config/flake8
 endif
 
 " -- setup airline
@@ -296,7 +294,7 @@ map <Right> :cclose<cr>
 map <Up> :cprev<cr>
 map <Down> :cnext<cr>
 
-map <leader>J :lopen<cr>
+map <leader>H :lopen<cr>
 map <leader>L :lclose<cr>
 map <leader>K :lprev<cr>
 map <leader>J :lnext<cr>
