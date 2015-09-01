@@ -6,7 +6,7 @@ import re
 
 
 def replace_bcast(inp):
-    l = inp.rsplit('.',1)
+    l = inp.rsplit('.', 1)
     l[-1] = '.255'
     return ''.join(l)
 
@@ -17,8 +17,9 @@ def get_bcast():
     except OSError:
         outp = subprocess.check_output(['ifconfig'])
 
-    # print outp
-    outp = outp.decode('latin-1')
+    if isinstance(outp, bytes):
+        outp = outp.decode('latin-1')
+
     lines = re.findall('10\..*', outp)
     matches = [line.split() for line in lines]
     nics = [match[0] for match in matches if match[0].startswith('10')]

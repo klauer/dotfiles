@@ -24,7 +24,9 @@ def get_location_osx():
     except OSError:
         return ''
 
-    outp = outp.decode('latin-1')
+    if isinstance(outp, bytes):
+        outp = outp.decode('latin-1')
+
     m = re.search('interface: (.*)$', outp, flags=re.MULTILINE)
     if not m:
         return ''
