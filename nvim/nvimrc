@@ -98,8 +98,8 @@ endif
 " set the runtime path to include Vundle and initialize
 
 if has('nvim')
-    " (neovim)
     let bundle_path=$HOME . "/.nvim/bundle"
+    runtime! plugin/python_setup.vim
 else
     let bundle_path=$HOME . "/.vim/bundle"
 endif
@@ -136,7 +136,6 @@ Plugin 'yssl/QFEnter'
 
 
 if has('nvim')
-    " (neovim)
     " New neovim linter
     Plugin 'benekastah/neomake'
 endif
@@ -225,7 +224,6 @@ let g:netrw_list_hide.='\.py[co],'
 let g:netrw_list_hide.='\.sw[op],'
 
 if has('nvim')
-    " (neovim)
     " use neomake's linter
     " E501 = line too long, C901 = too complex
     " let g:neomake_python_pep8_maker = {'args': ['--ignore', 'E501,C901']}
