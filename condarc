@@ -1,7 +1,10 @@
 channels:
-  - HXN
-  - Nikea
-  - defaults
+    - https://conda.nsls2.bnl.gov/conda/tcaswell
+    - https://conda.nsls2.bnl.gov/conda/edill
+    - https://conda.nsls2.bnl.gov/conda/dallan
+    - https://conda.nsls2.bnl.gov/conda/Nikea
+    - https://conda.nsls2.bnl.gov/conda/hxn
+    - anaconda
 
 create_default_packages:
   - pip
