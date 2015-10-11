@@ -20,8 +20,12 @@
 
 [core]
     editor = /usr/bin/vim
+    
 [push]
 	default = simple
+    
+[diff]
+	tool = vimdiff
 
 [alias]
 ls = log --oneline --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ar)%Creset'
@@ -29,4 +33,4 @@ lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(r
 vimdiff = !sh -c 'git diff | view -'
 linelog = "!fcn() { git log -L $1,$2:$3; }; fcn"
 new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
-diff2 = !git-diff2.sh
+st = status -s
