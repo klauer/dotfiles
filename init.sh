@@ -19,6 +19,17 @@ else
     echo "bashrc config already set"
 fi
 
+# -- gdb
+echo "* gdb"
+
+if [ ! -d $HOME/.gdbinit ]; then
+    wget -O gdbinit https://raw.githubusercontent.com/cyrus-and/gdb-dashboard/master/.gdbinit
+    ln -sf `pwd`/gdbinit $HOME/.gdbinit
+else
+    echo "** gdb init already exists"
+fi
+
+
 # -- vim
 VIM_VUNDLE_PATH=$HOME/.vim/bundle/Vundle.vim
 
