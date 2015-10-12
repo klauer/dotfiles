@@ -133,6 +133,8 @@ Plugin 'honza/vim-snippets'
 Plugin 'godlygeek/tabular.git'
 " QFEnter - quickfix open target window customization
 Plugin 'yssl/QFEnter'
+" QFEnter - quickfix open target window customization
+Plugin 't9md/vim-choosewin'
 
 
 if has('nvim')
@@ -311,6 +313,9 @@ nnoremap <CR> :
 
 nnoremap <Leader>o :CtrlP<CR>
 nmap <Leader><Leader> V
+
+nmap  <Leader>w  <Plug>(choosewin)
+let g:choosewin_overlay_enable = 1
 
 " filetype plugin indent off
 " set cindent
