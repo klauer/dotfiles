@@ -307,6 +307,7 @@ vnoremap <leader>u :s/\C\%V\<\@!\([A-Z]\)/\_\l\1/g<CR>gul<CR>:nohlsearch<CR>
 
 map <leader>j :bn<cr>
 map <leader>k :bp<cr>
+map <leader>p :!python %<cr>
 
 " Carriage return is now colon
 nnoremap <CR> :
