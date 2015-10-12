@@ -133,7 +133,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'godlygeek/tabular.git'
 " QFEnter - quickfix open target window customization
 Plugin 'yssl/QFEnter'
-" QFEnter - quickfix open target window customization
+" choosewin - toggle an overlay on windows to quickly jump to them
 Plugin 't9md/vim-choosewin'
 
 
