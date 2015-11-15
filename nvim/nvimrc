@@ -135,6 +135,8 @@ Plugin 'godlygeek/tabular.git'
 Plugin 'yssl/QFEnter'
 " choosewin - toggle an overlay on windows to quickly jump to them
 Plugin 't9md/vim-choosewin'
+" commentary with motion 'gc'
+Plugin 'tpope/vim-commentary'
 
 
 if has('nvim')
