@@ -1,10 +1,10 @@
 channels:
-    - https://conda.nsls2.bnl.gov/conda/tcaswell
-    - https://conda.nsls2.bnl.gov/conda/edill
-    - https://conda.nsls2.bnl.gov/conda/dallan
-    - https://conda.nsls2.bnl.gov/conda/Nikea
-    - https://conda.nsls2.bnl.gov/conda/hxn
-    - anaconda
+- klauer
+- https://conda.nsls2.bnl.gov/conda/latest
+- anaconda
+# - https://conda.anaconda.org/pkgw/channel/main
+# - https://conda.anaconda.org/ostrokach/channel/main
+always_yes: true
+binstar_upload: true
 
-create_default_packages:
-  - pip
+anaconda_upload: yes
