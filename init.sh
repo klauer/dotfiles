@@ -31,56 +31,10 @@ fi
 
 
 # -- vim
-VIM_VUNDLE_PATH=$HOME/.vim/bundle/Vundle.vim
-
-echo "* vim"
-
-if [ ! -d $HOME/.vim ]; then
-    ln -sf `pwd`/vim/ $HOME/.vim
-else
-    echo "** vim config directory already exists"
-fi
-
-if [ ! -a $HOME/.vimrc ]; then
-    ln -sf $HOME/.nvim/nvimrc $HOME/.vimrc
-else
-    echo "** vimrc already exists"
-fi
-
-mkdir -p vim/bundle
-
-echo "** install vundle"
-if [ ! -d $VIM_VUNDLE_PATH ]; then
-    git clone https://github.com/gmarik/Vundle.vim.git $VIM_VUNDLE_PATH
-fi
-
-pip install --user flake8
-
-echo "** installing bundles"
-vim -c ":BundleInstall"
+source init_vim.sh
 
 # -- neovim
-echo "* neovim"
-NVIM_VUNDLE_PATH=$HOME/.nvim/bundle/Vundle.vim
-if [ ! -d $HOME/.vim ]; then
-    ln -sf `pwd`/nvim/ $HOME/.nvim
-fi
-
-if [ ! -a $HOME/.nvimrc ]; then
-    ln -sf $HOME/.nvim/nvimrc $HOME/.nvimrc
-fi
-
-mkdir -p nvim/bundle
-
-echo "** install vundle"
-if [ ! -d $NVIM_VUNDLE_PATH ]; then
-    git clone https://github.com/gmarik/Vundle.vim.git $NVIM_VUNDLE_PATH
-fi
-
-pip install --user neovim
-
-echo "** installing bundles"
-nvim -c ":BundleInstall"
+source init_neovim.sh
 
 # -- tmux
 echo "* tmux"
