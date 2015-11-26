@@ -127,7 +127,7 @@ if has('python')
     Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
     " Tabular alignment :Tab/,
-    Plug 'godlygeek/tabular.git'
+    Plug 'godlygeek/tabular'
     " QFEnter - quickfix open target window customization
     Plug 'yssl/QFEnter'
     " choosewin - toggle an overlay on windows to quickly jump to them
