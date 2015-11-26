@@ -37,13 +37,7 @@ source init_vim.sh
 source init_neovim.sh
 
 # -- tmux
-echo "* tmux"
-if [ ! -a $HOME/.nvimrc ]; then
-    ln -sf `pwd`/tmux.conf $HOME/.tmux.conf
-else
-    echo "** tmux configuration already exists"
-fi
-
+source init_tmux.sh
 
 # -- git
 echo "* git"
