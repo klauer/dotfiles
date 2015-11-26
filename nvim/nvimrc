@@ -99,53 +99,49 @@ endif
 
 if has('python')
     if has('nvim')
-        let bundle_path=$HOME . "/.nvim/bundle"
+        let bundle_path=$HOME . "/.nvim/plugged"
         runtime! plugin/python_setup.vim
     else
-        let bundle_path=$HOME . "/.vim/bundle"
+        let bundle_path=$HOME . "/.vim/plugged"
     endif
 
-    let vundle_path=bundle_path . "/Vundle.vim"
-
-    let &rtp .= ',' . vundle_path
-    filetype off  " <-- required for vundle
-    call vundle#begin(bundle_path)
+    call plug#begin(bundle_path)
 
     " let Vundle manage Vundle, required
-    Plugin 'gmarik/Vundle.vim'
+    Plug 'gmarik/Vundle.vim'
     " Ctrl-P - fuzzy file searching
-    Plugin 'kien/ctrlp.vim'
+    Plug 'kien/ctrlp.vim'
     " Airline
-    Plugin 'bling/vim-airline'
+    Plug 'bling/vim-airline'
     " better tmux integration
-    Plugin 'christoomey/vim-tmux-navigator'
+    Plug 'christoomey/vim-tmux-navigator'
     " Python PEP8 checking
-    Plugin 'nvie/vim-flake8'
+    Plug 'nvie/vim-flake8'
     " git wrapper fugitive
-    Plugin 'tpope/vim-fugitive'
+    Plug 'tpope/vim-fugitive'
     " fugitive extension for managing/merging git branches
-    Plugin 'idanarye/vim-merginal'
+    Plug 'idanarye/vim-merginal'
     " jedi-vim completion
-    Plugin 'davidhalter/jedi-vim'
+    Plug 'davidhalter/jedi-vim'
     " snippets
-    Plugin 'SirVer/ultisnips'
-    Plugin 'honza/vim-snippets'
+    Plug 'SirVer/ultisnips'
+    Plug 'honza/vim-snippets'
     " Tabular alignment :Tab/,
-    Plugin 'godlygeek/tabular.git'
+    Plug 'godlygeek/tabular.git'
     " QFEnter - quickfix open target window customization
-    Plugin 'yssl/QFEnter'
+    Plug 'yssl/QFEnter'
     " choosewin - toggle an overlay on windows to quickly jump to them
-    Plugin 't9md/vim-choosewin'
+    Plug 't9md/vim-choosewin'
     " commentary with motion 'gc'
-    Plugin 'tpope/vim-commentary'
+    Plug 'tpope/vim-commentary'
 
     if has('nvim')
         " New neovim linter
-        Plugin 'benekastah/neomake'
+        Plug 'benekastah/neomake'
     endif
 
     " All of your Plugins must be added before the following line
-    call vundle#end()            " required
+    call plug#end()            " required
 endif
 
 filetype plugin indent on    " required

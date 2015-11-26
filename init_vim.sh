@@ -16,12 +16,13 @@ fi
 
 mkdir -p vim/bundle
 
-echo "** install vundle"
+echo "** install plug"
 if [ ! -d $VIM_VUNDLE_PATH ]; then
-    git clone https://github.com/gmarik/Vundle.vim.git $VIM_VUNDLE_PATH
+    curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
 pip install --user flake8
 
 echo "** installing bundles"
-vim -c ":BundleInstall"
+vim -c ":PlugInstall"
