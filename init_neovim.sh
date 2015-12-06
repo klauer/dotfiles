@@ -3,34 +3,27 @@ if [ -z "$DOTFILES" ]; then
     DOTFILES=$PWD
 fi
 
-NVIM_VUNDLE_PATH=$HOME/.nvim/plugged
-if [ ! -d $HOME/.nvim ]; then
-    ln -sf $DOTFILES/nvim/ $HOME/.nvim
+PLUGGED_PATH=$DOTFILES/nvim/plugged
+PLUG_VIM=$HOME/.config/nvim/autoload/plug.vim
+
+if [ ! -d $HOME/.config/nvim ]; then
+    ln -sf $DOTFILES/nvim/ $HOME/.config/nvim
 else
     echo "** neovim config directory already exists"
 fi
 
-if [ ! -a $HOME/.nvimrc ]; then
-    ln -sf $DOTFILES/nvim/nvimrc $HOME/.nvimrc
-else
-    echo "** nvimrc already exists"
-fi
-
-mkdir -p nvim/bundle
+mkdir -p $PLUGGED_PATH
+mkdir -p $(dirname $PLUG_VIM)
 
 echo "** install plugged"
-PLUG_VIM=$HOME/.nvim/autoload/plug.vim
-# if [ ! -f "$PLUG_VIM" ]; then
-#     curl -fLo $PLUG_VIM --create-dirs \
-#         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-# fi
+curl -fLo $PLUG_VIM --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 if [ ! -f "$PLUG_VIM" ]; then
-    mkdir -p $(dirname $PLUG_VIM)
     wget -O $PLUG_VIM https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-pip install neovim
+pip install --user neovim
 
 echo "** installing bundles"
 nvim -c ":PlugInstall"
