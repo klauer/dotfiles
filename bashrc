@@ -1,3 +1,6 @@
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
 function tmux() {
     # update-env command addition from:
     #   https://raim.codingfarm.de/blog/2013/01/30/tmux-update-environment/
