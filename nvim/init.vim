@@ -1,4 +1,4 @@
-" .nvimrc
+" .nvimrc ($HOME/.config/nvim/init.vim)
 "
 " Use Vim settings, rather then Vi settings
 " This must be first, because it changes other options as a side effect.
@@ -94,12 +94,12 @@ if &diff
   set diffopt=filler,context:3
 endif
 
-" ----- vundle ------
-" set the runtime path to include Vundle and initialize
+" ----- plugged ------
+" set the runtime path to include plugged and initialize
 
 if has('python')
     if has('nvim')
-        let bundle_path=$HOME . "/.nvim/plugged"
+        let bundle_path=$HOME . "/.config/nvim/plugged"
         runtime! plugin/python_setup.vim
     else
         let bundle_path=$HOME . "/.vim/plugged"
@@ -107,8 +107,6 @@ if has('python')
 
     call plug#begin(bundle_path)
 
-    " let Vundle manage Vundle, required
-    Plug 'gmarik/Vundle.vim'
     " Ctrl-P - fuzzy file searching
     Plug 'kien/ctrlp.vim'
     " Airline
@@ -119,6 +117,9 @@ if has('python')
     Plug 'nvie/vim-flake8'
     " git wrapper fugitive
     Plug 'tpope/vim-fugitive'
+    " unimpaired - mappings for [ and ]
+    "              such as buffer, args, quickfix, loc, tags (b, a, q, l, t)
+    Plug 'tpope/vim-unimpaired'
     " fugitive extension for managing/merging git branches
     Plug 'idanarye/vim-merginal'
     " jedi-vim completion
@@ -147,7 +148,7 @@ endif
 filetype plugin indent on    " required
 syntax on
 
-" ----- end vundle ------
+" ----- end plug ------
 
 " line numbering
 set number
@@ -305,9 +306,11 @@ map <leader>J :lnext<cr>
 vnoremap <leader>c :s/\C\%V_\([a-z]\)/\u\1/g<CR>gUl<cr>:nohlsearch<cr>
 vnoremap <leader>u :s/\C\%V\<\@!\([A-Z]\)/\_\l\1/g<CR>gul<CR>:nohlsearch<CR>
 
-map <leader>j :bn<cr>
-map <leader>k :bp<cr>
+map <leader>j :bnext<cr>
+map <leader>k :bprevious<cr>
+" remember to use: [b ]b from unimpaired now
 map <leader>p :!python %<cr>
+
 
 " Carriage return is now colon
 nnoremap <CR> :
