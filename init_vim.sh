@@ -1,15 +1,16 @@
 VIM_VUNDLE_PATH=$HOME/.vim/bundle/Vundle.vim
+DOTFILES=$PWD
 
 echo "* vim"
 
 if [ ! -d $HOME/.vim ]; then
-    ln -sf `pwd`/vim/ $HOME/.vim
+    ln -sf $DOTFILES/vim/ $HOME/.vim
 else
     echo "** vim config directory already exists"
 fi
 
 if [ ! -a $HOME/.vimrc ]; then
-    ln -sf $HOME/.nvim/nvimrc $HOME/.vimrc
+    ln -sf $DOTFILES/nvim/init.vim $HOME/.vimrc
 else
     echo "** vimrc already exists"
 fi
