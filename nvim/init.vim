@@ -177,7 +177,7 @@ let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
 
 " background color for omnicomplete
-highlight Pmenu ctermbg=blue gui=bold
+highlight Pmenu ctermbg=0 gui=bold
 
 " " Better navigating through omnicomplete option list
 " " See
