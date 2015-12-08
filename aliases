@@ -12,9 +12,9 @@ alias ue='tmux update-env'
 (which nvim > /dev/null) && use_nvim=1
 if [[ -n "$use_nvim" ]]; then
     # -X stops from connecting to X server
-    alias vi='nvim -X'
-    alias vim='nvim -X'
-    alias view='nvim -XR'
+    alias vi='nvim'
+    alias vim='nvim'
+    alias view='nvim -R'
     export EDITOR=nvim
     git config --global core.editor "nvim"
     echo "* Using neovim"
