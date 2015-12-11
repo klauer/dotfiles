@@ -1,5 +1,7 @@
 VIM_VUNDLE_PATH=$HOME/.vim/bundle/Vundle.vim
-DOTFILES=$PWD
+if [ -z "$DOTFILES" ]; then
+    DOTFILES=$PWD
+fi
 
 echo "* vim"
 
