@@ -135,6 +135,8 @@ if has('python')
     Plug 't9md/vim-choosewin'
     " commentary with motion 'gc'
     Plug 'tpope/vim-commentary'
+    " tmuxline
+    " Plug 'edkolev/tmuxline.vim'
 
     if has('nvim')
         " New neovim linter
@@ -324,3 +326,11 @@ let g:choosewin_overlay_enable = 1
 " filetype plugin indent off
 " set cindent
 " set cino=(0
+
+" Tmux-related
+" use the nice separators
+" let g:tmuxline_powerline_separators = 1
+" let g:tmuxline_preset = 'minimal'
+" let g:tmuxline_theme = 'powerline'
+" Tmuxline powerline minimal
+" TmuxlineSnapshot ~/dotfiles/tmuxline.conf
