@@ -35,6 +35,7 @@ alias pythongdb='gdb -iex "set auto-load safe-path /usr/bin" python2.7-dbg'
 alias rc='source ~/conda_ramdisk.sh'
 alias sac='source activate'
 alias sdac='source deactivate'
+alias pyoutline="grep -Hn --color '^class \|def '"
 
 # ref: https://github.com/thoughtbot/dotfiles/blob/master/aliases
 
