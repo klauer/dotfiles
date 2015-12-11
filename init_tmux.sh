@@ -38,5 +38,10 @@ else
     echo "** tmux xdg config path exists"
 fi
 
-# fb path picker for tmux-fpp
-brew install fpp
+TPM_PATH=$HOME/.config/tmux/plugins/tpm
+
+if [ ! -d "$TPM_PATH" ]; then
+    git clone https://github.com/tmux-plugins/tpm $TPM_PATH
+    # fb path picker for tmux-fpp
+    brew install fpp
+fi
