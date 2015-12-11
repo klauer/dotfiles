@@ -135,8 +135,11 @@ if has('python')
     Plug 't9md/vim-choosewin'
     " commentary with motion 'gc'
     Plug 'tpope/vim-commentary'
+
     " tmuxline
     " Plug 'edkolev/tmuxline.vim'
+    " tmux syntax highlighting
+    Plug 'tmux-plugins/vim-tmux'
 
     if has('nvim')
         " New neovim linter
