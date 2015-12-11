@@ -37,3 +37,6 @@ if [ ! -d $HOME/.config/tmux ]; then
 else
     echo "** tmux xdg config path exists"
 fi
+
+# fb path picker for tmux-fpp
+brew install fpp
