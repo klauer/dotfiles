@@ -117,6 +117,8 @@ if has('python')
     Plug 'nvie/vim-flake8'
     " git wrapper fugitive
     Plug 'tpope/vim-fugitive'
+    " git gutter annotation :GitGutter*
+    Plug 'airblade/vim-gitgutter'
     " unimpaired - mappings for [ and ]
     "              such as buffer, args, quickfix, loc, tags (b, a, q, l, t)
     Plug 'tpope/vim-unimpaired'
@@ -337,3 +339,6 @@ let g:choosewin_overlay_enable = 1
 " let g:tmuxline_theme = 'powerline'
 " Tmuxline powerline minimal
 " TmuxlineSnapshot ~/dotfiles/tmuxline.conf
+
+" add on conda lib paths so that :find works
+source ~/dotfiles/nvim/conda_path.vim
