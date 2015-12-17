@@ -212,8 +212,8 @@ inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 " )
 let g:UltiSnipsExpandTrigger="<c-s>"
 let g:UltiSnipsListSnippets="<c-e>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEnableSnipMate=0
 
 let g:ultisnips_python_style='numpy'
