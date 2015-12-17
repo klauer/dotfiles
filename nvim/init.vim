@@ -85,7 +85,7 @@ set nowritebackup
 set wrap
 
 set mouse+=a
-if &term =~ '^screen'
+if !has('nvim') && &term =~ '^screen'
     " tmux knows the extended mouse mode
     set ttymouse=xterm2
 endif
