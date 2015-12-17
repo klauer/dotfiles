@@ -168,7 +168,7 @@ set numberwidth=5
 " -> r = nearest ancestor with repo directory
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+set wildignore+=*\\tmp\\*,*.exe              " Windows
 
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
@@ -327,6 +327,7 @@ map <leader>p :!python %<cr>
 nnoremap <CR> :
 
 nnoremap <Leader>o :CtrlP<CR>
+nnoremap <Leader>O :CtrlPBuffer<CR>
 nmap <Leader><Leader> V
 
 nmap  <Leader>w  <Plug>(choosewin)
