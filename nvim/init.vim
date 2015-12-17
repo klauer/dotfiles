@@ -13,7 +13,7 @@ set ic                 " case-insensitive search by default
 set guifont=Consolas:h10
 
 set imdisable          " Disable the IME (gvim and unicode don't play well on different locale)
-set guioptions=cmgtTr 
+set guioptions=cmgtTr
 set autoindent         " always set autoindenting on
 set history=500        " keep x lines of command line history
 set ruler              " show the cursor position all the time
@@ -151,7 +151,7 @@ if has('python')
 
     " All of your Plugins must be added before the following line
     call plug#end()            " required
-    
+
     " ensure ctrl-h works with splits, at least on osx for now...
     nnoremap <silent> <bs> :TmuxNavigateLeft<cr>
 endif
@@ -251,7 +251,7 @@ endif
 if has("autocmd")
     " strip off whitespace at the ends of lines for the following languages
     " before writing to disk
-    autocmd FileType python,c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
+    autocmd FileType vim,python,c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 endif
 
 " -- setup airline
@@ -283,10 +283,6 @@ endif
 
 cmap w!! :SUwrite<cr>
 
-" Move visual block - select and move with R/F
-vnoremap F :m '>+1<CR>gv=gv 
-vnoremap R :m '<-2<CR>gv=gv
-
 noremap <S-return> <cr>
 noremap <C-return> <cr>
 inoremap <S-return> <cr>
@@ -299,11 +295,17 @@ inoremap <C-return> <cr>
 
 " Simplified window motion (ctrl+direction)
 " note that these also get mapped with the tmux-navigator plugin
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
-map <c-=> <c-w>=
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
+noremap <c-h> <c-w>h
+noremap <c-=> <c-w>=
+
+" Move visual block - select and move with ctrl-j/k
+" vnoremap <c-j> :m '>+1<CR>gv=gv
+" vnoremap <c-k> :m '<-2<CR>gv=gv
+xmap <c-k> <Plug>unimpairedMoveSelectionUp<esc>gv
+xmap <c-j> <Plug>unimpairedMoveSelectionDown<esc>gv
 
 " remap arrow keys to open up quickfix
 map <Left> :copen<cr>
