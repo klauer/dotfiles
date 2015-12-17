@@ -150,6 +150,9 @@ if has('python')
 
     " All of your Plugins must be added before the following line
     call plug#end()            " required
+    
+    " ensure ctrl-h works with splits, at least on osx for now...
+    nnoremap <silent> <bs> :TmuxNavigateLeft<cr>
 endif
 
 filetype plugin indent on    " required
@@ -292,6 +295,7 @@ inoremap <C-return> <cr>
 " map <C-T> :s/;\s*$// <cr>
 
 " Simplified window motion (ctrl+direction)
+" note that these also get mapped with the tmux-navigator plugin
 map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
