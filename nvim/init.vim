@@ -98,14 +98,15 @@ endif
 " set the runtime path to include plugged and initialize
 
 if has('python')
+    let s:config_path=$HOME . "/.config/nvim"
     if has('nvim')
-        let bundle_path=$HOME . "/.config/nvim/plugged"
+        let s:bundle_path=$HOME . "/.config/nvim/plugged"
         runtime! plugin/python_setup.vim
     else
-        let bundle_path=$HOME . "/.vim/plugged"
+        let s:bundle_path=$HOME . "/.vim/plugged"
     endif
 
-    call plug#begin(bundle_path)
+    call plug#begin(s:bundle_path)
 
     " Ctrl-P - fuzzy file searching
     Plug 'kien/ctrlp.vim'
@@ -158,7 +159,7 @@ endif
 filetype plugin indent on    " required
 syntax on
 
-" ----- end plug ------
+" ----- end plugged ------
 
 " line numbering
 set number
@@ -248,6 +249,8 @@ else
 endif
 
 if has("autocmd")
+    " strip off whitespace at the ends of lines for the following languages
+    " before writing to disk
     autocmd FileType python,c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
 endif
 
@@ -333,7 +336,8 @@ nmap <Leader><Leader> V
 nmap  <Leader>w  <Plug>(choosewin)
 
 " - tags (c-] for jump to definition, then ]t from vim-unimpaired)
-" TODO get ptags.py... from somewhere
+" TODO get ptags.py... from somewhere, or figure out what's better for
+" updating the whole project
 let ptag_path="/usr/local/Cellar/python3/3.4.3/Frameworks/Python.framework/Versions/3.4/share/doc/python3.4/examples/Tools/scripts/ptags.py"
 
 " update the tags for the current buffer
@@ -356,5 +360,7 @@ let g:choosewin_overlay_enable = 1
 " Tmuxline powerline minimal
 " TmuxlineSnapshot ~/dotfiles/tmuxline.conf
 
-" add on conda lib paths so that :find works
-source ~/dotfiles/nvim/conda_path.vim
+if has('python')
+  " add on conda lib paths so that :find works
+  execute ':source ' . s:config_path . '/conda_path.vim'
+endif
