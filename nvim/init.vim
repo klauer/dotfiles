@@ -331,6 +331,17 @@ nnoremap <Leader>O :CtrlPBuffer<CR>
 nmap <Leader><Leader> V
 
 nmap  <Leader>w  <Plug>(choosewin)
+
+" - tags (c-] for jump to definition, then ]t from vim-unimpaired)
+" TODO get ptags.py... from somewhere
+let ptag_path="/usr/local/Cellar/python3/3.4.3/Frameworks/Python.framework/Versions/3.4/share/doc/python3.4/examples/Tools/scripts/ptags.py"
+
+" update the tags for the current buffer
+nmap <Leader>t :execute "!python " . ptag_path . " %"<cr>
+
+" update the tags for all files in the arglist
+" nmap <Leader>T :execute "!python " . ptag_path . " " args<cr>
+
 let g:choosewin_overlay_enable = 1
 
 " filetype plugin indent off
