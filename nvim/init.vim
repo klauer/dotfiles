@@ -149,6 +149,9 @@ if has('python')
         Plug 'benekastah/neomake'
     endif
 
+    " Python PEP8 indentation
+    Plug 'hynek/vim-python-pep8-indent'
+
     " All of your Plugins must be added before the following line
     call plug#end()            " required
 
