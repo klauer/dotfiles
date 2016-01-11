@@ -9,5 +9,6 @@ fi
 
 http_proxy="http://192.168.1.165:3128"
 https_proxy="https://192.168.1.165:3128"
+no_proxy=""
 
 source set_proxy.sh

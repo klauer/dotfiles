@@ -8,6 +8,7 @@ fi
 echo "Setting proxy to $http_proxy"
 export http_proxy=$http_proxy
 export https_proxy=$https_proxy
+export no_proxy=$no_proxy
 
 
 has_git=$(which git 2> /dev/null)
