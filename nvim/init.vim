@@ -83,6 +83,9 @@ set novb                 " ** visual bell, no beeping! **
 set nobackup
 set nowritebackup
 set wrap
+set ignorecase smartcase
+" remember \c for turning off case sensitive search and \C for turning it on,
+" along with \v and \V for literal searches
 
 set mouse+=a
 if !has('nvim') && &term =~ '^screen'
