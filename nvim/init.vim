@@ -141,6 +141,8 @@ if has('python')
     Plug 't9md/vim-choosewin'
     " commentary with motion 'gc'
     Plug 'tpope/vim-commentary'
+    " Python coverage
+    Plug 'alfredodeza/coveragepy.vim'
 
     " tmuxline
     " Plug 'edkolev/tmuxline.vim'
