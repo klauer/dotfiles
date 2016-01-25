@@ -1,3 +1,6 @@
 [submodule "remote/git-remote-hg"]
 	path = remote/git-remote-hg
 	url = https://github.com/felipec/git-remote-hg
+[submodule "remote/oh-my-zsh"]
+	path = remote/oh-my-zsh
+	url = https://github.com/robbyrussell/oh-my-zsh
