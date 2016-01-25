@@ -27,7 +27,12 @@ def find_conda_lib_paths():
             python_dirs = glob.glob(os.path.join(lib_path, 'python*'))
             for pydir in python_dirs:
                 yield os.path.join(lib_path, pydir, '**')
-                # yield os.path.join(lib_path, pydir, 'site-packages', '**')
+
+            # site_packages = os.path.join(lib_path, pydir, 'site-packages')
+            # for egg_link in glob.glob(os.path.join(site_packages, '*.egg-link')):
+            #     with open(egg_link, 'rt') as f:
+            #         for line in f.readlines():
+            #             yield os.path.join(line.strip(), '**')
 
 
 def add_conda_lib_paths():
