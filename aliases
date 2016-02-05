@@ -36,8 +36,7 @@ alias rc='source ~/conda_ramdisk.sh'
 alias sac='source activate'
 alias sdac='source deactivate'
 alias pyoutline="grep -Hn --color '^class \|def '"
-
-# ref: https://github.com/thoughtbot/dotfiles/blob/master/aliases
+alias cview='view -c ":Coveragepy report"'
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
