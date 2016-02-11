@@ -15,6 +15,9 @@
 [apply]
     whitespace = nowarn
 
+[column]
+    status = auto
+
 [color]
     ui = auto
 
