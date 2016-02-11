@@ -1,6 +1,34 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/dotfiles/remote/oh-my-zsh
 
+# brew
+export PATH="$HOME/.linuxbrew/bin:$PATH"
+export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+alias brew="https_proxy=$http_proxy brew"
+
+# export CONDA_ROOT=$HOME/mc
+# export CONDA_DEFAULT_ENV=bs
+export REQUESTS_CA_BUNDLE=$HOME/.dspcert 
+
+export CONDA_ROOT=$HOME/ramdisk/mc
+unset CONDA_DEFAULT_ENV
+
+# export PATH=$HOME/.local/bin:$CONDA_ROOT/$CONDA_DEFAULT_ENV/bin:$PATH
+if [ -z "$CONDA_DEFAULT_ENV" ]; then
+    export PATH="$CONDA_ROOT/bin:$PATH"
+else
+    echo "Setting conda environment to: $CONDA_DEFAULT_ENV"
+    export PATH="$CONDA_ROOT/envs/$CONDA_DEFAULT_ENV/bin:$PATH"
+    # export CONDA_OLD_PS1="\[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\u@\h:\w\$ "
+    # export PS1="($CONDA_DEFAULT_ENV)$CONDA_OLD_PS1"
+fi
+
+# local bin directory
+export PATH="$HOME/.local/bin/:$PATH"
+
+
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -49,7 +77,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew )
+plugins=(git)
 
 # User configuration
 
@@ -59,13 +87,3 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 source $HOME/.bash_aliases
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-source /home/klauer/dotfiles/zshrc
