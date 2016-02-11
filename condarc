@@ -5,9 +5,10 @@ channels:
 - nsls2
 - anaconda
 # - defaults
+# - https://conda.anaconda.org/klauer/channel/main
 # - https://conda.anaconda.org/pkgw/channel/main
 # - https://conda.anaconda.org/ostrokach/channel/main
-always_yes: true
+# always_yes: true
 binstar_upload: true
 anaconda_upload: yes
-
+# changeps1: no
