@@ -143,6 +143,8 @@ if has('python')
     Plug 'tpope/vim-commentary'
     " Python coverage
     Plug 'alfredodeza/coveragepy.vim'
+    " EPICS syntax highlighting
+    Plug 'NickeZ/epics.vim'
 
     " tmuxline
     " Plug 'edkolev/tmuxline.vim'
