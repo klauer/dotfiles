@@ -151,6 +151,8 @@ if has('python')
     " Unite/unite-outline
     Plug 'Shougo/unite.vim'
     Plug 'Shougo/unite-outline'
+    " toggle location/quickfix list
+    Plug 'milkypostman/vim-togglelist'
 
     " tmuxline
     " Plug 'edkolev/tmuxline.vim'
@@ -338,8 +340,8 @@ nnoremap <Left> :lprev<cr>
 nnoremap <Right> :lnext<cr>
 nnoremap <Up> :cprev<cr>
 nnoremap <Down> :cnext<cr>
-nnoremap <leader>l :lwindow<cr>
-nnoremap <leader>c :cwindow<cr>
+nmap <script> <silent> <leader>l :call ToggleLocationList()<CR>
+nmap <script> <silent> <leader>c :call ToggleQuickfixList()<CR>
 
 map <leader>H :lopen<cr>
 map <leader>L :lclose<cr>
