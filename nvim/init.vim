@@ -112,7 +112,10 @@ if has('python')
     call plug#begin(s:bundle_path)
 
     " Ctrl-P - fuzzy file searching
-    Plug 'kien/ctrlp.vim'
+    " Plug 'kien/ctrlp.vim'
+    " fzf - fuzzy file searching
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf.vim'
     " Airline
     Plug 'bling/vim-airline'
     " better tmux integration
@@ -144,6 +147,8 @@ if has('python')
     " Python coverage
     Plug 'alfredodeza/coveragepy.vim'
     " EPICS syntax highlighting
+    Plug 'NickeZ/epics.vim'
+    " Unite/fzf
     Plug 'NickeZ/epics.vim'
 
     " tmuxline
@@ -177,15 +182,21 @@ set numberwidth=5
 
 " Ctrl-P setup:
 " -> r = nearest ancestor with repo directory
-let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_working_path_mode = 'ra'
+" nnoremap <Leader>o :CtrlP<CR>
+" nnoremap <Leader>O :CtrlPBuffer<CR>
+" let g:ctrlp_custom_ignore = {
+"   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+"   \ 'file': '\v\.(exe|so|dll|pyc|pyo)$',
+"   \ 'link': 'some_bad_symbolic_links',
+"   \ }
+" switching to fzf:
+nnoremap <c-p> :FZF<CR>
+nnoremap <Leader>o :Tags<CR>
+nnoremap <Leader>O :GitFiles<CR>
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.exe              " Windows
 
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll|pyc|pyo)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
 
 " only use jedi completion with ctrl-space, not after '.'
 let g:jedi#goto_assignments_command = "<Leader>g"
@@ -341,8 +352,6 @@ map <leader>p :!python %<cr>
 " Carriage return is now colon
 nnoremap <CR> :
 
-nnoremap <Leader>o :CtrlP<CR>
-nnoremap <Leader>O :CtrlPBuffer<CR>
 nmap <Leader><Leader> V
 
 nmap  <Leader>w  <Plug>(choosewin)
