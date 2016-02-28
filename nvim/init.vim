@@ -334,19 +334,51 @@ xmap <c-k> <Plug>unimpairedMoveSelectionUp<esc>gv
 xmap <c-j> <Plug>unimpairedMoveSelectionDown<esc>gv
 
 " remap arrow keys to open up quickfix
-map <Left> :copen<cr>
-map <Right> :cclose<cr>
-map <Up> :cprev<cr>
-map <Down> :cnext<cr>
+nnoremap <Left> :lprev<cr>
+nnoremap <Right> :lnext<cr>
+nnoremap <Up> :cprev<cr>
+nnoremap <Down> :cnext<cr>
+nnoremap <leader>l :lwindow<cr>
+nnoremap <leader>c :cwindow<cr>
 
 map <leader>H :lopen<cr>
 map <leader>L :lclose<cr>
 map <leader>K :lprev<cr>
 map <leader>J :lnext<cr>
 
-" Camel case conversion stuff on line
-vnoremap <leader>c :s/\C\%V_\([a-z]\)/\u\1/g<CR>gUl<cr>:nohlsearch<cr>
-vnoremap <leader>u :s/\C\%V\<\@!\([A-Z]\)/\_\l\1/g<CR>gul<CR>:nohlsearch<CR>
+" Camel case conversion stuff on visual selection
+function! s:get_visual_selection()
+  " http://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript
+  let [lnum1, col1] = getpos("'<")[1:2]
+  let [lnum2, col2] = getpos("'>")[1:2]
+  let lines = getline(lnum1, lnum2)
+  let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+  let lines[0] = lines[0][col1 - 1:]
+  return join(lines, "\n")
+endfunction
+
+
+function! s:to_underscores(name)
+python <<endpython
+import re
+import vim
+name = vim.eval('a:name')
+s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
+underscores = re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
+vim.command('return "{}"'.format(underscores))
+endpython
+endfunction
+
+function! Selection_CamelToUnderscores()
+    let selection = s:get_visual_selection()
+    let @x = s:to_underscores(selection)
+    normal gvd
+    normal "xp
+endfunction
+
+" vnoremap <leader>c :s/\C\%V_\([a-z]\)/\u\1/g<CR>gUl<cr>:nohlsearch<cr>
+" vnoremap <leader>u :s/\C\%V\<\@!\([A-Z]\)/\_\l\1/g<CR>gul<CR>:nohlsearch<CR>
+vnoremap <leader>u :call Selection_CamelToUnderscores()<cr>
 
 map <leader>j :bnext<cr>
 map <leader>k :bprevious<cr>
