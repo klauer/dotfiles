@@ -148,8 +148,9 @@ if has('python')
     Plug 'alfredodeza/coveragepy.vim'
     " EPICS syntax highlighting
     Plug 'NickeZ/epics.vim'
-    " Unite/fzf
-    Plug 'NickeZ/epics.vim'
+    " Unite/unite-outline
+    Plug 'Shougo/unite.vim'
+    Plug 'Shougo/unite-outline'
 
     " tmuxline
     " Plug 'edkolev/tmuxline.vim'
