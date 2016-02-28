@@ -195,12 +195,16 @@ set numberwidth=5
 nnoremap <c-p> :FZF<CR>
 nnoremap <Leader>o :Tags<CR>
 nnoremap <Leader>O :GitFiles<CR>
+nnoremap <Leader>b :BTags<CR>
+nnoremap <Leader>g :Commits<CR>
+nnoremap <Leader>G :BCommits<CR>
+
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.exe              " Windows
 
 
 " only use jedi completion with ctrl-space, not after '.'
-let g:jedi#goto_assignments_command = "<Leader>g"
+" let g:jedi#goto_assignments_command = "<Leader>g"
 let g:jedi#goto_definitions_command = "<Leader>d"
 let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<Leader>n"
