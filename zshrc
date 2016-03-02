@@ -9,7 +9,6 @@ alias brew="https_proxy=$http_proxy brew"
 
 # export CONDA_ROOT=$HOME/mc
 # export CONDA_DEFAULT_ENV=bs
-export REQUESTS_CA_BUNDLE=$HOME/.dspcert 
 
 export CONDA_ROOT=$HOME/ramdisk/mc
 unset CONDA_DEFAULT_ENV
