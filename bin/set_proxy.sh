@@ -13,6 +13,6 @@ export no_proxy=$no_proxy
 
 has_git=$(which git 2> /dev/null)
 if [ -n "$has_git" ]; then
-    git config --global http.proxy $http_proxy
-    git config --global https.proxy $https_proxy
+    git config --global http.proxy $http_proxy 2> /dev/null
+    git config --global https.proxy $https_proxy 2> /dev/null
 fi
