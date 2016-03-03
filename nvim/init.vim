@@ -134,7 +134,9 @@ if has('python')
     " jedi-vim completion
     Plug 'davidhalter/jedi-vim'
     " snippets
-    Plug 'SirVer/ultisnips'
+    if version >= 704
+        Plug 'SirVer/ultisnips'
+    endif
     Plug 'honza/vim-snippets'
     " Tabular alignment :Tab/,
     Plug 'godlygeek/tabular'
