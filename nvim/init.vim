@@ -284,7 +284,7 @@ endif
 if has("autocmd")
     " strip off whitespace at the ends of lines for the following languages
     " before writing to disk
-    autocmd FileType vim,python,c,cpp,java,php autocmd BufWritePre <buffer> :%s/\s\+$//e
+    autocmd FileType vim,python,c,cpp,java,php,pyrex autocmd BufWritePre <buffer> :%s/\s\+$//e
 endif
 
 " -- setup airline
@@ -380,7 +380,7 @@ function! Selection_CamelToUnderscores()
     let selection = s:get_visual_selection()
     let @x = s:to_underscores(selection)
     normal gvd
-    normal "xp
+    normal "xP
 endfunction
 
 " vnoremap <leader>c :s/\C\%V_\([a-z]\)/\u\1/g<CR>gUl<cr>:nohlsearch<cr>
@@ -423,6 +423,17 @@ if has('nvim')
     tnoremap <silent> <C-l> <C-\><C-n>:TmuxNavigateRight<cr>
     map <leader>i :vsplit term://ipython<cr>
     map <leader>s :vsplit term://bash<cr>
+endif
+
+if executable('pandoc')
+    autocmd! BufReadPost *.doc,*.docx,*.rtf,*.odp,*.odt silent %!pandoc "%" -t markdown -o /dev/stdout --columns=78
+    " Remove docx from the list of extensions that zipplugin should use:
+    let g:zipPlugin_ext='*.zip,*.jar,*.xpi,*.ja,*.war,*.ear,*.celzip,*.oxt,*.kmz,*.wsz,*.xap,*.docm,*.dotx,*.dotm,*.potx,*.potm,*.ppsx,*.ppsm,*.pptx,*.pptm,*.ppam,*.sldx,*.thmx,*.xlam,*.xlsx,*.xlsm,*.xlsb,*.xltx,*.xltm,*.xlam,*.crtx,*.vdw,*.glox,*.gcsx,*.gqsx'
+endif
+
+if executable('pdftotext')
+    autocmd BufReadPre *.pdf silent set ro
+    autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
 endif
 
 if has('python')
