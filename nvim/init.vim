@@ -421,6 +421,8 @@ if has('nvim')
     tnoremap <silent> <C-k> <C-\><C-n>:TmuxNavigateUp<cr>
     tnoremap <silent> <C-j> <C-\><C-n>:TmuxNavigateDown<cr>
     tnoremap <silent> <C-l> <C-\><C-n>:TmuxNavigateRight<cr>
+    map <leader>i :vsplit term://ipython<cr>
+    map <leader>s :vsplit term://bash<cr>
 endif
 
 if has('python')
