@@ -188,8 +188,6 @@ set numberwidth=5
 " Ctrl-P setup:
 " -> r = nearest ancestor with repo directory
 " let g:ctrlp_working_path_mode = 'ra'
-" nnoremap <Leader>o :CtrlP<CR>
-" nnoremap <Leader>O :CtrlPBuffer<CR>
 " let g:ctrlp_custom_ignore = {
 "   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
 "   \ 'file': '\v\.(exe|so|dll|pyc|pyo)$',
@@ -197,10 +195,15 @@ set numberwidth=5
 "   \ }
 " switching to fzf:
 nnoremap <c-p> :FZF<CR>
-nnoremap <Leader>o :Tags<CR>
-nnoremap <Leader>O :GitFiles<CR>
-nnoremap <Leader>b :BTags<CR>
+" show fzf list of tags
+nnoremap <Leader>t :Tags<CR>
+" show fzf list of tags in the buffer
+nnoremap <Leader>T :BTags<CR>
+" show fzf list of files in git repo
+nnoremap <Leader>o :GitFiles<CR>
+" show git commits in fzf window
 nnoremap <Leader>g :Commits<CR>
+" show git commits for current buffer in fzf window
 nnoremap <Leader>G :BCommits<CR>
 
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
@@ -396,17 +399,6 @@ nnoremap <CR> :
 nmap <Leader><Leader> V
 
 nmap  <Leader>w  <Plug>(choosewin)
-
-" - tags (c-] for jump to definition, then ]t from vim-unimpaired)
-" TODO get ptags.py... from somewhere, or figure out what's better for
-" updating the whole project
-let ptag_path="/usr/local/Cellar/python3/3.4.3/Frameworks/Python.framework/Versions/3.4/share/doc/python3.4/examples/Tools/scripts/ptags.py"
-
-" update the tags for the current buffer
-nmap <Leader>t :execute "!python " . ptag_path . " %"<cr>
-
-" update the tags for all files in the arglist
-" nmap <Leader>T :execute "!python " . ptag_path . " " args<cr>
 
 let g:choosewin_overlay_enable = 1
 
