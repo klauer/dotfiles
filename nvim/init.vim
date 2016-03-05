@@ -413,6 +413,15 @@ let g:choosewin_overlay_enable = 1
 " let g:tmuxline_theme = 'powerline'
 " Tmuxline powerline minimal
 " TmuxlineSnapshot ~/dotfiles/tmuxline.conf
+"
+if has('nvim')
+    " neovim terminal related settings
+    tnoremap <Esc> <C-\><C-n>
+    " tnoremap <C-h> <C-\><C-n>:TmuxNavigateLeft<cr>
+    tnoremap <silent> <C-k> <C-\><C-n>:TmuxNavigateUp<cr>
+    tnoremap <silent> <C-j> <C-\><C-n>:TmuxNavigateDown<cr>
+    tnoremap <silent> <C-l> <C-\><C-n>:TmuxNavigateRight<cr>
+endif
 
 if has('python')
   " add on conda lib paths so that :find works
