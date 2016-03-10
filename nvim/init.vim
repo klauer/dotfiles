@@ -174,6 +174,15 @@ if has('python')
 
     " ensure ctrl-h works with splits, at least on osx for now...
     nnoremap <silent> <bs> :TmuxNavigateLeft<cr>
+    noremap <silent> <c-j> :TmuxNavigateDown<cr>
+    noremap <silent> <c-k> :TmuxNavigateUp<cr>
+    noremap <silent> <c-l> :TmuxNavigateRight<cr>
+    noremap <silent> <c-h> :TmuxNavigateLeft<cr>
+else
+    noremap <c-j> <c-w>j
+    noremap <c-k> <c-w>k
+    noremap <c-l> <c-w>l
+    noremap <c-h> <c-w>h
 endif
 
 filetype plugin indent on    " required
@@ -328,10 +337,6 @@ inoremap <C-return> <cr>
 
 " Simplified window motion (ctrl+direction)
 " note that these also get mapped with the tmux-navigator plugin
-noremap <c-j> <c-w>j
-noremap <c-k> <c-w>k
-noremap <c-l> <c-w>l
-noremap <c-h> <c-w>h
 noremap <c-=> <c-w>=
 
 " Move visual block - select and move with ctrl-j/k
