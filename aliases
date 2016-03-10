@@ -37,6 +37,7 @@ alias sac='source activate'
 alias sdac='source deactivate'
 alias pyoutline="grep -Hn --color '^class \|def '"
 alias cview='view -c ":Coveragepy report"'
+alias cdup='cd ..'
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
