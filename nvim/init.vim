@@ -224,7 +224,11 @@ nnoremap <Leader>o :GitFiles<CR>
 nnoremap <Leader>g :Commits<CR>
 " show git commits for current buffer in fzf window
 nnoremap <Leader>G :BCommits<CR>
+" colorscheme list
+nnoremap <Leader>C :Colors<CR>
 
+" reminder for <c-x><c-f> to complete files in edit mode
+" (:help ^x^f)
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.exe              " Windows
 
