@@ -156,8 +156,6 @@ if has('python')
     " toggle location/quickfix list
     Plug 'milkypostman/vim-togglelist'
 
-    " tmuxline
-    " Plug 'edkolev/tmuxline.vim'
     " tmux syntax highlighting
     Plug 'tmux-plugins/vim-tmux'
 
@@ -412,14 +410,6 @@ let g:choosewin_overlay_enable = 1
 " set cindent
 " set cino=(0
 
-" Tmux-related
-" use the nice separators
-" let g:tmuxline_powerline_separators = 1
-" let g:tmuxline_preset = 'minimal'
-" let g:tmuxline_theme = 'powerline'
-" Tmuxline powerline minimal
-" TmuxlineSnapshot ~/dotfiles/tmuxline.conf
-"
 if has('nvim')
     " neovim terminal related settings
     tnoremap <Esc> <C-\><C-n>

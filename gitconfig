@@ -37,3 +37,7 @@ vimdiff = !sh -c 'git diff | view -'
 linelog = "!fcn() { git log -L $1,$2:$3; }; fcn"
 new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 st = status -s
+[http]
+[https]
+[http]
+[https]
