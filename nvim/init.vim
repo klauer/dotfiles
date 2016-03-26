@@ -6,7 +6,7 @@ set nocompatible
 
 " allow backspacing over everything in insert mode
 set backspace=indent,eol,start
-colorscheme ir_black
+
 " change dir to file location
 set acd                " current directory follows file being edited
 set ic                 " case-insensitive search by default
@@ -168,6 +168,10 @@ if has('python')
     " Python PEP8 indentation
     Plug 'hynek/vim-python-pep8-indent'
 
+    " colorschemes
+    " Plug 'jnurmine/Zenburn'
+    Plug 'NLKNguyen/papercolor-theme'
+
     " All of your Plugins must be added before the following line
     call plug#end()            " required
 
@@ -177,12 +181,17 @@ if has('python')
     noremap <silent> <c-k> :TmuxNavigateUp<cr>
     noremap <silent> <c-l> :TmuxNavigateRight<cr>
     noremap <silent> <c-h> :TmuxNavigateLeft<cr>
+
+    colorscheme PaperColor
 else
+    colorscheme ir_black
     noremap <c-j> <c-w>j
     noremap <c-k> <c-w>k
     noremap <c-l> <c-w>l
     noremap <c-h> <c-w>h
 endif
+
+set background=dark
 
 filetype plugin indent on    " required
 syntax on
