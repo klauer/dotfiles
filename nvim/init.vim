@@ -396,7 +396,8 @@ map <leader>j :bnext<cr>
 map <leader>k :bprevious<cr>
 " remember to use: [b ]b from unimpaired now
 map <leader>p :!python %<cr>
-
+" buffer jump
+nnoremap <leader>b :ls<cr>:b<space>
 
 " Carriage return is now colon
 nnoremap <CR> :
