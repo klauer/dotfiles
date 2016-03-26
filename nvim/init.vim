@@ -125,7 +125,8 @@ if has('python')
     " git wrapper fugitive
     Plug 'tpope/vim-fugitive'
     " git gutter annotation :GitGutter*
-    Plug 'airblade/vim-gitgutter'
+    " Plug 'airblade/vim-gitgutter'
+    Plug 'mhinz/vim-signify'
     " unimpaired - mappings for [ and ]
     "              such as buffer, args, quickfix, loc, tags (b, a, q, l, t)
     Plug 'tpope/vim-unimpaired'
@@ -245,6 +246,10 @@ let g:jedi#popup_select_first = 0
 
 " background color for omnicomplete
 highlight Pmenu ctermbg=0 gui=bold
+" signify/gitgutter
+highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
+highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
+highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
 " " Better navigating through omnicomplete option list
 " " See
