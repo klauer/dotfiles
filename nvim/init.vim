@@ -111,13 +111,12 @@ if has('python')
 
     call plug#begin(s:bundle_path)
 
-    " Ctrl-P - fuzzy file searching
-    " Plug 'kien/ctrlp.vim'
     " fzf - fuzzy file searching
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
     Plug 'junegunn/fzf.vim'
     " Airline
     Plug 'bling/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
     " better tmux integration
     Plug 'christoomey/vim-tmux-navigator'
     " Python PEP8 checking
@@ -201,15 +200,6 @@ syntax on
 " line numbering
 set number
 set numberwidth=5
-
-" Ctrl-P setup:
-" -> r = nearest ancestor with repo directory
-" let g:ctrlp_working_path_mode = 'ra'
-" let g:ctrlp_custom_ignore = {
-"   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-"   \ 'file': '\v\.(exe|so|dll|pyc|pyo)$',
-"   \ 'link': 'some_bad_symbolic_links',
-"   \ }
 
 fun! s:fzf_find_root()
     let s:top_marker_directories = ['.git', '.hg', 'configure']
