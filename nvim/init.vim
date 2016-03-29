@@ -226,6 +226,19 @@ nnoremap <Leader>g :Commits<CR>
 nnoremap <Leader>G :BCommits<CR>
 " colorscheme list
 nnoremap <Leader>C :Colors<CR>
+" help tags
+nnoremap <Leader>H :Helptags<CR>
+
+" fzf - Mapping selecting mappings (!)
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" fzf - Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " reminder for <c-x><c-f> to complete files in edit mode
 " (:help ^x^f)
@@ -371,10 +384,10 @@ nnoremap <Down> :cnext<cr>
 nmap <script> <silent> <leader>l :call ToggleLocationList()<CR>
 nmap <script> <silent> <leader>c :call ToggleQuickfixList()<CR>
 
-map <leader>H :lopen<cr>
-map <leader>L :lclose<cr>
-map <leader>K :lprev<cr>
-map <leader>J :lnext<cr>
+" map <leader>H :lopen<cr>
+" map <leader>L :lclose<cr>
+" map <leader>K :lprev<cr>
+" map <leader>J :lnext<cr>
 
 " Camel case conversion stuff on visual selection
 function! s:get_visual_selection()
@@ -434,9 +447,9 @@ if has('nvim')
     " neovim terminal related settings
     tnoremap <Esc> <C-\><C-n>
     " tnoremap <C-h> <C-\><C-n>:TmuxNavigateLeft<cr>
-    tnoremap <silent> <C-k> <C-\><C-n>:TmuxNavigateUp<cr>
-    tnoremap <silent> <C-j> <C-\><C-n>:TmuxNavigateDown<cr>
-    tnoremap <silent> <C-l> <C-\><C-n>:TmuxNavigateRight<cr>
+    " tnoremap <silent> <C-k> <C-\><C-n>:TmuxNavigateUp<cr>
+    " tnoremap <silent> <C-j> <C-\><C-n>:TmuxNavigateDown<cr>
+    " tnoremap <silent> <C-l> <C-\><C-n>:TmuxNavigateRight<cr>
     map <leader>i :vsplit term://ipython<cr>
     map <leader>s :vsplit term://bash<cr>
 endif
