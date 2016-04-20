@@ -52,28 +52,27 @@ else
 fi
 
 export DOTFILES=$HOME/dotfiles
-# path
 export PATH=$DOTFILES/bin:$HOME/.local/bin:$PATH
 
 # proxy settings
-export LOCATION="`python $DOTFILES/bin/get_location.py`"
+export LOCATION=$(python $DOTFILES/bin/get_location.py)
 
 if [ "${LOCATION}" == "beamline" ]; then
-    source $DOTFILES/bin/proxy-beamline.sh
+    . $DOTFILES/bin/proxy-beamline.sh
 elif [ "${LOCATION}" == "campus" ]; then
-    source $DOTFILES/bin/proxy-campus.sh
+    . $DOTFILES/bin/proxy-campus.sh
 else
     if [ -z "${LOCATION}" ]; then
         echo "* Unknown location; clearing proxy settings"
     else
         echo "* Location \"${LOCATION}\": clearing proxy settings"
     fi
-    source $DOTFILES/bin/clear_proxy.sh
+    . $DOTFILES/bin/clear_proxy.sh
 fi
 
 # EPICS address listings
 export EPICS_CA_AUTO_ADDR_LIST=NO
-export EPICS_CA_ADDR_LIST="`python $DOTFILES/bin/get_ca_bcast_addr.py`"
+export EPICS_CA_ADDR_LIST=$(python $DOTFILES/bin/get_ca_bcast_addr.py)
 export EPICS_CA_MAX_ARRAY_BYTES=20000000
 
 # neovim TUI config (note: may change)
