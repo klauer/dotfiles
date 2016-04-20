@@ -8,7 +8,7 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
 fi
 
 http_proxy="http://proxy:8888"
-https_proxy="https://proxy:8888"
+https_proxy="http://proxy:8888"
 no_proxy="cs.nsls2.local"
 
 source set_proxy.sh
