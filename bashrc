@@ -34,7 +34,12 @@ stty -ixoff
 export EDITOR=vim
 export EPICS_BASE=/usr/lib/epics
 export EDMDATAFILES=.:/usr/lib/epics/op/edl
-export TERM=screen-256color
+
+if [ -z "$(find /usr/share/terminfo -name st-256color 2> /dev/null)" ]; then
+    export TERM=screen-256color
+else
+    export TERM=st-256color
+fi
 
 export DOTFILES=$HOME/dotfiles
 # path
