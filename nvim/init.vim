@@ -174,6 +174,7 @@ if has('python')
     " colorschemes
     " Plug 'jnurmine/Zenburn'
     Plug 'NLKNguyen/papercolor-theme'
+    Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 
     " All of your Plugins must be added before the following line
     call plug#end()            " required
