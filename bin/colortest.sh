@@ -30,29 +30,16 @@ rainbowColor()
     let f=$1-43*$h
     let t=$f*255/43
     let q=255-t
+    
+    case $h in 
+        0) echo "255 $t 0";;
+        1) echo "$q 255 0";;
+        2) echo "0 255 $t";;
+        3) echo "0 $q 255";;
+        4) echo "$t 0 255";;
+        5) echo "255 0 $q";;
+    esac
 
-    if [ $h -eq 0 ]
-    then
-        echo "255 $t 0"
-    elif [ $h -eq 1 ]
-    then
-        echo "$q 255 0"
-    elif [ $h -eq 2 ]
-    then
-        echo "0 255 $t"
-    elif [ $h -eq 3 ]
-    then
-        echo "0 $q 255"
-    elif [ $h -eq 4 ]
-    then
-        echo "$t 0 255"
-    elif [ $h -eq 5 ]
-    then
-        echo "255 0 $q"
-    else
-        # execution should never reach here
-        echo "0 0 0"
-    fi
 }
 
 for i in `seq 0 127`; do
