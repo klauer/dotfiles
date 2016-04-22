@@ -146,6 +146,10 @@ if has('python')
     Plug 't9md/vim-choosewin'
     " commentary with motion 'gc'
     Plug 'tpope/vim-commentary'
+    " surround
+    Plug 'tpope/vim-surround'
+    " sessions
+    Plug 'tpope/vim-obsession'
     " Python coverage
     Plug 'alfredodeza/coveragepy.vim'
     " EPICS syntax highlighting
