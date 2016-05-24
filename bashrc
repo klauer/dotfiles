@@ -69,3 +69,7 @@ export EPICS_CA_MAX_ARRAY_BYTES=20000000
 # neovim TUI config (note: may change)
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+# Setting ag as the default source for fzf - and ignore stuff in gitignore/hgignore
+export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
