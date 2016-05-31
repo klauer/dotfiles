@@ -150,6 +150,8 @@ if has('python')
     Plug 'tpope/vim-surround'
     " sessions
     Plug 'tpope/vim-obsession'
+    " two-character forward/reverse searches
+    Plug 'justinmk/vim-sneak'
     " Python coverage
     Plug 'alfredodeza/coveragepy.vim'
     " EPICS syntax highlighting
@@ -443,6 +445,15 @@ nmap <Leader><Leader> V
 nmap  <Leader>w  <Plug>(choosewin)
 
 let g:choosewin_overlay_enable = 1
+
+" sneak mode - 2 character fwd/rev search
+" replace s for now ('cl' could replace it)
+nmap s <Plug>Sneak_s
+nmap S <Plug>Sneak_S
+xmap s <Plug>Sneak_s
+xmap S <Plug>Sneak_S
+omap s <Plug>Sneak_s
+omap S <Plug>Sneak_S
 
 " filetype plugin indent off
 " set cindent
