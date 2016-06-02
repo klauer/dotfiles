@@ -442,7 +442,7 @@ nnoremap <CR> :
 
 nmap <Leader><Leader> V
 
-nmap  <Leader>w  <Plug>(choosewin)
+nmap <Leader>w <Plug>(choosewin)
 
 let g:choosewin_overlay_enable = 1
 
@@ -454,6 +454,31 @@ xmap s <Plug>Sneak_s
 xmap S <Plug>Sneak_S
 omap s <Plug>Sneak_s
 omap S <Plug>Sneak_S
+
+nmap gs <Plug>(SneakStreak)
+nmap gS <Plug>(SneakStreakBackward)
+xmap gs <Plug>(SneakStreak)
+xmap gS <Plug>(SneakStreakBackward)
+omap gs <Plug>(SneakStreak)
+omap gS <Plug>(SneakStreakBackward)
+
+
+" I'm not sure I like this just yet...
+" "replace 'f' with 1-char Sneak
+" nmap f <Plug>Sneak_f
+" nmap F <Plug>Sneak_F
+" xmap f <Plug>Sneak_f
+" xmap F <Plug>Sneak_F
+" omap f <Plug>Sneak_f
+" omap F <Plug>Sneak_F
+" "replace 't' with 1-char Sneak
+" nmap t <Plug>Sneak_t
+" nmap T <Plug>Sneak_T
+" xmap t <Plug>Sneak_t
+" xmap T <Plug>Sneak_T
+" omap t <Plug>Sneak_t
+" omap T <Plug>Sneak_T
+" let g:sneak#streak = 1
 
 " filetype plugin indent off
 " set cindent
