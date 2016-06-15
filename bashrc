@@ -25,6 +25,16 @@ function tmux() {
     esac
 }
 
+function vimp() {
+    /usr/bin/vim - -u NONE -es '+1' "+$*" '+%print' '+:qa!' | tail -n +2
+}
+# $ printf "foo\nbar\n" | vimp normal dd
+
+function vimnp() {
+    /usr/bin/vim - -u NONE -es '+1' "+normal $*" '+%print' '+:qa!' | tail -n +2
+}
+# $ printf "foo\nbar\n" | vimnp dd
+
 # disable ctrl-s/ctrl-q
 stty stop ''
 stty start ''
