@@ -1,0 +1,2 @@
+QT_X11_NO_MITSHM=1 _X11_NO_MITSHM=1 _MITSHM=0
+export XAUTHORITY=~klauer/.Xauthority
