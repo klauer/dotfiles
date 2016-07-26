@@ -135,7 +135,7 @@ if has('python')
     Plug 'davidhalter/jedi-vim'
     " snippets
     if version >= 704
-        Plug 'SirVer/ultisnips'
+        "Plug 'SirVer/ultisnips'
     endif
     Plug 'honza/vim-snippets'
     " Tabular alignment :Tab/,
@@ -150,8 +150,6 @@ if has('python')
     Plug 'tpope/vim-surround'
     " sessions
     Plug 'tpope/vim-obsession'
-    " two-character forward/reverse searches
-    Plug 'justinmk/vim-sneak'
     " Python coverage
     Plug 'alfredodeza/coveragepy.vim'
     " EPICS syntax highlighting
@@ -172,6 +170,9 @@ if has('python')
 
     " Python PEP8 indentation
     Plug 'hynek/vim-python-pep8-indent'
+
+    " two-character forward/reverse searches
+    Plug 'justinmk/vim-sneak'
 
     " colorschemes
     " Plug 'jnurmine/Zenburn'
@@ -448,12 +449,19 @@ let g:choosewin_overlay_enable = 1
 
 " sneak mode - 2 character fwd/rev search
 " replace s for now ('cl' could replace it)
-nmap s <Plug>Sneak_s
-nmap S <Plug>Sneak_S
-xmap s <Plug>Sneak_s
-xmap S <Plug>Sneak_S
-omap s <Plug>Sneak_s
-omap S <Plug>Sneak_S
+nnoremap s <Plug>(Sneak_s)
+nnoremap S <Plug>(Sneak_S)
+xnoremap s <Plug>(Sneak_s)
+xnoremap S <Plug>(Sneak_S)
+onoremap s <Plug>(Sneak_s)
+onoremap S <Plug>(Sneak_S)
+
+" nnoremap f <Plug>Sneak_f
+" nnoremap F <Plug>Sneak_F
+" xnoremap f <Plug>Sneak_f
+" xnoremap F <Plug>Sneak_F
+" onoremap f <Plug>Sneak_f
+" onoremap F <Plug>Sneak_F
 
 nmap gs <Plug>(SneakStreak)
 nmap gS <Plug>(SneakStreakBackward)
