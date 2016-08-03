@@ -135,7 +135,7 @@ if has('python')
     Plug 'davidhalter/jedi-vim'
     " snippets
     if version >= 704
-        Plug 'SirVer/ultisnips'
+        "Plug 'SirVer/ultisnips'
     endif
     Plug 'honza/vim-snippets'
     " Tabular alignment :Tab/,
@@ -159,6 +159,8 @@ if has('python')
     Plug 'Shougo/unite-outline'
     " toggle location/quickfix list
     Plug 'milkypostman/vim-togglelist'
+    " add emacs/readline style bindings to the command line
+    Plug 'vim-utils/vim-husk'
 
     " tmux syntax highlighting
     Plug 'tmux-plugins/vim-tmux'
@@ -171,9 +173,13 @@ if has('python')
     " Python PEP8 indentation
     Plug 'hynek/vim-python-pep8-indent'
 
+    " two-character forward/reverse searches
+    Plug 'justinmk/vim-sneak'
+
     " colorschemes
     " Plug 'jnurmine/Zenburn'
     Plug 'NLKNguyen/papercolor-theme'
+    Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 
     " All of your Plugins must be added before the following line
     call plug#end()            " required
@@ -439,9 +445,50 @@ nnoremap <CR> :
 
 nmap <Leader><Leader> V
 
-nmap  <Leader>w  <Plug>(choosewin)
+nmap <Leader>w <Plug>(choosewin)
 
 let g:choosewin_overlay_enable = 1
+
+" sneak mode - 2 character fwd/rev search
+" replace s for now ('cl' could replace it)
+nnoremap s <Plug>(Sneak_s)
+nnoremap S <Plug>(Sneak_S)
+xnoremap s <Plug>(Sneak_s)
+xnoremap S <Plug>(Sneak_S)
+onoremap s <Plug>(Sneak_s)
+onoremap S <Plug>(Sneak_S)
+
+" nnoremap f <Plug>Sneak_f
+" nnoremap F <Plug>Sneak_F
+" xnoremap f <Plug>Sneak_f
+" xnoremap F <Plug>Sneak_F
+" onoremap f <Plug>Sneak_f
+" onoremap F <Plug>Sneak_F
+
+nmap gs <Plug>(SneakStreak)
+nmap gS <Plug>(SneakStreakBackward)
+xmap gs <Plug>(SneakStreak)
+xmap gS <Plug>(SneakStreakBackward)
+omap gs <Plug>(SneakStreak)
+omap gS <Plug>(SneakStreakBackward)
+
+
+" I'm not sure I like this just yet...
+" "replace 'f' with 1-char Sneak
+" nmap f <Plug>Sneak_f
+" nmap F <Plug>Sneak_F
+" xmap f <Plug>Sneak_f
+" xmap F <Plug>Sneak_F
+" omap f <Plug>Sneak_f
+" omap F <Plug>Sneak_F
+" "replace 't' with 1-char Sneak
+" nmap t <Plug>Sneak_t
+" nmap T <Plug>Sneak_T
+" xmap t <Plug>Sneak_t
+" xmap T <Plug>Sneak_T
+" omap t <Plug>Sneak_t
+" omap T <Plug>Sneak_T
+" let g:sneak#streak = 1
 
 " filetype plugin indent off
 " set cindent

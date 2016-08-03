@@ -38,6 +38,10 @@ else
     echo "** tmux xdg config path exists"
 fi
 
+if [ ! -d $HOME/.terminfo ]; then
+    ln -sf $DOTFILES/terminfo $HOME/terminfo
+fi
+
 TPM_PATH=$HOME/.config/tmux/plugins/tpm
 
 if [ ! -d "$TPM_PATH" ]; then
