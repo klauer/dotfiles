@@ -159,6 +159,8 @@ if has('python')
     Plug 'Shougo/unite-outline'
     " toggle location/quickfix list
     Plug 'milkypostman/vim-togglelist'
+    " add emacs/readline style bindings to the command line
+    Plug 'vim-utils/vim-husk'
 
     " tmux syntax highlighting
     Plug 'tmux-plugins/vim-tmux'
