@@ -516,6 +516,28 @@ if executable('pdftotext')
     autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk -layout -q -eol unix "%" - | fmt -w78
 endif
 
+function! s:SelectMatchingCharacterColumn()
+  " search pattern to determine the up and down motion counts
+  let c=matchstr(getline('.'),'\%'.virtcol('.').'v.')
+  let c=escape(c,'~$*\.')
+  let p='^\(.*\%'.virtcol('.').'v'.c.'\)\@!.*$'
+  " up motion (and reset) to select the top column segment
+  let k=search(p,'nWb')
+  let k=!k?line('.')-1:line('.')-k-1
+  let k=!k?'':k.'ko'
+  " down motion to select the bottom column segment
+  let j=search(p,'nW')
+  let j=!j?line('$')-line('.'):j-1-line('.')
+  let j=!j?'':j.'j'
+  " key sequence to select the whole column
+  return "\<C-v>".k.j.(v:count>0?'V':'')
+endfunction
+
+" select column of same character under cursor, enter visual block mode
+nnoremap <expr> g<C-v> <SID>SelectMatchingCharacterColumn()
+
+nnoremap <Leader>e :cd %:h\|execute "term"\|cd -<cr>
+
 if has('python')
   " add on conda lib paths so that :find works
   execute ':source ' . s:config_path . '/conda_path.vim'
