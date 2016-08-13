@@ -138,8 +138,8 @@ if has('python')
         "Plug 'SirVer/ultisnips'
     endif
     Plug 'honza/vim-snippets'
-    " Tabular alignment :Tab/,
-    Plug 'godlygeek/tabular'
+    " easy alignment with motions
+    Plug 'junegunn/vim-easy-align'
     " QFEnter - quickfix open target window customization
     Plug 'yssl/QFEnter'
     " choosewin - toggle an overlay on windows to quickly jump to them
@@ -535,6 +535,11 @@ endfunction
 
 " select column of same character under cursor, enter visual block mode
 nnoremap <expr> g<C-v> <SID>SelectMatchingCharacterColumn()
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" and for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 nnoremap <Leader>e :cd %:h\|execute "term"\|cd -<cr>
 
