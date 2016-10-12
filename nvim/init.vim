@@ -545,8 +545,3 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 nnoremap <Leader>e :cd %:h\|execute "term"\|cd -<cr>
-
-if has('python')
-  " add on conda lib paths so that :find works
-  execute ':source ' . s:config_path . '/conda_path.vim'
-endif
