@@ -57,27 +57,31 @@ export PATH=$DOTFILES/bin:$HOME/.local/bin:$PATH
 # proxy settings
 export LOCATION=$(python $DOTFILES/bin/get_location.py)
 
-if [ "${LOCATION}" == "beamline" ]; then
-    . $DOTFILES/bin/proxy-beamline.sh
-elif [ "${LOCATION}" == "campus" ]; then
-    . $DOTFILES/bin/proxy-campus.sh
-else
-    if [ -z "${LOCATION}" ]; then
-        echo "* Unknown location; clearing proxy settings"
-    else
-        echo "* Location \"${LOCATION}\": clearing proxy settings"
-    fi
-    . $DOTFILES/bin/clear_proxy.sh
-fi
+# if [ "${LOCATION}" == "beamline" ]; then
+#     . $DOTFILES/bin/proxy-beamline.sh
+# elif [ "${LOCATION}" == "campus" ]; then
+#     . $DOTFILES/bin/proxy-campus.sh
+# else
+#     if [ -z "${LOCATION}" ]; then
+#         echo "* Unknown location; clearing proxy settings"
+#     else
+#         echo "* Location \"${LOCATION}\": clearing proxy settings"
+#     fi
+#     . $DOTFILES/bin/clear_proxy.sh
+# fi
 
 # EPICS address listings
-export EPICS_CA_AUTO_ADDR_LIST=NO
-export EPICS_CA_ADDR_LIST=$(python $DOTFILES/bin/get_ca_bcast_addr.py)
-export EPICS_CA_MAX_ARRAY_BYTES=20000000
+# export EPICS_CA_AUTO_ADDR_LIST=NO
+# export EPICS_CA_ADDR_LIST=$(python $DOTFILES/bin/get_ca_bcast_addr.py)
+# export EPICS_CA_MAX_ARRAY_BYTES=20000000
+
+if [ -f /afs/slac/g/lcls/tools/script/ENVS.bash ]; then
+  . /afs/slac/g/lcls/tools/script/ENVS.bash
+fi
 
 # neovim TUI config (note: may change)
-export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-export NVIM_TUI_ENABLE_TRUE_COLOR=1
+# export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+# export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 # Setting ag as the default source for fzf - and ignore stuff in gitignore/hgignore
 export FZF_DEFAULT_COMMAND='ag -g ""'
