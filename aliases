@@ -1,3 +1,4 @@
+#!/bin/bash
 # vi: syntax=sh
 
 alias ln='ln -v'
@@ -9,7 +10,7 @@ alias lh='ls -Alh'
 alias ue='tmux update-env'
 
 # Use neovim if available:
-(which nvim > /dev/null) && use_nvim=1
+(which nvim 2> /dev/null > /dev/null) && use_nvim=1
 if [[ -n "$use_nvim" ]]; then
     # -X stops from connecting to X server
     alias vi='nvim'

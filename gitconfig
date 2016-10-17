@@ -22,7 +22,7 @@
     ui = auto
 
 [core]
-	editor = nvim
+	editor = vim
     
 [push]
 	default = simple

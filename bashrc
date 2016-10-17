@@ -42,13 +42,15 @@ stty -ixon
 stty -ixoff
 
 export EDITOR=vim
-export EPICS_BASE=/usr/lib/epics
-export EDMDATAFILES=.:/usr/lib/epics/op/edl
+# export EPICS_BASE=/usr/lib/epics
+# export EDMDATAFILES=.:/usr/lib/epics/op/edl
 
+export TERM=st-256color
 if [ -z "$(find /usr/share/terminfo -name st-256color 2> /dev/null)" ]; then
-    export TERM=screen-256color
-else
-    export TERM=st-256color
+    if [ -z "$(find $HOME/.terminfo/ -name st-256color 2> /dev/null)" ]; then
+        echo "(st-256color not found; using screen-256color)"
+        export TERM=screen-256color
+    fi
 fi
 
 export DOTFILES=$HOME/dotfiles
@@ -75,9 +77,7 @@ export LOCATION=$(python $DOTFILES/bin/get_location.py)
 # export EPICS_CA_ADDR_LIST=$(python $DOTFILES/bin/get_ca_bcast_addr.py)
 # export EPICS_CA_MAX_ARRAY_BYTES=20000000
 
-if [ -f /afs/slac/g/lcls/tools/script/ENVS.bash ]; then
-  . /afs/slac/g/lcls/tools/script/ENVS.bash
-fi
+source $DOTFILES/aliases
 
 # neovim TUI config (note: may change)
 # export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
