@@ -41,6 +41,7 @@ alias cview='view -c ":Coveragepy report"'
 function cdup() { cd ../$@; }
 alias pd=pushd
 alias Pd=popd
+alias iocConsole='TERM=screen iocConsole'
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
