@@ -475,6 +475,7 @@ xmap gS <Plug>(SneakStreakBackward)
 omap gs <Plug>(SneakStreak)
 omap gS <Plug>(SneakStreakBackward)
 
+cmap :E<cr> :Explore<cr>
 
 " I'm not sure I like this just yet...
 " "replace 'f' with 1-char Sneak
