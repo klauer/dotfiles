@@ -18,14 +18,14 @@ if [[ -n "$use_nvim" ]]; then
     alias view='nvim -R'
     export EDITOR=nvim
     git config --global core.editor "nvim" 2>/dev/null
-    echo "* Using neovim"
+    echo "* Using neovim" 2>/dev/stderr
 else
     alias vi='vim -X'
     alias vim='vim -X'
     alias view='vim -XR'
     export EDITOR=vim
     git config --global core.editor "vim" 2>/dev/null
-    echo "* Using vim"
+    echo "* Using vim" 2>/dev/stderr
 fi
 
 alias ssh='ssh -Y'
