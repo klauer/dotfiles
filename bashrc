@@ -48,7 +48,7 @@ export EDITOR=vim
 export TERM=st-256color
 if [ -z "$(find /usr/share/terminfo -name st-256color 2> /dev/null)" ]; then
     if [ -z "$(find $HOME/.terminfo/ -name st-256color 2> /dev/null)" ]; then
-        echo "(st-256color not found; using screen-256color)"
+        echo "(st-256color not found; using screen-256color)" 1>&2
         export TERM=screen-256color
     fi
 fi
