@@ -45,13 +45,15 @@ export EDITOR=vim
 # export EPICS_BASE=/usr/lib/epics
 # export EDMDATAFILES=.:/usr/lib/epics/op/edl
 
-export TERM=st-256color
-if [ -z "$(find /usr/share/terminfo -name st-256color 2> /dev/null)" ]; then
-    if [ -z "$(find $HOME/.terminfo/ -name st-256color 2> /dev/null)" ]; then
-        echo "(st-256color not found; using screen-256color)" 1>&2
-        export TERM=screen-256color
-    fi
-fi
+export TERM=screen-256color
+
+# st-256color
+# if [ -z "$(find /usr/share/terminfo -name st-256color 2> /dev/null)" ]; then
+#     if [ -z "$(find $HOME/.terminfo/ -name st-256color 2> /dev/null)" ]; then
+#         echo "(st-256color not found; using screen-256color)" 1>&2
+#         export TERM=screen-256color
+#     fi
+# fi
 
 export DOTFILES=$HOME/dotfiles
 export PATH=$DOTFILES/bin:$HOME/.local/bin:$PATH
