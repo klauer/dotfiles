@@ -36,7 +36,7 @@ alias pythongdb='gdb -iex "set auto-load safe-path /usr/bin" python2.7-dbg'
 alias rc='source ~/conda_ramdisk.sh'
 alias sac='source activate'
 alias sdac='source deactivate'
-alias pyoutline="grep -Hn --color '^class \|def '"
+alias pyoutline='grep -Hn --color -e '\''^\s*class '\'' -e '\''^\s*\(async \)\?def '\'''
 alias cview='view -c ":Coveragepy report"'
 function cdup() { cd ../$@; }
 alias pd=pushd
