@@ -25,7 +25,7 @@ if [ ! -d $VIM_VUNDLE_PATH ]; then
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
-pip install --user flake8
+# pip install --user flake8
 
 echo "** installing bundles"
 vim -c ":PlugInstall"

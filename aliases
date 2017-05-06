@@ -1,3 +1,4 @@
+#!/bin/bash
 # vi: syntax=sh
 
 alias ln='ln -v'
@@ -9,7 +10,7 @@ alias lh='ls -Alh'
 alias ue='tmux update-env'
 
 # Use neovim if available:
-(which nvim > /dev/null) && use_nvim=1
+(which nvim 2> /dev/null > /dev/null) && use_nvim=1
 if [[ -n "$use_nvim" ]]; then
     # -X stops from connecting to X server
     alias vi='nvim'
@@ -17,14 +18,14 @@ if [[ -n "$use_nvim" ]]; then
     alias view='nvim -R'
     export EDITOR=nvim
     git config --global core.editor "nvim" 2>/dev/null
-    echo "* Using neovim"
+    # echo "* Using neovim" 2>/dev/stderr
 else
     alias vi='vim -X'
     alias vim='vim -X'
     alias view='vim -XR'
     export EDITOR=vim
     git config --global core.editor "vim" 2>/dev/null
-    echo "* Using vim"
+    # echo "* Using vim" 2>/dev/stderr
 fi
 
 alias ssh='ssh -Y'
@@ -35,11 +36,12 @@ alias pythongdb='gdb -iex "set auto-load safe-path /usr/bin" python2.7-dbg'
 alias rc='source ~/conda_ramdisk.sh'
 alias sac='source activate'
 alias sdac='source deactivate'
-alias pyoutline="grep -Hn --color '^class \|def '"
+alias pyoutline='grep -Hn --color -e '\''^\s*class '\'' -e '\''^\s*\(async \)\?def '\'''
 alias cview='view -c ":Coveragepy report"'
 function cdup() { cd ../$@; }
 alias pd=pushd
 alias Pd=popd
+alias iocConsole='TERM=screen iocConsole'
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
