@@ -124,6 +124,8 @@ if has('python')
     Plug 'christoomey/vim-tmux-navigator'
     " Python PEP8 checking
     Plug 'nvie/vim-flake8'
+    " Python position information
+    Plug 'mgedmin/pythonhelper.vim'
     " git wrapper fugitive
     Plug 'tpope/vim-fugitive'
     " git gutter annotation :GitGutter*
@@ -133,7 +135,7 @@ if has('python')
     "              such as buffer, args, quickfix, loc, tags (b, a, q, l, t)
     Plug 'tpope/vim-unimpaired'
     " fugitive extension for managing/merging git branches
-    Plug 'idanarye/vim-merginal'
+    Plug 'idanarye/vim-merginal', { 'branch': 'develop' }
     " jedi-vim completion
     Plug 'davidhalter/jedi-vim'
     " snippets
@@ -346,6 +348,29 @@ let g:airline_powerline_fonts=1 " if funny symbols show in the status line, set 
 let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#tabline#left_sep = ' '
 " let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#wordcount#enabled = 0
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline_section_c = airline#section#create(['%{TagInStatusLine()}', 'path', ' ', 'readonly'])
+let g:airline_section_y = airline#section#create_right(['ffenc'])
+let g:airline_section_z = airline#section#create(['linenr', 'maxlinenr', '|%3v'])
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+let g:airline_symbols.linenr = ''
+let g:airline_symbols.maxlinenr = ''
+
+call extend(g:airline_mode_map, {
+    \ '__' : '------',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'v'  : 'V',
+    \ 'V'  : 'VL',
+    \ 'c'  : 'COMMAND',
+    \ '' : 'V-BLOCK',
+    \ 's'  : 'SELECT',
+    \ 'S'  : 'S-LINE',
+    \ '' : 'S-BLOCK',
+    \ 't'  : 'TERMINAL',
+    \ }, 'force')
 
 " -- special mappings
 "  putty note: if having issues, switch to using Xterm R6 function keys
