@@ -103,7 +103,7 @@ endif
 " ----- plugged ------
 " set the runtime path to include plugged and initialize
 
-if has('python')
+if has('python') || has('python3')
     let s:config_path=$HOME . "/.config/nvim"
     if has('nvim')
         let s:bundle_path=$HOME . "/.config/nvim/plugged"
@@ -196,7 +196,8 @@ if has('python')
     noremap <silent> <c-l> :TmuxNavigateRight<cr>
     noremap <silent> <c-h> :TmuxNavigateLeft<cr>
 
-    colorscheme PaperColor
+    silent! colorscheme ir_black
+    silent! colorscheme PaperColor
 else
     colorscheme ir_black
     noremap <c-j> <c-w>j
