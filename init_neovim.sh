@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "* neovim"
 if [ -z "$DOTFILES" ]; then
     DOTFILES=$PWD

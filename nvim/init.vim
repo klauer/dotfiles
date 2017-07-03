@@ -344,33 +344,35 @@ endif
 
 " -- setup airline
 set t_Co=256                    " 256-color terminal
-let g:airline_powerline_fonts=1 " if funny symbols show in the status line, set this to 0
-let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#left_sep = ' '
-" let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#wordcount#enabled = 0
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline_section_c = airline#section#create(['%{TagInStatusLine()}', 'file', ' ', 'readonly'])
-let g:airline_section_y = airline#section#create_right(['ffenc'])
-let g:airline_section_z = airline#section#create(['linenr', 'maxlinenr', '|%3v'])
-let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-let g:airline_symbols.linenr = ''
-let g:airline_symbols.maxlinenr = ''
+if &cp || v:version < 702 || (exists('g:loaded_airline') && g:loaded_airline)
+    let g:airline_powerline_fonts=1 " if funny symbols show in the status line, set this to 0
+    let g:airline#extensions#tabline#enabled = 1
+    " let g:airline#extensions#tabline#left_sep = ' '
+    " let g:airline#extensions#tabline#left_alt_sep = '|'
+    let g:airline#extensions#wordcount#enabled = 0
+    let g:airline#extensions#whitespace#enabled = 0
+    let g:airline_section_c = airline#section#create(['%{TagInStatusLine()}', 'file', ' ', 'readonly'])
+    let g:airline_section_y = airline#section#create_right(['ffenc'])
+    let g:airline_section_z = airline#section#create(['linenr', 'maxlinenr', '|%3v'])
+    let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+    let g:airline_symbols.linenr = ''
+    let g:airline_symbols.maxlinenr = ''
+    call extend(g:airline_mode_map, {
+        \ '__' : '------',
+        \ 'n'  : 'N',
+        \ 'i'  : 'I',
+        \ 'R'  : 'R',
+        \ 'v'  : 'V',
+        \ 'V'  : 'VL',
+        \ 'c'  : 'COMMAND',
+        \ '' : 'V-BLOCK',
+        \ 's'  : 'SELECT',
+        \ 'S'  : 'S-LINE',
+        \ '' : 'S-BLOCK',
+        \ 't'  : 'TERMINAL',
+        \ }, 'force')
+endif
 
-call extend(g:airline_mode_map, {
-    \ '__' : '------',
-    \ 'n'  : 'N',
-    \ 'i'  : 'I',
-    \ 'R'  : 'R',
-    \ 'v'  : 'V',
-    \ 'V'  : 'VL',
-    \ 'c'  : 'COMMAND',
-    \ '' : 'V-BLOCK',
-    \ 's'  : 'SELECT',
-    \ 'S'  : 'S-LINE',
-    \ '' : 'S-BLOCK',
-    \ 't'  : 'TERMINAL',
-    \ }, 'force')
 
 " -- special mappings
 "  putty note: if having issues, switch to using Xterm R6 function keys
