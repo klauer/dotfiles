@@ -124,8 +124,17 @@ if has('python') || has('python3')
     Plug 'tpope/vim-unimpaired'
     " fugitive extension for managing/merging git branches
     Plug 'idanarye/vim-merginal', { 'branch': 'develop' }
-    " jedi-vim completion
+    " jedi-vim not for completion, but for jump-to-definition
     Plug 'davidhalter/jedi-vim'
+    " Asynchronous completion with deoplete
+    if has('nvim')
+      Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    else
+      Plug 'Shougo/deoplete.nvim'
+      Plug 'roxma/nvim-yarp'
+      Plug 'roxma/vim-hug-neovim-rpc'
+    endif
+    Plug 'zchee/deoplete-jedi'
     " snippets
     if version >= 704
         "Plug 'SirVer/ultisnips'
@@ -133,8 +142,6 @@ if has('python') || has('python3')
     Plug 'honza/vim-snippets'
     " easy alignment with motions
     Plug 'junegunn/vim-easy-align'
-    " QFEnter - quickfix open target window customization
-    Plug 'yssl/QFEnter'
     " choosewin - toggle an overlay on windows to quickly jump to them
     Plug 't9md/vim-choosewin'
     " commentary with motion 'gc'
@@ -162,6 +169,9 @@ if has('python') || has('python3')
         " New neovim linter
         Plug 'benekastah/neomake'
     endif
+
+    " " Docstring area
+    " Plug 'Shougo/echodoc.vim'
 
     " Python PEP8 indentation
     Plug 'hynek/vim-python-pep8-indent'
@@ -249,13 +259,37 @@ set wildignore+=*\\tmp\\*,*.exe              " Windows
 
 " only use jedi completion with ctrl-space, not after '.'
 " let g:jedi#goto_assignments_command = "<Leader>g"
+let g:jedi#auto_initialization = 1
 let g:jedi#goto_definitions_command = "<Leader>d"
 let g:jedi#documentation_command = "K"
 let g:jedi#usages_command = "<Leader>n"
-let g:jedi#completions_command = "<C-Space>"
+let g:jedi#completions_command = ""
 let g:jedi#rename_command = "<Leader>r"
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
+let g:jedi#show_call_signatures = 1
+let g:jedi#use_splits_not_buffers = "top"
+let g:jedi#smart_auto_mappings = 0
+let g:jedi#force_python_version = 3
+
+" use deoplete instead of jedi:
+let g:jedi#completions_enabled = 0
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#jedi#show_docstring = 1
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
+" let g:deoplete#disable_auto_complete = 1
+
+augroup omnifuncs
+  autocmd!
+  autocmd FileType python setlocal omnifunc=jedi#completions
+augroup end
+
+" Close the preview window when done
+autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
+
+set completeopt+=preview,menu,menuone
 
 " background color for omnicomplete
 highlight Pmenu ctermbg=0 gui=bold
@@ -267,7 +301,6 @@ highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 " " Better navigating through omnicomplete option list
 " " See
 " http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
-set completeopt=longest,menuone
 function! OmniPopup(action)
     if pumvisible()
         if a:action == 'j'
@@ -282,24 +315,26 @@ endfunction
 inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
 inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 
+" <CR>/enter: close completion popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return deoplete#mappings#smart_close_popup() . "\<CR>"
+  "replace with deoplete#mappings#close_popup() to allow completion to occur
+endfunction
+
 " snippets with ctrl-s (ensure bashrc has:
 "   stty stop ''; stty start ''; stty -ixon; stty -ixoff;
 " )
-let g:UltiSnipsExpandTrigger="<c-s>"
-let g:UltiSnipsListSnippets="<c-e>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-let g:UltiSnipsEnableSnipMate=0
+" let g:UltiSnipsExpandTrigger="<c-s>"
+" let g:UltiSnipsListSnippets="<c-e>"
+" let g:UltiSnipsJumpForwardTrigger="<c-j>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+" let g:UltiSnipsEnableSnipMate=0
 
-let g:ultisnips_python_style='numpy'
+" let g:ultisnips_python_style='numpy'
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-" make QFEnter behavior map to the same keys as Ctrl-P
-let g:qfenter_vopen_map = ['<C-v>']
-let g:qfenter_hopen_map = ['<C-CR>', '<C-s>', '<C-x>']
-let g:qfenter_topen_map = ['<C-t>']
+" " If you want :UltiSnipsEdit to split your window.
+" let g:UltiSnipsEditSplit="vertical"
 
 highlight LineNr ctermfg=red
 highlight LineNr guifg=#FF0000
@@ -515,3 +550,6 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 nnoremap <Leader>e :cd %:h\|execute "term"\|cd -<cr>
+
+" vim-fugitive Ggrep should open the quick-fix window after
+autocmd QuickFixCmdPost *grep* cwindow
