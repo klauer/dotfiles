@@ -117,8 +117,8 @@ if has('python') || has('python3')
     " git wrapper fugitive
     Plug 'tpope/vim-fugitive'
     " git gutter annotation :GitGutter*
-    " Plug 'airblade/vim-gitgutter'
-    Plug 'mhinz/vim-signify'
+    Plug 'airblade/vim-gitgutter'
+    " Plug 'mhinz/vim-signify'
     " unimpaired - mappings for [ and ]
     "              such as buffer, args, quickfix, loc, tags (b, a, q, l, t)
     Plug 'tpope/vim-unimpaired'
@@ -223,6 +223,10 @@ fun! s:fzf_find_root()
     return path
 endfun
 
+" Coveragepy
+nnoremap <Leader>c :Coveragepy show<CR>
+nnoremap <Leader>C :Coveragepy report<CR>
+
 " fzf functionality like ctrl-p
 nnoremap <c-p> :exe 'Files ' . <SID>fzf_find_root()<CR>
 " show fzf list of tags
@@ -236,7 +240,7 @@ nnoremap <Leader>g :Commits<CR>
 " show git commits for current buffer in fzf window
 nnoremap <Leader>G :BCommits<CR>
 " colorscheme list
-nnoremap <Leader>C :Colors<CR>
+" nnoremap <Leader>C :Colors<CR>
 " help tags
 nnoremap <Leader>H :Helptags<CR>
 
@@ -290,6 +294,10 @@ augroup end
 autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
 
 set completeopt+=preview,menu,menuone
+
+" because I keep hitting ctrl-space and that means <C-@>...
+inoremap <C-Space> <C-x><C-o>
+inoremap <C-@> <C-Space>
 
 " background color for omnicomplete
 highlight Pmenu ctermbg=0 gui=bold
