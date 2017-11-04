@@ -191,6 +191,13 @@ if has('python') || has('python3')
     noremap <silent> <c-l> :TmuxNavigateRight<cr>
     noremap <silent> <c-h> :TmuxNavigateLeft<cr>
 
+    augroup my_neomake_highlights
+        au!
+        autocmd ColorScheme *
+          \ hi link NeomakeError ErrorMsg |
+          \ hi link NeomakeWarning SpellCap
+    augroup END
+
     silent! colorscheme ir_black
     silent! colorscheme PaperColor
 else
@@ -305,6 +312,10 @@ highlight Pmenu ctermbg=0 gui=bold
 highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
+
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " " Better navigating through omnicomplete option list
 " " See
