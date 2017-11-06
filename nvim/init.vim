@@ -572,3 +572,5 @@ nnoremap <Leader>e :cd %:h\|execute "term"\|cd -<cr>
 
 " vim-fugitive Ggrep should open the quick-fix window after
 autocmd QuickFixCmdPost *grep* cwindow
+" vim-fugitive Ggrep identifier under cursor
+nnoremap <Leader>* :execute ":Ggrep " . expand("<cword>")<CR>
