@@ -519,6 +519,8 @@ map <leader>p :!python %<cr>
 
 " Carriage return is now colon
 nnoremap <CR> :
+vnoremap <CR> :
+
 " But not in quickfix mode:
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
