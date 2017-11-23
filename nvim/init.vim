@@ -515,10 +515,12 @@ map <leader>k :bprevious<cr>
 " remember to use: [b ]b from unimpaired now
 map <leader>p :!python %<cr>
 " buffer jump
-nnoremap <leader>b :ls<cr>:b<space>
+" nnoremap <leader>b :ls<cr>:b<space>
 
 " Carriage return is now colon
 nnoremap <CR> :
+" But not in quickfix mode:
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
 nmap <Leader><Leader> V
 
