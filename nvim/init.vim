@@ -116,6 +116,8 @@ if has('python') || has('python3')
     Plug 'mgedmin/pythonhelper.vim'
     " git wrapper fugitive
     Plug 'tpope/vim-fugitive'
+    " enable Gbrowse
+    Plug 'tpope/vim-rhubarb'
     " git gutter annotation :GitGutter*
     Plug 'airblade/vim-gitgutter'
     " Plug 'mhinz/vim-signify'
