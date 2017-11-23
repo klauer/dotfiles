@@ -250,6 +250,8 @@ nnoremap <Leader>G :BCommits<CR>
 " nnoremap <Leader>C :Colors<CR>
 " help tags
 nnoremap <Leader>H :Helptags<CR>
+" buffers
+nnoremap <Leader>b :Buffers<CR>
 
 " fzf - Mapping selecting mappings (!)
 nmap <leader><tab> <plug>(fzf-maps-n)
