@@ -373,11 +373,14 @@ if has('nvim')
     " use neomake's linter
     " E501 = line too long, C901 = too complex
     " let g:neomake_python_pep8_maker = {'args': ['--ignore', 'E501,C901']}
-    autocmd BufWritePost *.py Neomake
+    autocmd BufWritePost *.py :Neomake<cr>
+    nnoremap <Leader>f :Neomake<cr>
+    let g:neomake_open_list=2
 else
     " for regular vim, use flake8 linter
     " flake8 config is in ~/.config/flake8
     autocmd BufWritePost *.py call Flake8()
+    nnoremap <Leader>f :call Flake8()<cr>
 endif
 
 if has("autocmd")
