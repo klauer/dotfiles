@@ -9,10 +9,15 @@ alias lh='ls -Alh'
 
 alias ue='tmux update-env'
 
+# conda environment for vim to use
+vimenv=$HOME/mc/envs/py36
+
 # Use neovim if available:
 (which nvim 2> /dev/null > /dev/null) && use_nvim=1
+
 if [[ -n "$use_nvim" ]]; then
     # -X stops from connecting to X server
+    alias nvim="PATH=\"$vimenv/bin:$vimenv/scripts:$PATH\" `which nvim`"
     alias vi='nvim'
     alias vim='nvim'
     alias view='nvim -R'
@@ -20,15 +25,16 @@ if [[ -n "$use_nvim" ]]; then
     alias ivimdiff="nvim -dc 'set diffopt+=iwhite'"
 
     export EDITOR=nvim
-    git config --global core.editor "nvim" 2>/dev/null
+    # git config --global core.editor "nvim" 2>/dev/null
     # echo "* Using neovim" 2>/dev/stderr
 else
+    alias vim="PATH=\"$vimenv/bin:$vimenv/scripts:$PATH\" `which vim`"
     alias vi='vim -X'
     alias vim='vim -X'
     alias view='vim -XR'
     alias ivimdiff="vimdiff -c 'set diffopt+=iwhite'"
     export EDITOR=vim
-    git config --global core.editor "vim" 2>/dev/null
+    # git config --global core.editor "vim" 2>/dev/null
     # echo "* Using vim" 2>/dev/stderr
 fi
 
