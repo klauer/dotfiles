@@ -50,8 +50,10 @@ alias pyoutline='grep -Hn --color -e '\''^\s*class '\'' -e '\''^\s*\(async \)\?d
 alias cview='view -c ":Coveragepy report"'
 function cdup() { cd ../$@; }
 alias pd=pushd
-alias Pd=popd
+alias ppd=popd
 alias iocConsole='TERM=screen iocConsole'
+alias mmf_hgvpu='ssh dev3 /afs/slac.stanford.edu/g/lcls/vol8/epics/iocCommon/ioc-b081-mc01/GUI.sh'
+alias epicsdev='pushd $HOME/Repos/caproto && source tenv.sh; popd'
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
