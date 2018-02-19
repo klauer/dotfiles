@@ -1,5 +1,5 @@
 " .nvimrc ($HOME/.config/nvim/init.vim)
-set nocompatible
+" set nocompatible
 
 " secure modeline processing
 set secure
@@ -183,7 +183,9 @@ if has('python') || has('python3')
     Plug 'NLKNguyen/papercolor-theme'
     Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 
-    " All of your Plugins must be added before the following line
+    " rust
+    Plug 'sebastianmarkow/deoplete-rust'
+
     call plug#end()            " required
 
     " ensure ctrl-h works with splits, at least on osx for now...
@@ -192,6 +194,10 @@ if has('python') || has('python3')
     noremap <silent> <c-k> :TmuxNavigateUp<cr>
     noremap <silent> <c-l> :TmuxNavigateRight<cr>
     noremap <silent> <c-h> :TmuxNavigateLeft<cr>
+    tnoremap <silent> <c-j> <c-\><C-N>:TmuxNavigateDown<cr>
+    tnoremap <silent> <c-k> <c-\><C-N>:TmuxNavigateUp<cr>
+    tnoremap <silent> <c-l> <c-\><C-N>:TmuxNavigateRight<cr>
+    tnoremap <silent> <c-h> <c-\><C-N>:TmuxNavigateLeft<cr>
 
     augroup my_neomake_highlights
         au!
@@ -373,7 +379,7 @@ if has('nvim')
     " use neomake's linter
     " E501 = line too long, C901 = too complex
     " let g:neomake_python_pep8_maker = {'args': ['--ignore', 'E501,C901']}
-    autocmd BufWritePost *.py :Neomake<cr>
+    call neomake#configure#automake('w')
     nnoremap <Leader>f :Neomake<cr>
     let g:neomake_open_list=2
 else
@@ -391,13 +397,16 @@ endif
 
 " -- setup airline
 set t_Co=256                    " 256-color terminal
-if &cp || v:version < 702 || (exists('g:loaded_airline') && g:loaded_airline)
+" if exists('airline#section#create')
     let g:airline_powerline_fonts=1 " if funny symbols show in the status line, set this to 0
     let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#bufferline#enabled = 0
     " let g:airline#extensions#tabline#left_sep = ' '
     " let g:airline#extensions#tabline#left_alt_sep = '|'
     let g:airline#extensions#wordcount#enabled = 0
     let g:airline#extensions#whitespace#enabled = 0
+    let g:airline_section_a = airline#section#create(['mode', 'crypt', 'paste', 'spell', 'iminsert'])
+    let g:airline_section_b = airline#section#create_left(['hunks', 'branch'])
     let g:airline_section_c = airline#section#create(['%{TagInStatusLine()}', 'file', ' ', 'readonly'])
     let g:airline_section_y = airline#section#create_right(['ffenc'])
     let g:airline_section_z = airline#section#create(['linenr', 'maxlinenr', '|%3v'])
@@ -418,7 +427,7 @@ if &cp || v:version < 702 || (exists('g:loaded_airline') && g:loaded_airline)
         \ '' : 'S-BLOCK',
         \ 't'  : 'TERMINAL',
         \ }, 'force')
-endif
+" endif
 
 
 " -- special mappings
@@ -585,3 +594,7 @@ nnoremap <Leader>e :cd %:h\|execute "term"\|cd -<cr>
 autocmd QuickFixCmdPost *grep* cwindow
 " vim-fugitive Ggrep identifier under cursor
 nnoremap <Leader>* :execute ":Ggrep " . expand("<cword>")<CR>
+
+" Rust
+let g:deoplete#sources#rust#rust_source_path=$HOME . "/Repos/rust/src/src"
+let g:deoplete#sources#rust#racer_binary=$HOME . "/.cargo/bin/racer"
