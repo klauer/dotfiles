@@ -177,6 +177,8 @@ if has('python') || has('python3')
 
     " Python PEP8 indentation
     Plug 'hynek/vim-python-pep8-indent'
+    " And assisted formatting, if desirable
+    Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
     " colorschemes
     " Plug 'jnurmine/Zenburn'
