@@ -274,6 +274,10 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
+" fzf - fix c-j and c-k
+autocmd FileType fzf tnoremap <buffer> <C-j> <Down>
+autocmd FileType fzf tnoremap <buffer> <C-k> <Up>
+
 " reminder for <c-x><c-f> to complete files in edit mode
 " (:help ^x^f)
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
