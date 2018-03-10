@@ -54,6 +54,8 @@ alias ppd=popd
 alias iocConsole='TERM=screen iocConsole'
 alias mmf_hgvpu='ssh dev3 /afs/slac.stanford.edu/g/lcls/vol8/epics/iocCommon/ioc-b081-mc01/GUI.sh'
 alias epicsdev='pushd $HOME/Repos/caproto && source tenv.sh; popd'
+alias openfiles="lsof -n |cut -d ' ' -f 1 | sort |uniq -c |sort -n"
+alias cclip='xclip -selection clipboard'
 
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
