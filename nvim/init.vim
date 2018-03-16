@@ -604,3 +604,14 @@ nnoremap <Leader>* :execute ":Ggrep " . expand("<cword>")<CR>
 " Rust
 let g:deoplete#sources#rust#rust_source_path=$HOME . "/Repos/rust/src/src"
 let g:deoplete#sources#rust#racer_binary=$HOME . "/.cargo/bin/racer"
+
+
+au BufEnter * call NoLastQuickfix()
+function! NoLastQuickfix()
+  " quit if the last window showing is just a quickfix one
+  if &buftype=="quickfix"
+    if winbufnr(2) == -1
+      quit
+    endif
+  endif
+endfunction
