@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
@@ -88,6 +90,10 @@ source $DOTFILES/aliases
 # Setting ag as the default source for fzf - and ignore stuff in gitignore/hgignore
 export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# export FZF_DEFAULT_COMMAND='
+#   (git ls-tree -r --name-only HEAD ||
+#    find . -path "*/\.*" -prune -o -type f -print -o -type l -print |
+#       sed s/^..//) 2> /dev/null'
 
 # fd - cd to selected directory
 fd() {

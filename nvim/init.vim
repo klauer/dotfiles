@@ -246,6 +246,7 @@ nnoremap <Leader>C :Coveragepy report<CR>
 
 " fzf functionality like ctrl-p
 nnoremap <c-p> :exe 'Files ' . <SID>fzf_find_root()<CR>
+nnoremap <c-s-P> :Files .<CR>
 " show fzf list of tags
 nnoremap <Leader>t :Tags<CR>
 " show fzf list of tags in the buffer
@@ -387,7 +388,7 @@ if has('nvim')
     " let g:neomake_python_pep8_maker = {'args': ['--ignore', 'E501,C901']}
     call neomake#configure#automake('w')
     nnoremap <Leader>f :Neomake<cr>
-    let g:neomake_open_list=2
+    let g:neomake_open_list=0
 else
     " for regular vim, use flake8 linter
     " flake8 config is in ~/.config/flake8
@@ -483,6 +484,7 @@ nnoremap <Left> :lprev<cr>
 nnoremap <Right> :lnext<cr>
 nnoremap <Up> :cprev<cr>
 nnoremap <Down> :cnext<cr>
+nmap <silent> <leader>L :windo if &buftype == "quickfix" \|\| &buftype == "locationlist" \| lclose \| endif<CR>
 nmap <script> <silent> <leader>l :call ToggleLocationList()<CR>
 nmap <script> <silent> <leader>q :call ToggleQuickfixList()<CR>
 
