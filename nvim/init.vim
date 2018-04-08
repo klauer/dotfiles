@@ -188,6 +188,9 @@ if has('python') || has('python3')
     " rust
     Plug 'sebastianmarkow/deoplete-rust'
 
+    " ansi escape sequences
+    Plug 'vim-scripts/AnsiEsc.vim'
+
     call plug#end()            " required
 
     " ensure ctrl-h works with splits, at least on osx for now...
