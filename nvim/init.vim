@@ -152,8 +152,9 @@ if has('python') || has('python3')
     Plug 'tpope/vim-surround'
     " sessions
     Plug 'tpope/vim-obsession'
-    " Python coverage
-    Plug 'alfredodeza/coveragepy.vim'
+    " " Python coverage
+    Plug 'mgedmin/coverage-highlight.vim'
+
     " EPICS syntax highlighting
     Plug 'NickeZ/epics.vim'
     " Unite/unite-outline
@@ -192,6 +193,8 @@ if has('python') || has('python3')
     Plug 'vim-scripts/AnsiEsc.vim'
 
     call plug#end()            " required
+
+    " call glaive#Install()
 
     " ensure ctrl-h works with splits, at least on osx for now...
     nnoremap <silent> <bs> :TmuxNavigateLeft<cr>
@@ -244,8 +247,7 @@ fun! s:fzf_find_root()
 endfun
 
 " Coveragepy
-nnoremap <Leader>c :Coveragepy show<CR>
-nnoremap <Leader>C :Coveragepy report<CR>
+nnoremap <Leader>c :HighlightCoverage<CR>:e<CR>
 
 " fzf functionality like ctrl-p
 nnoremap <c-p> :exe 'Files ' . <SID>fzf_find_root()<CR>

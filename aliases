@@ -25,8 +25,6 @@ if [[ -n "$use_nvim" ]]; then
     alias ivimdiff="nvim -dc 'set diffopt+=iwhite'"
 
     export EDITOR=nvim
-    # git config --global core.editor "nvim" 2>/dev/null
-    # echo "* Using neovim" 2>/dev/stderr
 else
     alias vim="PATH=\"$vimenv/bin:$vimenv/scripts:$PATH\" `which vim`"
     alias vi='vim -X'
@@ -34,8 +32,6 @@ else
     alias view='vim -XR'
     alias ivimdiff="vimdiff -c 'set diffopt+=iwhite'"
     export EDITOR=vim
-    # git config --global core.editor "vim" 2>/dev/null
-    # echo "* Using vim" 2>/dev/stderr
 fi
 
 alias ssh='ssh -Y'
@@ -47,7 +43,7 @@ alias rc='source ~/conda_ramdisk.sh'
 alias sac='source activate'
 alias sdac='source deactivate'
 alias pyoutline='grep -Hn --color -e '\''^\s*class '\'' -e '\''^\s*\(async \)\?def '\'''
-alias cview='view -c ":Coveragepy report"'
+alias cview='view -c ":HighlightCoverage"'
 function cdup() { cd ../$@; }
 alias pd=pushd
 alias ppd=popd
