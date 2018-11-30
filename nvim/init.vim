@@ -110,8 +110,6 @@ if has('python') || has('python3')
     Plug 'vim-airline/vim-airline-themes'
     " better tmux integration
     Plug 'christoomey/vim-tmux-navigator'
-    " Python PEP8 checking
-    Plug 'nvie/vim-flake8'
     " Python position information
     Plug 'mgedmin/pythonhelper.vim'
     " git wrapper fugitive
@@ -168,10 +166,10 @@ if has('python') || has('python3')
     " tmux syntax highlighting
     Plug 'tmux-plugins/vim-tmux'
 
-    if has('nvim')
-        " New neovim linter
-        Plug 'benekastah/neomake'
-    endif
+    " New neovim linter
+    Plug 'w0rp/ale'
+    " Highlighting of f/F t/T motions
+    Plug 'unblevable/quick-scope'
 
     " " Docstring area
     " Plug 'Shougo/echodoc.vim'
@@ -207,13 +205,6 @@ if has('python') || has('python3')
     tnoremap <silent> <c-l> <c-\><C-N>:TmuxNavigateRight<cr>
     tnoremap <silent> <c-h> <c-\><C-N>:TmuxNavigateLeft<cr>
 
-    augroup my_neomake_highlights
-        au!
-        autocmd ColorScheme *
-          \ hi link NeomakeError ErrorMsg |
-          \ hi link NeomakeWarning SpellCap
-    augroup END
-
     silent! colorscheme ir_black
     silent! colorscheme PaperColor
 else
@@ -245,6 +236,99 @@ fun! s:fzf_find_root()
     endfor
     return path
 endfun
+
+if has("cscope")
+    set csprg=/usr/local/bin/cscope
+    set csto=0
+    set cst
+    let project_root = <SID>fzf_find_root()
+    " add any database in current directory
+    if filereadable("cscope.out")
+        echo "found cscope.out"
+        silent cs add cscope.out
+        cs show
+    elseif filereadable(project_root . "cscope.out")
+        cs add $project_root/cscope.out
+        cs show
+    elseif $CSCOPE_DB != ""
+        silent cs add $CSCOPE_DB
+        cs show
+    endif
+	map <C-_> :cstag <C-R>=expand("<cword>")<CR><CR>
+	map g<C-]> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
+	map g<C-\> :cs find 0 <C-R>=expand("<cword>")<CR><CR>
+
+    function! Cscope(option, query)
+      let color = '{ x = $1; $1 = ""; z = $3; $3 = ""; printf "\033[34m%s\033[0m:\033[31m%s\033[0m\011\033[37m%s\033[0m\n", x,z,$0; }'
+      let opts = {
+      \ 'source':  "cscope -dL" . a:option . " " . a:query . " | awk '" . color . "'",
+      \ 'options': ['--ansi', '--prompt', '> ',
+      \             '--multi', '--bind', 'alt-a:select-all,alt-d:deselect-all',
+      \             '--color', 'fg:188,fg+:222,bg+:#3a3a3a,hl+:104'],
+      \ 'down': '40%'
+      \ }
+      function! opts.sink(lines)
+        let data = split(a:lines)
+        let file = split(data[0], ":")
+        execute 'e ' . '+' . file[1] . ' ' . file[0]
+      endfunction
+      echo opts
+      call fzf#run(opts)
+    endfunction
+
+    function! CscopeQuery(option)
+      call inputsave()
+      if a:option == '0'
+        let query = input('Assignments to: ')
+      elseif a:option == '1'
+        let query = input('Functions calling: ')
+      elseif a:option == '2'
+        let query = input('Functions called by: ')
+      elseif a:option == '3'
+        let query = input('Egrep: ')
+      elseif a:option == '4'
+        let query = input('File: ')
+      elseif a:option == '6'
+        let query = input('Definition: ')
+      elseif a:option == '7'
+        let query = input('Files #including: ')
+      elseif a:option == '8'
+        let query = input('C Symbol: ')
+      elseif a:option == '9'
+        let query = input('Text: ')
+      else
+        echo "Invalid option!"
+        return
+      endif
+      call inputrestore()
+      if query != ""
+        call Cscope(a:option, query)
+      else
+        echom "Cancelled Search!"
+      endif
+    endfunction
+
+    nnoremap <silent> <Leader>ca :call Cscope('0', expand('<cword>'))<CR>
+    nnoremap <silent> <Leader>cc :call Cscope('1', expand('<cword>'))<CR>
+    nnoremap <silent> <Leader>cd :call Cscope('2', expand('<cword>'))<CR>
+    nnoremap <silent> <Leader>ce :call Cscope('3', expand('<cword>'))<CR>
+    nnoremap <silent> <Leader>cf :call Cscope('4', expand('<cword>'))<CR>
+    nnoremap <silent> <Leader>cg :call Cscope('6', expand('<cword>'))<CR>
+    nnoremap <silent> <Leader>ci :call Cscope('7', expand('<cword>'))<CR>
+    nnoremap <silent> <Leader>cs :call Cscope('8', expand('<cword>'))<CR>
+    nnoremap <silent> <Leader>ct :call Cscope('9', expand('<cword>'))<CR>
+
+    nnoremap <silent> <Leader><Leader>ca :call CscopeQuery('0')<CR>
+    nnoremap <silent> <Leader><Leader>cc :call CscopeQuery('1')<CR>
+    nnoremap <silent> <Leader><Leader>cd :call CscopeQuery('2')<CR>
+    nnoremap <silent> <Leader><Leader>ce :call CscopeQuery('3')<CR>
+    nnoremap <silent> <Leader><Leader>cf :call CscopeQuery('4')<CR>
+    nnoremap <silent> <Leader><Leader>cg :call CscopeQuery('6')<CR>
+    nnoremap <silent> <Leader><Leader>ci :call CscopeQuery('7')<CR>
+    nnoremap <silent> <Leader><Leader>cs :call CscopeQuery('8')<CR>
+    nnoremap <silent> <Leader><Leader>ct :call CscopeQuery('9')<CR>
+endif
+
 
 " Coveragepy
 nnoremap <Leader>c :HighlightCoverage<CR>:e<CR>
@@ -309,6 +393,7 @@ let g:jedi#force_python_version = 3
 let g:jedi#completions_enabled = 0
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#jedi#show_docstring = 1
+let g:deoplete#sources#jedi#ignore_errors = 1
 if !exists('g:deoplete#omni#input_patterns')
   let g:deoplete#omni#input_patterns = {}
 endif
@@ -387,19 +472,10 @@ let g:netrw_list_hide.='\.hg,'
 let g:netrw_list_hide.='\.py[co],'
 let g:netrw_list_hide.='\.sw[op],'
 
-if has('nvim')
-    " use neomake's linter
-    " E501 = line too long, C901 = too complex
-    " let g:neomake_python_pep8_maker = {'args': ['--ignore', 'E501,C901']}
-    call neomake#configure#automake('w')
-    nnoremap <Leader>f :Neomake<cr>
-    let g:neomake_open_list=0
-else
-    " for regular vim, use flake8 linter
-    " flake8 config is in ~/.config/flake8
-    autocmd BufWritePost *.py call Flake8()
-    nnoremap <Leader>f :call Flake8()<cr>
-endif
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+let g:airline#extensions#ale#enabled = 1
+
 
 if has("autocmd")
     " strip off whitespace at the ends of lines for the following languages
