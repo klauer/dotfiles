@@ -216,6 +216,7 @@ else
 endif
 
 set background=dark
+" Note: ]ob and [ob from vim-unimpaired swaps background color
 
 filetype plugin indent on    " required
 syntax on
