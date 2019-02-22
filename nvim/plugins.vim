@@ -75,8 +75,6 @@ Plug 'tmux-plugins/vim-tmux'
 
 " New neovim linter
 Plug 'w0rp/ale'
-" Highlighting of f/F t/T motions
-Plug 'unblevable/quick-scope'
 
 " " Docstring area
 " Plug 'Shougo/echodoc.vim'
