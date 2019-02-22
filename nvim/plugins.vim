@@ -5,8 +5,7 @@ call plug#begin(bundle_path)
 " fzf - fuzzy file searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-" Airline
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " better tmux integration
 Plug 'christoomey/vim-tmux-navigator'
@@ -18,7 +17,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 " git gutter annotation :GitGutter*
 Plug 'airblade/vim-gitgutter'
-" Plug 'mhinz/vim-signify'
 " unimpaired - mappings for [ and ]
 "              such as buffer, args, quickfix, loc, tags (b, a, q, l, t)
 Plug 'tpope/vim-unimpaired'
@@ -29,35 +27,27 @@ Plug 'davidhalter/jedi-vim'
 " Asynchronous completion with deoplete
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " Plug 'Shougo/denite.nvim'
 else
   Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-Plug 'zchee/deoplete-jedi'
+Plug 'deoplete-plugins/deoplete-jedi'
 " snippets
-if version >= 704
-    "Plug 'SirVer/ultisnips'
-endif
-Plug 'honza/vim-snippets'
-" easy alignment with motions
-Plug 'junegunn/vim-easy-align'
+Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
 " choosewin - toggle an overlay on windows to quickly jump to them
 Plug 't9md/vim-choosewin'
 " commentary with motion 'gc'
 Plug 'tpope/vim-commentary'
 " surround
 Plug 'tpope/vim-surround'
-" sessions
-Plug 'tpope/vim-obsession'
 " " Python coverage
 Plug 'mgedmin/coverage-highlight.vim'
 
 " EPICS syntax highlighting
 Plug 'NickeZ/epics.vim'
-" Unite/unite-outline
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/unite-outline'
 " toggle location/quickfix list
 Plug 'milkypostman/vim-togglelist'
 " add emacs/readline style bindings to the command line
@@ -78,12 +68,8 @@ Plug 'hynek/vim-python-pep8-indent'
 Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
 " colorschemes
-" Plug 'jnurmine/Zenburn'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
-
-" rust
-Plug 'sebastianmarkow/deoplete-rust'
 
 " ansi escape sequences
 Plug 'vim-scripts/AnsiEsc.vim'
