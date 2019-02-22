@@ -56,14 +56,20 @@ if &diff
   set diffopt=filler,context:3
 endif
 
+if has('nvim')
+    let g:config_path=$HOME . "/.config/nvim"
+else
+    let g:config_path=$HOME . "/.vim"
+endif
+
+execute "source " . g:config_path . "/functions.vim"
+
 if has('python') || has('python3')
-  source plugins.vim
+  call SourceConfig("plugins.vim")
 endif
 
 filetype plugin indent on
 syntax on
-
-source functions.vim
 
 silent! colorscheme PaperColor
 
@@ -202,17 +208,16 @@ if has('nvim')
   map <leader>s :vsplit term://bash<cr>
 endif
 
-source airline.vim
+call SourceConfig("airline.vim")
 if has("autocmd")
-  source autocmds.vim
+  call SourceConfig("autocmds.vim")
 endif
-source completion.vim
+call SourceConfig("completion.vim")
 if has("cscope")
-    source cscope.vim
+    call SourceConfig("cscope.vim")
 endif
-" source rust.vim
-source snippets.vim
-source tmuxline.vim
+" call SourceConfig("rust.vim")
+call SourceConfig("snippets.vim")
 
 let g:netrw_list_hide='.git,'
 let g:netrw_list_hide.='\.svn,'

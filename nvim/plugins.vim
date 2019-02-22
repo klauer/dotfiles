@@ -1,10 +1,3 @@
-if has('nvim')
-    let config_path=$HOME . "/.config/nvim"
-    runtime! plugin/python_setup.vim
-else
-    let config_path=$HOME . "/.vim"
-endif
-
 let bundle_path=config_path . "/plugged"
 
 call plug#begin(bundle_path)

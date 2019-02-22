@@ -73,3 +73,6 @@ function! SelectMatchingCharacterColumn()
   return "\<C-v>".k.j.(v:count>0?'V':'')
 endfunction
 
+function! SourceConfig(filename)
+  execute "source " . g:config_path . "/" . a:filename
+endfunction
