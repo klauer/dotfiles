@@ -69,8 +69,8 @@ Plug 'tmux-plugins/vim-tmux'
 " New neovim linter
 Plug 'w0rp/ale'
 
-" " Docstring area
-" Plug 'Shougo/echodoc.vim'
+" Docstring area
+Plug 'Shougo/echodoc.vim'
 
 " Python PEP8 indentation
 Plug 'hynek/vim-python-pep8-indent'
