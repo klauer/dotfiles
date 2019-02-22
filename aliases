@@ -60,3 +60,8 @@ export PYQTDESIGNERPATH=/Users/klauer/Repos/pydm/
 alias designer=/Users/klauer/mc/envs/py36/bin/Designer.app/Contents/MacOS/Designer
 alias test-stand-external='ssh rhel6-64k.slac.stanford.edu "ssh lcls-dev3 test-stand"'
 alias dev3-external='ssh -J rhel6-64k.slac.stanford.edu lcls-dev3'
+
+function github_pr() {
+    echo "PR $1 from origin into branch $2:"
+    git fetch origin pull/$1/head:$2
+}
