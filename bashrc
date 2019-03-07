@@ -43,6 +43,7 @@ stty start ''
 stty -ixon
 stty -ixoff
 
+export GITHUB_USER=klauer
 export EDITOR=vim
 # export EPICS_BASE=/usr/lib/epics
 # export EDMDATAFILES=.:/usr/lib/epics/op/edl
