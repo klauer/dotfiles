@@ -17,6 +17,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 " git gutter annotation :GitGutter*
 Plug 'airblade/vim-gitgutter'
+" try vimagit again
+Plug 'jreybert/vimagit'
 " unimpaired - mappings for [ and ]
 "              such as buffer, args, quickfix, loc, tags (b, a, q, l, t)
 Plug 'tpope/vim-unimpaired'
@@ -75,5 +77,3 @@ Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 Plug 'vim-scripts/AnsiEsc.vim'
 
 call plug#end()            " required
-
-" call glaive#Install()
