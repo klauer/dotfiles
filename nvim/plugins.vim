@@ -7,25 +7,41 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" better tmux integration
-Plug 'christoomey/vim-tmux-navigator'
-" Python position information
-Plug 'mgedmin/pythonhelper.vim'
+
+" -- tpope
+" commentary with motion 'gc'
+Plug 'tpope/vim-commentary'
+" surround
+Plug 'tpope/vim-surround'
+" unimpaired - mappings for [ and ]
+"              such as buffer, args, quickfix, loc, tags (b, a, q, l, t)
+Plug 'tpope/vim-unimpaired'
+
+" -- git
 " git wrapper fugitive
 Plug 'tpope/vim-fugitive'
 " enable Gbrowse
 Plug 'tpope/vim-rhubarb'
 " git gutter annotation :GitGutter*
 Plug 'airblade/vim-gitgutter'
-" try vimagit again
 Plug 'jreybert/vimagit'
-" unimpaired - mappings for [ and ]
-"              such as buffer, args, quickfix, loc, tags (b, a, q, l, t)
-Plug 'tpope/vim-unimpaired'
 " fugitive extension for managing/merging git branches
 Plug 'idanarye/vim-merginal', { 'branch': 'develop' }
+
+" -- tmux
+" better tmux integration
+Plug 'christoomey/vim-tmux-navigator'
+" tmux syntax highlighting
+Plug 'tmux-plugins/vim-tmux'
+" Focus event fix for tmux
+Plug 'tmux-plugins/vim-tmux-focus-events'
+
+" Python position information
+Plug 'mgedmin/pythonhelper.vim'
 " jedi-vim not for completion, but for jump-to-definition
 Plug 'davidhalter/jedi-vim'
+
+
 " Asynchronous completion with deoplete
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -36,16 +52,16 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 Plug 'deoplete-plugins/deoplete-jedi'
+
+
 " snippets
 Plug 'SirVer/ultisnips'
 " Plug 'honza/vim-snippets'
 " choosewin - toggle an overlay on windows to quickly jump to them
 Plug 't9md/vim-choosewin'
-" commentary with motion 'gc'
-Plug 'tpope/vim-commentary'
-" surround
-Plug 'tpope/vim-surround'
-" " Python coverage
+
+
+" Python coverage
 Plug 'mgedmin/coverage-highlight.vim'
 
 " EPICS syntax highlighting
@@ -54,9 +70,6 @@ Plug 'NickeZ/epics.vim'
 Plug 'milkypostman/vim-togglelist'
 " add emacs/readline style bindings to the command line
 Plug 'vim-utils/vim-husk'
-
-" tmux syntax highlighting
-Plug 'tmux-plugins/vim-tmux'
 
 " New neovim linter
 Plug 'w0rp/ale'
@@ -71,9 +84,8 @@ Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
 " colorschemes
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 
 " ansi escape sequences
 Plug 'vim-scripts/AnsiEsc.vim'
 
-call plug#end()            " required
+call plug#end()
