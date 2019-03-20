@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -f "run_tests.py" ]; then
+    coverage run run_tests.py "$@"
+else
+    coverage run -m pytest "$@"
+fi
+
+# (coverage combine && coverage report | grep -v -e ' 0%') || /usr/bin/true
+coverage combine || /usr/bin/true
