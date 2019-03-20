@@ -38,3 +38,4 @@ linelog = "!fcn() { git log -L $1,$2:$3; }; fcn"
 new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
 st = status -s
 addnw=!sh -c 'git diff -U0 -w --no-color "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
+alltags=log --oneline --decorate --tags --no-walk
