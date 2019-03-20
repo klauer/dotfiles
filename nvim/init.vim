@@ -165,7 +165,8 @@ highlight LineNr guifg=#FF0000
 "
 " F3 recursively searches all files in the current directory (with the same
 "    extension as the current file) for the word under the cursor
-map <F3> <ESC>:vs<CR><ESC> :execute "lvimgrep /" . expand("<cword>") . "./**/*." . expand("%:e")<CR><ESC>:lw<CR>
+map <F3> <ESC>:vs<CR><ESC> :execute "vimgrep /\\<" . expand("<cword>") . "\\>./**/*." . expand("%:e")<CR><ESC>:lw<CR>
+" map <F3> <ESC>:vs<CR><ESC> :execute "lvimgrep /" . expand("<cword>") . "./**/*." . expand("%:e")<CR><ESC>:lw<CR>
 " F4 recursively searches all files in the current directory for the word
 "    under the cursor
 map <F4> <ESC>:vs<CR><ESC> :execute "lvimgrep /" . expand("<cword>") . "./**"<CR><ESC>:lw<CR>
