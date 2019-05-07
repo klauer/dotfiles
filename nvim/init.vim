@@ -102,7 +102,7 @@ nnoremap <Leader>G :BCommits<CR>
 nnoremap <Leader>H :Helptags<CR>
 nnoremap <Leader>T :BTags<CR>
 nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>c :HighlightCoverage<CR>:e<CR>
+nnoremap <Leader>c :silent! HighlightCoverage<CR>
 nnoremap <Leader>g :Commits<CR>
 nnoremap <Leader>o :GitFiles<CR>
 nnoremap <Leader>t :Tags<CR>
