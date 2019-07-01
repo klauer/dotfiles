@@ -14,6 +14,9 @@ autocmd BufReadPost *
 autocmd FileType fzf tnoremap <buffer> <C-j> <Down>
 autocmd FileType fzf tnoremap <buffer> <C-k> <Up>
 
+autocmd FileType xml,htm,html,tmc nnoremap ]t vatatv
+autocmd FileType xml,htm,html,tmc nnoremap [t vatatov
+
 " Close the preview window when done
 autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
 
