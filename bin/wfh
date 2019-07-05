@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sshuttle --dns -vr psbuild-rhel7.slac.stanford.edu -e 'ssh -v' 134.79.72.98/32
