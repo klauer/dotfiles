@@ -48,8 +48,13 @@ Plug 'mgedmin/coverage-highlight.vim'
 
 " EPICS syntax highlighting
 Plug 'NickeZ/epics.vim'
-" toggle location/quickfix list
-Plug 'milkypostman/vim-togglelist'
+
+" " toggle location/quickfix list
+" Plug 'milkypostman/vim-togglelist'
+
+" location/quickfix list tools
+Plug 'romainl/vim-qf'
+
 " add emacs/readline style bindings to the command line
 Plug 'vim-utils/vim-husk'
 

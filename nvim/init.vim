@@ -109,14 +109,41 @@ nnoremap <Leader>t :Tags<CR>
 nnoremap <c-p> :exe 'Files ' . FzfFindRoot()<CR>
 nnoremap <c-s-P> :Files .<CR>
 
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
 " fzf - Mapping selecting mappings (!)
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
 
 nmap <silent> <leader>L :windo if &buftype == "quickfix" \|\| &buftype == "locationlist" \| lclose \| endif<CR>
-nmap <script> <silent> <leader>l :call ToggleLocationList()<CR>
-nmap <script> <silent> <leader>q :call ToggleQuickfixList()<CR>
+nmap <script> <silent> <leader>q :copen<cr>
+nmap <script> <silent> <leader>l :lopen<cr>
 
 map <leader>H :lopen<cr>
 map <leader>L :lclose<cr>
