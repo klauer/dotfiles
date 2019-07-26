@@ -35,10 +35,10 @@ imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " <CR>/enter: close completion popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return deoplete#mappings#smart_close_popup() . "\<CR>"
-  "replace with deoplete#mappings#close_popup() to allow completion to occur
-endfunction
+" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+" function! s:my_cr_function()
+"   return deoplete#mappings#smart_close_popup() . "\<CR>"
+"   "replace with deoplete#mappings#close_popup() to allow completion to occur
+" endfunction
 
 set completeopt+=preview,menu,menuone

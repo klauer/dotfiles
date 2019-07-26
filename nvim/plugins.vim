@@ -36,27 +36,9 @@ Plug 'tmux-plugins/vim-tmux'
 " Focus event fix for tmux
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
-" Python position information
-Plug 'mgedmin/pythonhelper.vim'
-" jedi-vim not for completion, but for jump-to-definition
-Plug 'davidhalter/jedi-vim'
+" " Python position information
+" Plug 'mgedmin/pythonhelper.vim'
 
-
-" Asynchronous completion with deoplete
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  " Plug 'Shougo/denite.nvim'
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-Plug 'deoplete-plugins/deoplete-jedi'
-
-
-" snippets
-Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
 " choosewin - toggle an overlay on windows to quickly jump to them
 Plug 't9md/vim-choosewin'
 
@@ -71,21 +53,16 @@ Plug 'milkypostman/vim-togglelist'
 " add emacs/readline style bindings to the command line
 Plug 'vim-utils/vim-husk'
 
-" New neovim linter
-Plug 'w0rp/ale'
-
-" Docstring area
-Plug 'Shougo/echodoc.vim'
-
-" Python PEP8 indentation
-Plug 'hynek/vim-python-pep8-indent'
-" And assisted formatting, if desirable
-Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
+" " New neovim linter
+" Plug 'w0rp/ale'
 
 " colorschemes
 Plug 'NLKNguyen/papercolor-theme'
 
 " ansi escape sequences
 Plug 'vim-scripts/AnsiEsc.vim'
+
+" Use release branch
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
