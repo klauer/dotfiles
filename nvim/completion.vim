@@ -1,44 +1,35 @@
-" only use jedi completion with ctrl-space, not after '.'
-" let g:jedi#goto_assignments_command = "<Leader>g"
-let g:jedi#auto_initialization = 1
-let g:jedi#goto_definitions_command = "<Leader>d"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<Leader>n"
-let g:jedi#completions_command = ""
-let g:jedi#rename_command = "<Leader>r"
-let g:jedi#popup_on_dot = 0
-let g:jedi#popup_select_first = 0
-let g:jedi#show_call_signatures = 1
-let g:jedi#use_splits_not_buffers = "top"
-let g:jedi#smart_auto_mappings = 0
-let g:jedi#force_python_version = 3
-
-" use deoplete instead of jedi:
-let g:jedi#completions_enabled = 0
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#jedi#show_docstring = 1
-let g:deoplete#sources#jedi#ignore_errors = 1
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-endif
-" let g:deoplete#disable_auto_complete = 1
-
-augroup omnifuncs
-  autocmd!
-  autocmd FileType python setlocal omnifunc=jedi#completions
-augroup end
-
 " fzf - Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
-" <CR>/enter: close completion popup and save indent.
-" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-" function! s:my_cr_function()
-"   return deoplete#mappings#smart_close_popup() . "\<CR>"
-"   "replace with deoplete#mappings#close_popup() to allow completion to occur
-" endfunction
-
 set completeopt+=preview,menu,menuone
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+" Map <tab> to trigger completion and navigate to the next item:
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+inoremap <silent><expr> <c-space> coc#refresh()
+" <CR> to confirm completion
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
+" To make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Map <tab> for trigger completion, completion confirm, snippet expand and jump
+" like VSCode.
+inoremap <silent><expr> <TAB>
+  \ pumvisible() ? coc#_select_confirm() :
+  \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
+
+let g:coc_snippet_next = '<tab>'
