@@ -61,7 +61,7 @@ alias designer=/Users/klauer/mc/envs/py36/bin/Designer.app/Contents/MacOS/Design
 alias test-stand-external='ssh rhel6-64k.slac.stanford.edu "ssh lcls-dev3 test-stand"'
 alias dev3-external='ssh -J rhel6-64k.slac.stanford.edu lcls-dev3'
 alias sshpass='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no'
-
+alias simdet='cd /Users/klauer/epics/R7.0.1.1/support/areadetector/3-2/ADSimDetector/iocs/simDetectorIOC/iocBoot/iocSimDetector; ../../bin/darwin-x86/simDetectorApp st.cmd'
 function github_pr() {
     echo "PR $1 from origin into branch $2:"
     git fetch origin pull/$1/head:$2
