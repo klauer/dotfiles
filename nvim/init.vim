@@ -144,6 +144,7 @@ omap <leader><tab> <plug>(fzf-maps-o)
 nmap <silent> <leader>L :windo if &buftype == "quickfix" \|\| &buftype == "locationlist" \| lclose \| endif<CR>
 nmap <script> <silent> <leader>q :copen<cr>
 nmap <script> <silent> <leader>l :lopen<cr>
+nmap <script> <silent> <leader>l :CocList diagnostics<cr>
 
 map <leader>H :lopen<cr>
 map <leader>L :lclose<cr>

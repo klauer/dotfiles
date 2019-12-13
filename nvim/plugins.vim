@@ -64,8 +64,11 @@ Plug 'romainl/vim-qf'
 " add emacs/readline style bindings to the command line
 Plug 'vim-utils/vim-husk'
 
-" " New neovim linter
-" Plug 'w0rp/ale'
+" Python PEP8 indentation
+Plug 'hynek/vim-python-pep8-indent'
+
+" New neovim linter
+Plug 'w0rp/ale'
 
 " colorschemes
 Plug 'NLKNguyen/papercolor-theme'
@@ -73,7 +76,7 @@ Plug 'NLKNguyen/papercolor-theme'
 " ansi escape sequences
 Plug 'vim-scripts/AnsiEsc.vim'
 
-" Use release branch
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" IEC 61131-3 syntax
+Plug 'jubnzv/IEC.vim'
 
 call plug#end()
