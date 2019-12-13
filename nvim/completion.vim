@@ -4,7 +4,7 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
-set completeopt+=preview,menu,menuone
+set completeopt+=preview,menu,menuone,noselect
 
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -19,10 +19,10 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 " <CR> to confirm completion
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
-" To make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-            \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" " To make <CR> auto-select the first completion item and notify coc.nvim to
+" " format on enter
+" inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+"             \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Map <tab> for trigger completion, completion confirm, snippet expand and jump
 " like VSCode.
