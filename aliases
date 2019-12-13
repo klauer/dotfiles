@@ -40,8 +40,8 @@ alias sudo='sudo ' # this allows for aliases to be passed through to sudo
 # startup gdb with python backtrace stuff
 alias pythongdb='gdb -iex "set auto-load safe-path /usr/bin" python2.7-dbg'
 alias rc='source ~/conda_ramdisk.sh'
-alias sac='source activate'
-alias sdac='source deactivate'
+alias sac='sdac; conda activate'
+alias sdac='conda deactivate; conda deactivate'
 alias pyoutline='grep -Hn --color -e '\''^\s*class '\'' -e '\''^\s*\(async \)\?def '\'''
 alias cview='view -c ":HighlightCoverage"'
 function cdup() { cd ../$@; }
