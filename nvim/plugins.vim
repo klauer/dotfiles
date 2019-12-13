@@ -1,10 +1,16 @@
 let bundle_path=config_path . "/plugged"
-
 call plug#begin(bundle_path)
+
+" Use release branch
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " fzf - fuzzy file searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+
+Plug 'edkolev/tmuxline.vim'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 

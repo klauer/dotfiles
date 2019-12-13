@@ -255,3 +255,13 @@ let g:netrw_list_hide.='\.sw[op],'
 
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
+
+" tmux related
+" use the nice separators
+let g:tmuxline_powerline_separators = 1
+let g:tmuxline_preset = 'minimal'
+let g:tmuxline_theme = 'powerline'
+" Tmuxline powerline minimal
+TmuxlineSnapshot ~/dotfiles/tmuxline.conf
+
+let g:airline#extensions#tmuxline#enabled = 1
