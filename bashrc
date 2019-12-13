@@ -142,3 +142,14 @@ cdf() {
   cd "$dir"
 }
 
+
+caddr() {
+    export EPICS_CA_ADDR_LIST=$1 $2 $3
+    export EPICS_CA_AUTO_ADDR_LIST=NO
+}
+
+
+caddrauto() {
+    export EPICS_CA_ADDR_LIST=
+    export EPICS_CA_AUTO_ADDR_LIST=YES
+}
