@@ -262,7 +262,8 @@ let g:ale_sign_warning = '--'
 let g:tmuxline_powerline_separators = 1
 let g:tmuxline_preset = 'minimal'
 let g:tmuxline_theme = 'powerline'
-" Tmuxline powerline minimal
-TmuxlineSnapshot ~/dotfiles/tmuxline.conf
+
+" Tmuxline powerline
+"TmuxlineSnapshot! ~/dotfiles/tmuxline.conf
 
 let g:airline#extensions#tmuxline#enabled = 1

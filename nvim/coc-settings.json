@@ -27,4 +27,13 @@
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
     // try integration with ALE
 	"coc.preferences.diagnostic.displayByAle": true,
+    "list.normalMappings": {
+        "<C-c>": "do:exit"
+     },
+     "list.returns": {
+        "<C-c>": "do:exit"
+     },
+     "list.insertMappings": {
+        "<C-c>": "do:exit"
+     }
 }
