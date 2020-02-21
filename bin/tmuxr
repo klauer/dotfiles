@@ -14,7 +14,7 @@ else
         echo "Invalid repo name: $REPO";
         exit 1;
     fi
-    tmux new-session -s $REPO -c $HOME
+    tmux new-session -s $REPO -c $REPO_PATH
 fi
 
 tmux attach-session -t $REPO
