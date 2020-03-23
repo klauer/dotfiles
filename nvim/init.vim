@@ -238,6 +238,8 @@ if has('nvim')
   map <leader>s :vsplit term://bash<cr>
 endif
 
+let g:python3_host_prog = $HOME . '/mc/envs/nvim/bin/python'
+
 call SourceConfig("airline.vim")
 if has("autocmd")
   call SourceConfig("autocmds.vim")

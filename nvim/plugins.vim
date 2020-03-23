@@ -79,4 +79,8 @@ Plug 'vim-scripts/AnsiEsc.vim'
 " IEC 61131-3 syntax
 Plug 'jubnzv/IEC.vim'
 
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 call plug#end()
