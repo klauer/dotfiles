@@ -97,7 +97,8 @@ map Q gq
 " select column of same character under cursor, enter visual block mode
 nnoremap <expr> g<C-v> SelectMatchingCharacterColumn()
 
-" nnoremap <Leader>C :Colors<CR>
+nnoremap <Leader>A :CocAction<CR>
+nnoremap <Leader>C :CocCommand<CR>
 nnoremap <Leader>G :BCommits<CR>
 nnoremap <Leader>H :Helptags<CR>
 nnoremap <Leader>T :BTags<CR>
@@ -267,3 +268,6 @@ let g:tmuxline_theme = 'powerline'
 "TmuxlineSnapshot! ~/dotfiles/tmuxline.conf
 
 let g:airline#extensions#tmuxline#enabled = 1
+
+set background=light
+colorscheme PaperColor

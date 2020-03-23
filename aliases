@@ -57,8 +57,8 @@ alias cclip='xclip -selection clipboard'
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
 
-export PYQTDESIGNERPATH=/Users/klauer/Repos/pydm/
-alias designer=/Users/klauer/mc/envs/pytmc/bin/Designer.app/Contents/MacOS/Designer
+PYQTDESIGNERPATH=/Users/klauer/docs/Repos/typhos/etc:/Users/klauer/Repos/pydm/
+alias designer=/Users/klauer/mc/envs/lucid/bin/Designer.app/Contents/MacOS/Designer
 alias test-stand-external='ssh rhel6-64k.slac.stanford.edu "ssh lcls-dev3 test-stand"'
 alias dev3-external='ssh -J rhel6-64k.slac.stanford.edu lcls-dev3'
 alias sshpass='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no'
@@ -67,3 +67,5 @@ function github_pr() {
     echo "PR $1 from origin into branch $2:"
     git fetch origin pull/$1/head:$2
 }
+
+alias home120hz='cscreen -i 4e840607 -s 1 -r 120 -d 32 -x 1920 -y 1080'
