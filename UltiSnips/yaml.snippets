@@ -1,0 +1,133 @@
+priority -60
+
+###########################################################################
+#                            Python includes                              #
+###########################################################################
+
+#
+# env:
+# - pyyaml
+# - gitpython
+# - pynvim
+
+global !p
+import pathlib
+import yaml
+
+def get_repo(repo):
+    if not repo.strip():
+        return None
+    return pathlib.Path.home() / 'Repos' / repo
+
+
+def _find_deps(repo):
+    repo_root = get_repo(repo)
+    if not repo_root or not repo_root.exists():
+        return ['no-repo']
+
+    ret = set()
+
+    try:
+        metayaml, = list(repo_root.glob('**/meta.yaml'))
+    except ValueError:
+        ...
+    else:
+        with open(metayaml, 'rt') as f:
+            text = f.read()
+        text = re.sub(r'{%[^%]+%}', '', text)
+        text = re.sub(r'{{[^}]+}}', 'temp_val', text)
+        meta = yaml.load(text, Loader=yaml.FullLoader)
+
+        for key1, key2 in [('requirements', 'build'),
+                           ('requirements', 'run'),
+                           ]:
+            try:
+                ret = ret.union(meta[key1][key2])
+            except KeyError:
+                ...
+
+    req_file = repo_root / 'requirements.txt'
+    if req_file.exists():
+        with open(req_file, 'rt') as f:
+            reqs = f.read().splitlines()
+        ret = ret.union(set(reqs))
+
+    return list(sorted(req.strip() for req in ret
+                       if req.strip()))
+
+
+def find_deps(repo):
+    try:
+        return _find_deps(repo)
+    except Exception as ex:
+        return [f'({ex})']
+
+
+def find_latest_tag(repo):
+    import git
+    repo_root = get_repo(repo)
+    if not repo_root or not repo_root.exists():
+        return '0.0.0-no-repo'
+
+    try:
+        repo = git.Repo(repo_root)
+        tags = list(sorted(repo.tags, key=lambda tag: tag.commit.committed_datetime))
+        return str(tags[-1])
+    except Exception as ex:
+        return f'0.0.0-{ex}'
+endglobal
+
+###########################################################################
+#                            TEXTMATE SNIPPETS                            #
+###########################################################################
+
+#! header
+snippet conda "conda-forge meta.yaml" b
+{% set name = "${2:pkg}" %}
+{% set version = "`!p
+repo = t[2]
+snip.rv = find_latest_tag(repo).lstrip('v')
+`" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/${1:org}/$2/archive/v{{ version }}.tar.gz
+  sha256: 
+
+build:
+  noarch: python
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - python >=3.6
+    - pip
+  run:
+    - python >=3.6
+`!p
+repo = t[2]
+snip.rv = '\n'.join('    - ' + dep for dep in find_deps(repo))
+`
+
+test:
+  imports:
+    - ${2}
+
+about:
+  home: https://github.com/$1/$2
+  doc_url: https://$1.github.io/$2/
+  dev_url: https://github.com/$1/$2
+  license: SLAC Open
+  license_family: Other
+  license_file: LICENSE
+  summary: '$5'
+
+extra:
+  recipe-maintainers:
+    - klauer
+    - hhslepicka
+endsnippet
