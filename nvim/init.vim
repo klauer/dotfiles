@@ -273,3 +273,6 @@ let g:airline#extensions#tmuxline#enabled = 1
 
 set background=light
 colorscheme PaperColor
+
+" https://stackoverflow.com/questions/58330034/
+nmap - <Plug>NetrwBrowseUpDir
