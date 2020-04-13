@@ -1,8 +1,8 @@
 {
     "python.jediEnabled": false,
-	// Timeout for completion, in milliseconds.,  default: `2000`
+    // Timeout for completion, in milliseconds.,  default: `2000`
     "suggest.timeout": 1000,
-	// Create location list for error & warning,  default: `true`
+    // Create location list for error & warning,  default: `true`
     "diagnostic.locationlist": true,
     //  Text of error sign,  default: `">>"`
     "diagnostic.errorSign": ">>",
@@ -16,17 +16,17 @@
     "codeLens.enable": true,
     //  Separator text for `codeLens` in virtual text,  default: `"‣"`
     "codeLens.separator": "*",
-	// Key used for select next line on insert mode.,  default: `"<C-j>"`
+    // Key used for select next line on insert mode.,  default: `"<C-j>"`
     "list.nextKeymap": "<C-n>",
-	// Key used for select previous line on insert mode.,  default: `"<C-k>"`
+    // Key used for select previous line on insert mode.,  default: `"<C-k>"`
     "list.previousKeymap": "C-p",
-	// Patterns to resolve workspaceFolder from parent folders of opened files, resolved from up to down.,  default
+    // Patterns to resolve workspaceFolder from parent folders of opened files, resolved from up to down.,  default
     "coc.preferences.rootPatterns": [".vim",".git",".hg",".projections.json"],
     // Function string that current cursor in.  in coc-settings.json to update it on CursorHold.
     // TODO: not working?
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
     // try integration with ALE
-	"coc.preferences.diagnostic.displayByAle": true,
+    "coc.preferences.diagnostic.displayByAle": true,
     "list.normalMappings": {
         "<C-c>": "do:exit"
      },

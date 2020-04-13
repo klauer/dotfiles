@@ -18,7 +18,7 @@ set backspace=2 whichwrap+=<,>,[,]     " backspace and cursor keys wrap to previ
 set expandtab                          " tabs -> spaces (:retab)
 set foldlevel=99
 set foldmethod=indent
-set guifont=Consolas:h10
+" set guifont=Consolas:h10
 set guioptions=cmgtTr
 set history=500                        " keep x lines of command line history
 set hlsearch

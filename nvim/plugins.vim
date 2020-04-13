@@ -3,6 +3,10 @@ call plug#begin(bundle_path)
 
 " Use release branch
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" clangd / C++:
+" !brew upgrade llvm
+" !ln -s /usr/local/opt/llvm/bin/clangd /usr/local/bin
+" :CocInstall coc-clangd
 
 " fzf - fuzzy file searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
