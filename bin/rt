@@ -13,6 +13,6 @@ else
     if [ -f "run_tests.py" ]; then
         python run_tests.py --concurrency=thread --parallel-mode "$@"
     else
-        python -m pytest --concurrency=thread --parallel-mode "$@"
+        python -m pytest "$@"
     fi
 fi
