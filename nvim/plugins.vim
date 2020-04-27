@@ -52,9 +52,11 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 " choosewin - toggle an overlay on windows to quickly jump to them
 Plug 't9md/vim-choosewin'
 
+" aerojump - fuzzy find in buffer
+Plug 'ripxorip/aerojump.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Python coverage
-Plug 'mgedmin/coverage-highlight.vim'
+" Plug 'mgedmin/coverage-highlight.vim'
 
 " EPICS syntax highlighting
 Plug 'NickeZ/epics.vim'
@@ -72,10 +74,11 @@ Plug 'vim-utils/vim-husk'
 Plug 'hynek/vim-python-pep8-indent'
 
 " New neovim linter
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 
 " colorschemes
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'kaicataldo/material.vim'
 
 " ansi escape sequences
 Plug 'vim-scripts/AnsiEsc.vim'
@@ -86,5 +89,11 @@ Plug 'jubnzv/IEC.vim'
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+
+" tagbar
+Plug 'majutsushi/tagbar'
+
+" indentation markers
+Plug 'Yggdroot/indentLine'
 
 call plug#end()

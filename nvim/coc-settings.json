@@ -1,7 +1,7 @@
 {
     "python.jediEnabled": false,
     // Timeout for completion, in milliseconds.,  default: `2000`
-    "suggest.timeout": 1000,
+    "suggest.timeout": 500,
     // Create location list for error & warning,  default: `true`
     "diagnostic.locationlist": true,
     //  Text of error sign,  default: `">>"`
@@ -20,6 +20,10 @@
     "list.nextKeymap": "<C-n>",
     // Key used for select previous line on insert mode.,  default: `"<C-k>"`
     "list.previousKeymap": "C-p",
+    // Max height for preview window of list, default: `12`
+    "list.maxPreviewHeight": 20,
+    //Use Vim's quickfix list for jump locations. Requires restart on change, default: `false`
+    "coc.preferences.useQuickfixForLocations": true,
     // Patterns to resolve workspaceFolder from parent folders of opened files, resolved from up to down.,  default
     "coc.preferences.rootPatterns": [".vim",".git",".hg",".projections.json"],
     // Function string that current cursor in.  in coc-settings.json to update it on CursorHold.
@@ -35,5 +39,6 @@
      },
      "list.insertMappings": {
         "<C-c>": "do:exit"
-     }
+     },
+     "signature.target": "float"
 }

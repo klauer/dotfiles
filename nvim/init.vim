@@ -13,7 +13,6 @@ set secure
 let mapleader="\<Space>"               " prefix when using <leader> in map
 set acd                                " current directory follows file being edited
 set autoindent                         " always set autoindenting on
-set background=dark
 set backspace=2 whichwrap+=<,>,[,]     " backspace and cursor keys wrap to previous/next line
 set expandtab                          " tabs -> spaces (:retab)
 set foldlevel=99
@@ -39,6 +38,10 @@ set tabstop=4 shiftwidth=4 autoindent
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set wildignore+=*\\tmp\\*,*.exe
 set wrap
+
+if has('termguicolors')
+  set termguicolors
+endif
 
 if !has('nvim') && &term =~ '^screen'
     " tmux knows the extended mouse mode
@@ -97,18 +100,33 @@ map Q gq
 " select column of same character under cursor, enter visual block mode
 nnoremap <expr> g<C-v> SelectMatchingCharacterColumn()
 
-nnoremap <Leader>A :CocAction<CR>
-nnoremap <Leader>C :CocCommand<CR>
+function! CocRestart()
+  echo "Restarting COC"
+  syntax off
+  CocRestart
+  syntax on
+endfunction
+
+nnoremap <Leader>ca :CocAction<CR>
+nnoremap <Leader>cc :CocCommand<CR>
+nnoremap <Leader>r :call clearmatches()<CR>:call nvim_buf_clear_namespace(bufnr('%'), -1, 0, -1)<CR>:silent! CocRestart<CR>
 nnoremap <Leader>G :BCommits<CR>
 nnoremap <Leader>H :Helptags<CR>
 nnoremap <Leader>T :BTags<CR>
 nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>c :silent! HighlightCoverage<CR>
+nnoremap <Leader>hc :silent! HighlightCoverage<CR>
 nnoremap <Leader>g :Commits<CR>
 nnoremap <Leader>o :GitFiles<CR>
-nnoremap <Leader>t :Tags<CR>
-nnoremap <c-p> :exe 'Files ' . FzfFindRoot()<CR>
-nnoremap <c-s-P> :Files .<CR>
+nnoremap <Leader>t :Tagbar<CR>
+nnoremap <Leader>cd :call CdRoot()<CR>:set noacd<CR>
+nnoremap <Leader>lcd :call LcdRoot()<CR>:set noacd<CR>
+nnoremap <c-p>     :exe 'Files ' . FzfFindRoot()<CR>
+nnoremap <c-s-P>   :Files .<CR>
+
+nmap <Leader>as <Plug>(AerojumpSpace)
+nmap <Leader>ab <Plug>(AerojumpBolt)
+nmap <Leader>aa <Plug>(AerojumpFromCursorBolt)
+nmap <Leader>ad <Plug>(AerojumpDefault)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -179,7 +197,7 @@ nnoremap <Leader>e :cd %:h\|execute "term"\|cd -<cr>
 nnoremap <Leader>* :execute ":Ggrep " . expand("<cword>")<CR>
 
 " background color for omnicomplete
-highlight Pmenu ctermbg=0 gui=bold
+" highlight Pmenu ctermbg=0 gui=bold
 " signify/gitgutter
 highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
@@ -245,9 +263,10 @@ if has("autocmd")
   call SourceConfig("autocmds.vim")
 endif
 call SourceConfig("completion.vim")
-if has("cscope")
-    call SourceConfig("cscope.vim")
-endif
+" if has("cscope")
+"     call SourceConfig("cscope.vim")
+" endif
+
 " call SourceConfig("rust.vim")
 call SourceConfig("snippets.vim")
 
@@ -269,10 +288,42 @@ let g:tmuxline_theme = 'powerline'
 " Tmuxline powerline
 "TmuxlineSnapshot! ~/dotfiles/tmuxline.conf
 
+let g:airline_theme = 'material'
 let g:airline#extensions#tmuxline#enabled = 1
 
-set background=light
-colorscheme PaperColor
+function DarkBackground()
+  set background=dark
+  let g:material_theme_style = 'default'
+  colorscheme material
+  " colorscheme PaperColor
+endfunction
+
+function LightBackground()
+  set background=light
+  " let g:material_theme_style = 'lighter'
+  " colorscheme material
+  colorscheme PaperColor
+endfunction
+
+"nnoremap yol :silent call LightBackground()<cr>
+"nnoremap yod :silent call DarkBackground()<cr>
+"nnoremap yob :silent call SwapBackground()<cr>
+
+" call LightBackground()
+call DarkBackground()
 
 " https://stackoverflow.com/questions/58330034/
 nmap - <Plug>NetrwBrowseUpDir
+
+" Tagbar
+let g:tagbar_left = 1
+
+" set list
+" set listchars=
+" set listchars+=tab:░\
+" set listchars+=trail:·
+" set listchars+=extends:»
+" set listchars+=precedes:«
+" set listchars+=nbsp:⣿
+
+let g:indentLine_char_list = ['▏', '┊']

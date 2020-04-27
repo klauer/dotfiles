@@ -50,3 +50,15 @@ autocmd QuickFixCmdPost *grep* cwindow
 
 " CR is colon in normal/visual mode, but not in quickfix mode:
 autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+
+augroup ColorColumnOnEnter
+    autocmd!
+    autocmd WinEnter * set colorcolumn=80
+    autocmd WinLeave * set colorcolumn=0
+augroup END
+
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END

@@ -76,3 +76,20 @@ endfunction
 function! SourceConfig(filename)
   execute "source " . g:config_path . "/" . a:filename
 endfunction
+
+function! CdRoot()
+  execute 'cd ' . FzfFindRoot()
+endfunction
+
+function! LcdRoot()
+  execute 'lcd ' . FzfFindRoot()
+endfunction
+
+function SwapBackground()
+  if &background == "dark"
+    call LightBackground()
+  else
+    call DarkBackground()
+  endif
+endfunction
+
