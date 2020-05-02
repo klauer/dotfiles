@@ -203,11 +203,13 @@ highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
+highlight CocErrorHighlight ctermfg=Red  guifg=#ff0000
+
 inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
 inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 
-highlight LineNr ctermfg=red
-highlight LineNr guifg=#FF0000
+" highlight LineNr ctermfg=red
+" highlight LineNr guifg=#FF0000
 
 "
 " F3 recursively searches all files in the current directory (with the same
@@ -309,8 +311,8 @@ endfunction
 "nnoremap yod :silent call DarkBackground()<cr>
 "nnoremap yob :silent call SwapBackground()<cr>
 
-" call LightBackground()
-call DarkBackground()
+call LightBackground()
+" call DarkBackground()
 
 " https://stackoverflow.com/questions/58330034/
 nmap - <Plug>NetrwBrowseUpDir
@@ -327,3 +329,15 @@ let g:tagbar_left = 1
 " set listchars+=nbsp:⣿
 
 let g:indentLine_char_list = ['▏', '┊']
+
+hi TagbarLightBackground guibg=white
+hi TagbarDarkBackground guibg=black
+
+autocmd FileType tagbar
+  \ if &background == "dark" |
+  \   set winhighlight=Normal:TagbarDarkBackground |
+  \ else |
+  \   set winhighlight=Normal:TagbarLightBackground |
+  \ endif
+
+
