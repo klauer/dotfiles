@@ -2,10 +2,14 @@
     "python.jediEnabled": false,
     // Timeout for completion, in milliseconds.,  default: `2000`
     "suggest.timeout": 500,
+	// Enable signs for diagnostics,  default: `true`
+    "diagnostic.enableSign": true,
+	// Highlight the line number, too
+    "diagnostic.enableHighlightLineNumber": true,
     // Create location list for error & warning,  default: `true`
     "diagnostic.locationlist": true,
     //  Text of error sign,  default: `">>"`
-    "diagnostic.errorSign": ">>",
+    "diagnostic.errorSign": "!!",
     //  Text of warning sign,  default: `"⚠"`
     "diagnostic.warningSign": "⚠",
     //  Text of info sign,  default: `">>"`
@@ -30,7 +34,7 @@
     // TODO: not working?
     "coc.preferences.currentFunctionSymbolAutoUpdate": true,
     // try integration with ALE
-    "coc.preferences.diagnostic.displayByAle": true,
+    "coc.preferences.diagnostic.displayByAle": false,
     "list.normalMappings": {
         "<C-c>": "do:exit"
      },
@@ -40,5 +44,7 @@
      "list.insertMappings": {
         "<C-c>": "do:exit"
      },
-     "signature.target": "float"
+     "suggest.floatEnable": true,
+     "signature.target": "float",
+     "coc.preferences.hoverTarget": "float"
 }
