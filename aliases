@@ -63,9 +63,16 @@ alias test-stand-external='ssh rhel6-64k.slac.stanford.edu "ssh lcls-dev3 test-s
 alias dev3-external='ssh -J rhel6-64k.slac.stanford.edu lcls-dev3'
 alias sshpass='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no'
 alias simdet='cd /Users/klauer/epics/R7.0.1.1/support/areadetector/3-2/ADSimDetector/iocs/simDetectorIOC/iocBoot/iocSimDetector; ../../bin/darwin-x86/simDetectorApp st.cmd'
+function wherep() { which python; python -c "import $1; print('$1 is', $1.__file__)"; }
 function github_pr() {
     echo "PR $1 from origin into branch $2:"
     git fetch origin pull/$1/head:$2
 }
 
+pcds_hash() {
+    REPO=$1
+    VER=$2
+    wget https://github.com/pcdshub/$REPO/archive/v${VER}.tar.gz
+    shasum -a 256 v${VER}.tar.gz
+}
 alias home120hz='cscreen -i 4e840607 -s 1 -r 120 -d 32 -x 1920 -y 1080'
