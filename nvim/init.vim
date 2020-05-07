@@ -311,8 +311,8 @@ endfunction
 "nnoremap yod :silent call DarkBackground()<cr>
 "nnoremap yob :silent call SwapBackground()<cr>
 
-call LightBackground()
-" call DarkBackground()
+" call LightBackground()
+call DarkBackground()
 
 " https://stackoverflow.com/questions/58330034/
 nmap - <Plug>NetrwBrowseUpDir
@@ -333,11 +333,15 @@ let g:indentLine_char_list = ['▏', '┊']
 hi TagbarLightBackground guibg=white
 hi TagbarDarkBackground guibg=black
 
+hi ActiveWindowLightBackground guibg=white
+hi InactiveWindowLightBackground guibg=gray
+
+hi ActiveWindowDarkBackground guibg=#1e282d
+hi InactiveWindowDarkBackground guibg=#33454d
+
 autocmd FileType tagbar
   \ if &background == "dark" |
   \   set winhighlight=Normal:TagbarDarkBackground |
   \ else |
   \   set winhighlight=Normal:TagbarLightBackground |
   \ endif
-
-

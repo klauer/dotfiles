@@ -62,3 +62,24 @@ augroup CursorLineOnlyInActiveWindow
   autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
   autocmd WinLeave * setlocal nocursorline
 augroup END
+
+augroup ActiveWindowBackground
+  autocmd!
+  let blacklist = ["tagbar"]
+  autocmd VimEnter,WinEnter,BufWinEnter,FocusGained *
+        \ if index(blacklist, &ft) < 0 |
+        \   if &background == "dark" |
+        \     set winhighlight=Normal:ActiveWindowDarkBackground |
+        \   else |
+        \     set winhighlight=Normal:ActiveWindowLightBackground |
+        \   endif |
+        \ endif
+  autocmd VimLeave,WinLeave,BufLeave,FocusLost *
+        \ if index(blacklist, &ft) < 0 |
+        \   if &background == "dark" |
+        \     set winhighlight=Normal:InactiveWindowDarkBackground |
+        \   else |
+        \     set winhighlight=Normal:InactiveWindowLightBackground |
+        \   endif |
+        \ endif
+augroup END
