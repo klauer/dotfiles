@@ -1,16 +1,3 @@
 show_channel_urls: true
 channels:
-# - klauer
-# - https://conda.nsls2.bnl.gov/conda/latest
-- nsls2
-- anaconda
-# - defaults
-# - https://conda.anaconda.org/klauer/channel/main
-# - https://conda.anaconda.org/pkgw/channel/main
-# - https://conda.anaconda.org/ostrokach/channel/main
-# always_yes: true
-binstar_upload: true
-anaconda_upload: yes
-ssl_verify: False
-
-# changeps1: no
+- conda-forge
