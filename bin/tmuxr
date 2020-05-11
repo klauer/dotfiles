@@ -2,19 +2,24 @@
 
 REPO=$1
 
-[ -z "$REPO" ] && echo "Usage: tmuxr [repo_name]" && exit 1;
+[ -z "$REPO" ] && echo "Usage: tmuxr [repo_name]" && exit 1
 
 if tmux has-session -t $REPO; then
-    echo "Has session";
+    echo "Existing session"
+    if [ ! -z "$TMUX" ]; then
+        # Inside tmux
+        tmux switch-client -t $REPO
+    else
+        # Outside tmux
+        tmux attach-session -t $REPO
+    fi
 else
-    echo "No session";
+    echo "No session"
     REPO_PATH=$HOME/Repos/$REPO
 
     if [ ! -d $REPO_PATH ]; then
-        echo "Invalid repo name: $REPO";
-        exit 1;
+        echo "Invalid repo name: $REPO"
+        exit 1
     fi
     tmux new-session -s $REPO -c $REPO_PATH
 fi
-
-tmux attach-session -t $REPO
