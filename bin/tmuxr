@@ -6,13 +6,6 @@ REPO=$1
 
 if tmux has-session -t $REPO; then
     echo "Existing session"
-    if [ ! -z "$TMUX" ]; then
-        # Inside tmux
-        tmux switch-client -t $REPO
-    else
-        # Outside tmux
-        tmux attach-session -t $REPO
-    fi
 else
     echo "No session"
     REPO_PATH=$HOME/Repos/$REPO
@@ -21,5 +14,13 @@ else
         echo "Invalid repo name: $REPO"
         exit 1
     fi
-    tmux new-session -s $REPO -c $REPO_PATH
+    tmux new-session -s $REPO -c $REPO_PATH -d
+fi
+
+if [ ! -z "$TMUX" ]; then
+    # Inside tmux
+    tmux switch-client -t $REPO
+else
+    # Outside tmux
+    tmux attach-session -t $REPO
 fi
