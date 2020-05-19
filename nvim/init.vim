@@ -100,16 +100,6 @@ map Q gq
 " select column of same character under cursor, enter visual block mode
 nnoremap <expr> g<C-v> SelectMatchingCharacterColumn()
 
-function! CocRestart()
-  echo "Restarting COC"
-  syntax off
-  CocRestart
-  syntax on
-endfunction
-
-nnoremap <Leader>ca :CocAction<CR>
-nnoremap <Leader>cc :CocCommand<CR>
-nnoremap <Leader>r :call clearmatches()<CR>:call nvim_buf_clear_namespace(bufnr('%'), -1, 0, -1)<CR>:silent! CocRestart<CR>
 nnoremap <Leader>G :BCommits<CR>
 nnoremap <Leader>H :Helptags<CR>
 nnoremap <Leader>T :BTags<CR>
@@ -128,33 +118,6 @@ nmap <Leader>ab <Plug>(AerojumpBolt)
 nmap <Leader>aa <Plug>(AerojumpFromCursorBolt)
 nmap <Leader>ad <Plug>(AerojumpDefault)
 
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
 " fzf - Mapping selecting mappings (!)
 nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
@@ -163,7 +126,6 @@ omap <leader><tab> <plug>(fzf-maps-o)
 nmap <silent> <leader>L :windo if &buftype == "quickfix" \|\| &buftype == "locationlist" \| lclose \| endif<CR>
 nmap <script> <silent> <leader>q :copen<cr>
 nmap <script> <silent> <leader>l :lopen<cr>
-nmap <script> <silent> <leader>l :CocList diagnostics<cr>
 
 map <leader>H :lopen<cr>
 map <leader>L :lclose<cr>
@@ -202,8 +164,6 @@ nnoremap <Leader>* :execute ":Ggrep " . expand("<cword>")<CR>
 highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
-
-highlight CocErrorHighlight ctermfg=Red  guifg=#ff0000
 
 inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
 inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
@@ -278,9 +238,6 @@ let g:netrw_list_hide.='\.hg,'
 let g:netrw_list_hide.='\.py[co],'
 let g:netrw_list_hide.='\.sw[op],'
 
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
-
 " tmux related
 " use the nice separators
 let g:tmuxline_powerline_separators = 1
@@ -345,3 +302,4 @@ autocmd FileType tagbar
   \ else |
   \   set winhighlight=Normal:TagbarLightBackground |
   \ endif
+

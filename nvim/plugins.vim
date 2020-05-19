@@ -1,12 +1,11 @@
 let bundle_path=config_path . "/plugged"
 call plug#begin(bundle_path)
 
-" Use release branch
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" clangd / C++:
-" !brew upgrade llvm
-" !ln -s /usr/local/opt/llvm/bin/clangd /usr/local/bin
-" :CocInstall coc-clangd
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'neovim/nvim-lsp'
+Plug 'haorenW1025/diagnostic-nvim'
+Plug 'haorenW1025/completion-nvim'
+Plug 'vigoux/completion-treesitter'
 
 " fzf - fuzzy file searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -73,9 +72,6 @@ Plug 'vim-utils/vim-husk'
 " Python PEP8 indentation
 Plug 'hynek/vim-python-pep8-indent'
 
-" New neovim linter
-" Plug 'w0rp/ale'
-
 " colorschemes
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'kaicataldo/material.vim'
@@ -87,8 +83,8 @@ Plug 'vim-scripts/AnsiEsc.vim'
 Plug 'jubnzv/IEC.vim'
 
 " Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
 
 " tagbar
 Plug 'majutsushi/tagbar'
