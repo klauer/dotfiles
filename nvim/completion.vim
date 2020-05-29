@@ -60,8 +60,6 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
-set completeopt+=preview,menu,menuone,noselect
-
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
@@ -112,7 +110,9 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
 
-" Avoid showing message extra message when using completion
+" c	don't give |ins-completion-menu| messages.  For example,
+"  "-- XXX completion (YYY)", "match 1 of 2", "The only match",
+"  "Pattern not found", "Back at original", etc.
 set shortmess+=c
 
 " Auto close popup menu when finish completion
@@ -138,3 +138,13 @@ let g:completion_chain_complete_list = {
             \       {'mode': '<c-n>'}],
             \   'comment': [],
             \   'string' : [{'complete_items': ['path']}]}}
+
+
+" possible value: 'UltiSnips', 'Neosnippet', 'vim-vsnip'
+let g:completion_enable_snippet = 'UltiSnips'
+
+let g:completion_enable_auto_hover = 0
+let g:completion_enable_auto_signature = 1
+let g:completion_enable_fuzzy_match = 1
+let g:completion_matching_ignore_case = 1
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']

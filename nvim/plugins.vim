@@ -83,8 +83,8 @@ Plug 'vim-scripts/AnsiEsc.vim'
 Plug 'jubnzv/IEC.vim'
 
 " Snippets
-" Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " tagbar
 Plug 'majutsushi/tagbar'
