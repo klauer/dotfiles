@@ -39,6 +39,8 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set wildignore+=*\\tmp\\*,*.exe
 set wrap
 
+let g:python3_host_prog = $HOME . '/mc/envs/nvim/bin/python'
+
 if has('termguicolors')
   set termguicolors
 endif
@@ -217,8 +219,6 @@ if has('nvim')
   map <leader>i :vsplit term://ipython<cr>
   map <leader>s :vsplit term://bash<cr>
 endif
-
-let g:python3_host_prog = $HOME . '/mc/envs/nvim/bin/python'
 
 call SourceConfig("airline.vim")
 if has("autocmd")
