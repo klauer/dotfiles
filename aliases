@@ -75,6 +75,13 @@ pcds_hash() {
     wget https://github.com/pcdshub/$REPO/archive/v${VER}.tar.gz
     shasum -a 256 v${VER}.tar.gz
 }
+
+slac_hash() {
+    REPO=$1
+    VER=$2
+    wget https://github.com/slaclab/$REPO/archive/v${VER}.tar.gz
+    shasum -a 256 v${VER}.tar.gz
+}
 alias home120hz='cscreen -i 4e840607 -s 1 -r 120 -d 32 -x 1920 -y 1080'
 
 # for upgrading HEAD formulas:
