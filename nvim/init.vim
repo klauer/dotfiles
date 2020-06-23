@@ -254,6 +254,8 @@ function DarkBackground()
   set background=dark
   let g:material_theme_style = 'default'
   colorscheme material
+  " Fix up matching parentheses:
+  hi MatchParen cterm=bold ctermfg=220 gui=bold guifg=#ffcc00 guibg=#263238
   " colorscheme PaperColor
 endfunction
 
@@ -302,4 +304,3 @@ autocmd FileType tagbar
   \ else |
   \   set winhighlight=Normal:TagbarLightBackground |
   \ endif
-
