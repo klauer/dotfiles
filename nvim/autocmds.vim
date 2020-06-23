@@ -83,3 +83,6 @@ augroup ActiveWindowBackground
         \   endif |
         \ endif
 augroup END
+
+
+autocmd FileType jinja setlocal noautoindent nocindent nosmartindent indentexpr=
