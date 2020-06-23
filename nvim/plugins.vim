@@ -92,4 +92,6 @@ Plug 'majutsushi/tagbar'
 " indentation markers
 Plug 'Yggdroot/indentLine'
 
+Plug 'Glench/Vim-Jinja2-Syntax'
+
 call plug#end()
