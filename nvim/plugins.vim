@@ -1,6 +1,7 @@
 let bundle_path=config_path . "/plugged"
 call plug#begin(bundle_path)
 
+" Treesitter/language-server settings
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'neovim/nvim-lsp'
 Plug 'haorenW1025/diagnostic-nvim'
@@ -35,7 +36,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'airblade/vim-gitgutter'
 Plug 'jreybert/vimagit'
 " fugitive extension for managing/merging git branches
-Plug 'idanarye/vim-merginal', { 'branch': 'develop' }
+" Plug 'idanarye/vim-merginal', { 'branch': 'develop' }
 
 " -- tmux
 " better tmux integration
@@ -45,23 +46,14 @@ Plug 'tmux-plugins/vim-tmux'
 " Focus event fix for tmux
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
-" " Python position information
-" Plug 'mgedmin/pythonhelper.vim'
-
 " choosewin - toggle an overlay on windows to quickly jump to them
 Plug 't9md/vim-choosewin'
 
 " aerojump - fuzzy find in buffer
 Plug 'ripxorip/aerojump.nvim', { 'do': ':UpdateRemotePlugins' }
 
-" Python coverage
-" Plug 'mgedmin/coverage-highlight.vim'
-
 " EPICS syntax highlighting
 Plug 'NickeZ/epics.vim'
-
-" " toggle location/quickfix list
-" Plug 'milkypostman/vim-togglelist'
 
 " location/quickfix list tools
 Plug 'romainl/vim-qf'
@@ -69,8 +61,15 @@ Plug 'romainl/vim-qf'
 " add emacs/readline style bindings to the command line
 Plug 'vim-utils/vim-husk'
 
-" Python PEP8 indentation
+" Python
+" coverage
+" Plug 'mgedmin/coverage-highlight.vim'
+
+" PEP8 indentation
 Plug 'hynek/vim-python-pep8-indent'
+
+" Slime
+Plug 'jpalardy/vim-slime'
 
 " colorschemes
 Plug 'NLKNguyen/papercolor-theme'
@@ -92,6 +91,7 @@ Plug 'majutsushi/tagbar'
 " indentation markers
 Plug 'Yggdroot/indentLine'
 
+" Jinja
 Plug 'Glench/Vim-Jinja2-Syntax'
 
 call plug#end()
