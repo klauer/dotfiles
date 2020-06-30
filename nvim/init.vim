@@ -76,7 +76,7 @@ endif
 filetype plugin indent on
 syntax on
 
-silent! colorscheme PaperColor
+" silent! colorscheme PaperColor
 
 if exists(":TmuxNavigateLeft")
   " ensure ctrl-h works with splits, at least on osx for now...
@@ -115,10 +115,10 @@ nnoremap <Leader>lcd :call LcdRoot()<CR>:set noacd<CR>
 nnoremap <c-p>     :exe 'Files ' . FzfFindRoot()<CR>
 nnoremap <c-s-P>   :Files .<CR>
 
-nmap <Leader>as <Plug>(AerojumpSpace)
-nmap <Leader>ab <Plug>(AerojumpBolt)
-nmap <Leader>aa <Plug>(AerojumpFromCursorBolt)
-nmap <Leader>ad <Plug>(AerojumpDefault)
+" nmap <Leader>A <Plug>(AerojumpSpace)
+nmap <Leader>a <Plug>(AerojumpBolt)
+" nmap <Leader>ad <Plug>(AerojumpDefault)
+nmap <Leader>A <Plug>(AerojumpMilk)
 
 " fzf - Mapping selecting mappings (!)
 nmap <leader><tab> <plug>(fzf-maps-n)
@@ -159,13 +159,6 @@ nnoremap <Leader>e :cd %:h\|execute "term"\|cd -<cr>
 
 " vim-fugitive Ggrep identifier under cursor
 nnoremap <Leader>* :execute ":Ggrep " . expand("<cword>")<CR>
-
-" background color for omnicomplete
-" highlight Pmenu ctermbg=0 gui=bold
-" signify/gitgutter
-highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
-highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
-highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
 inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
 inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
@@ -246,33 +239,7 @@ let g:tmuxline_theme = 'powerline'
 
 " Tmuxline powerline
 "TmuxlineSnapshot! ~/dotfiles/tmuxline.conf
-
-let g:airline_theme = 'material'
-let g:airline#extensions#tmuxline#enabled = 1
-
-function DarkBackground()
-  set background=dark
-  let g:material_theme_style = 'default'
-  colorscheme material
-  " Fix up matching parentheses:
-  hi MatchParen cterm=bold ctermfg=220 gui=bold guifg=#ffcc00 guibg=#263238
-  " colorscheme PaperColor
-endfunction
-
-function LightBackground()
-  set background=light
-  " let g:material_theme_style = 'lighter'
-  " colorscheme material
-  colorscheme PaperColor
-endfunction
-
-"nnoremap yol :silent call LightBackground()<cr>
-"nnoremap yod :silent call DarkBackground()<cr>
-"nnoremap yob :silent call SwapBackground()<cr>
-
-" call LightBackground()
-call DarkBackground()
-
+"
 " https://stackoverflow.com/questions/58330034/
 nmap - <Plug>NetrwBrowseUpDir
 
@@ -289,21 +256,7 @@ let g:tagbar_left = 1
 
 let g:indentLine_char_list = ['▏', '┊']
 
-hi TagbarLightBackground guibg=white
-hi TagbarDarkBackground guibg=black
-
-hi ActiveWindowLightBackground guibg=white
-hi InactiveWindowLightBackground guibg=gray
-
-hi ActiveWindowDarkBackground guibg=#1e282d
-hi InactiveWindowDarkBackground guibg=#33454d
-
-autocmd FileType tagbar
-  \ if &background == "dark" |
-  \   set winhighlight=Normal:TagbarDarkBackground |
-  \ else |
-  \   set winhighlight=Normal:TagbarLightBackground |
-  \ endif
-
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
+
+call SourceConfig("color.vim")

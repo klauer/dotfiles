@@ -4,8 +4,8 @@ call plug#begin(bundle_path)
 " Treesitter/language-server settings
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'neovim/nvim-lsp'
-Plug 'haorenW1025/diagnostic-nvim'
-Plug 'haorenW1025/completion-nvim'
+Plug 'nvim-lua/diagnostic-nvim'
+Plug 'nvim-lua/completion-nvim'
 Plug 'vigoux/completion-treesitter'
 
 " fzf - fuzzy file searching
@@ -73,7 +73,8 @@ Plug 'jpalardy/vim-slime'
 
 " colorschemes
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'kaicataldo/material.vim'
+" Plug 'kaicataldo/material.vim'
+Plug 'sainnhe/edge'
 
 " ansi escape sequences
 Plug 'vim-scripts/AnsiEsc.vim'
