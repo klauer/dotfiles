@@ -82,6 +82,13 @@ slac_hash() {
     wget https://github.com/slaclab/$REPO/archive/v${VER}.tar.gz
     shasum -a 256 v${VER}.tar.gz
 }
+
+gp() {
+    REMOTE=${1:-origin}
+    BRANCH=${2:-master}
+    git pull ${REMOTE} ${BRANCH}
+}
+
 alias home120hz='cscreen -i 4e840607 -s 1 -r 120 -d 32 -x 1920 -y 1080'
 
 # for upgrading HEAD formulas:

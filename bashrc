@@ -144,7 +144,7 @@ cdf() {
 
 
 function cdr() {
-    cd $HOME/Repos/$TMUX_SESSION_NAME
+    cd $HOME/Repos/${1:-$TMUX_SESSION_NAME}
 }
 
 caddr() {
