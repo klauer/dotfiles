@@ -52,4 +52,3 @@ endfunction
 
 " call LightBackground()
 call DarkBackground()
-

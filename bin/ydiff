@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# from: https://github.com/joshuarli/ydiff/blob/master/ydiff
+#   $ git config --global pager.diff "ydiff | less"
+#   $ git config --global pager.show "ydiff | less"
+#   $ git config --global pager.log less
+#   $ git config --global color.diff never
 
 import signal
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
