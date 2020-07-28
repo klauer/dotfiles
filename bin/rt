@@ -11,7 +11,7 @@ if command -v coverage; then
     coverage combine || /usr/bin/true
 else
     if [ -f "run_tests.py" ]; then
-        python run_tests.py --concurrency=thread --parallel-mode "$@"
+        python run_tests.py "$@"
     else
         python -m pytest "$@"
     fi
