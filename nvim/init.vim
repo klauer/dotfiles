@@ -112,6 +112,7 @@ nnoremap <Leader>o :GitFiles<CR>
 nnoremap <Leader>t :Tagbar<CR>
 nnoremap <Leader>cd :call CdRoot()<CR>:set noacd<CR>
 nnoremap <Leader>lcd :call LcdRoot()<CR>:set noacd<CR>
+nnoremap <Leader><Leader> :ContextPeek<CR>
 nnoremap <c-p>     :exe 'Files ' . FzfFindRoot()<CR>
 nnoremap <c-s-P>   :Files .<CR>
 
@@ -150,7 +151,7 @@ map <leader>k :bprevious<cr>
 map <leader>p :!python %<cr>
 " buffer jump
 " nnoremap <leader>b :ls<cr>:b<space>
-nmap <Leader><Leader> V
+" nmap <Leader><Leader> V
 
 let g:choosewin_overlay_enable = 1
 nmap <Leader>w <Plug>(choosewin)
@@ -213,7 +214,7 @@ if has('nvim')
   map <leader>s :vsplit term://bash<cr>
 endif
 
-call SourceConfig("airline.vim")
+" call SourceConfig("airline.vim")
 if has("autocmd")
   call SourceConfig("autocmds.vim")
 endif
@@ -258,5 +259,8 @@ let g:indentLine_char_list = ['▏', '┊']
 
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
+
+let g:context_enabled = 0
+let g:context_nvim_no_redraw = 0
 
 call SourceConfig("color.vim")

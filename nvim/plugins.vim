@@ -3,20 +3,19 @@ call plug#begin(bundle_path)
 
 " Treesitter/language-server settings
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/completion-treesitter'
 Plug 'neovim/nvim-lsp'
 Plug 'nvim-lua/diagnostic-nvim'
 Plug 'nvim-lua/completion-nvim'
-Plug 'vigoux/completion-treesitter'
 
 " fzf - fuzzy file searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-
 Plug 'edkolev/tmuxline.vim'
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 
 " -- tpope
 " commentary with motion 'gc'
@@ -34,7 +33,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 " git gutter annotation :GitGutter*
 Plug 'airblade/vim-gitgutter'
-Plug 'jreybert/vimagit'
+" Plug 'jreybert/vimagit'
 " fugitive extension for managing/merging git branches
 " Plug 'idanarye/vim-merginal', { 'branch': 'develop' }
 
@@ -80,7 +79,7 @@ Plug 'sainnhe/edge'
 Plug 'vim-scripts/AnsiEsc.vim'
 
 " IEC 61131-3 syntax
-Plug 'jubnzv/IEC.vim'
+" Plug 'jubnzv/IEC.vim'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -94,5 +93,8 @@ Plug 'Yggdroot/indentLine'
 
 " Jinja
 Plug 'Glench/Vim-Jinja2-Syntax'
+
+" Code context?
+Plug 'wellle/context.vim'
 
 call plug#end()
