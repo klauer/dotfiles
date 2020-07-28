@@ -157,3 +157,7 @@ caddrauto() {
     export EPICS_CA_ADDR_LIST=
     export EPICS_CA_AUTO_ADDR_LIST=YES
 }
+
+signpython() {
+    codesign -s "My Python Certificate" -f $(which python)
+}
