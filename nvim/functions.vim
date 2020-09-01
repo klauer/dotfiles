@@ -93,3 +93,6 @@ function SwapBackground()
   endif
 endfunction
 
+function! PleaseStopIndenting()
+    setlocal noautoindent nocindent nosmartindent indentexpr=
+endfunction

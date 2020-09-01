@@ -18,7 +18,7 @@ endsnippet
 
 snippet for "for loop" b
 for ${1:item} in ${2:iterable}:
-	${3:pass}
+	${3:...}
 endsnippet
 
 ##########
@@ -59,7 +59,6 @@ class Arg(object):
 def get_args(arglist):
 	args = [Arg(arg) for arg in arglist.split(',') if arg]
 	args = [arg for arg in args if arg.name != 'self']
-
 	return args
 
 
@@ -100,43 +99,17 @@ def triple_quotes_handle_trailing(snip, quoting_style):
 	else:
 		snip.rv = snip.c
 
-def get_style(snip):
-	style = snip.opt("g:ultisnips_python_style", "normal")
-
-	if    style == "doxygen": return DOXYGEN
-	elif  style == "sphinx": return SPHINX
-	elif  style == "google": return GOOGLE
-	elif  style == "numpy": return NUMPY
-	else: return NORMAL
-
-
 def format_arg(snip, arg, style):
-	if style == DOXYGEN:
-		return "@param %s TODO" % arg
-	elif style == SPHINX:
-		return ":param %s: TODO" % arg
-	elif style == NORMAL:
-		return ":%s: TODO" % arg
-	elif style == GOOGLE:
-		return "%s (TODO): TODO" % arg
-	elif style == NUMPY:
-		snip += "%s : TODO" % arg
-		snip.shift()
-		snip += 'TODO'
-		snip.unshift()
+	snip += "%s : TODO" % arg
+	snip.shift()
+	snip += ''
+	snip.unshift()
 
 
 def format_return(snip, style):
-	if style == DOXYGEN:
-		snip += "@return: TODO"
-	elif style in (NORMAL, SPHINX):
-		snip += ":returns: TODO"
-	elif style == GOOGLE:
-		snip += "Returns: TODO"
-	elif style == NUMPY:
-		snip += "Returns"
-		snip += "-------"
-		snip += "TODO"
+	snip += "Returns"
+	snip += "-------"
+	snip += ""
 
 
 def write_docstring_args(args, snip):
@@ -145,37 +118,7 @@ def write_docstring_args(args, snip):
 		return
 
 	snip.rv += '\n' + snip.mkline('', indent='')
-
-	style = get_style(snip)
-
-	if style == GOOGLE:
-		write_google_docstring_args(args, snip)
-	elif style == NUMPY:
-		write_numpy_docstring_args(args, snip)
-	else:
-		for arg in args:
-			format_arg(snip, arg, style)
-
-
-def write_google_docstring_args(args, snip):
-	kwargs = [arg for arg in args if arg.is_kwarg()]
-	args = [arg for arg in args if not arg.is_kwarg()]
-
-	if args:
-		snip += "Args:"
-		snip.shift()
-		for arg in args:
-			format_arg(snip, arg, GOOGLE)
-		snip.unshift()
-		snip.rv += '\n' + snip.mkline('', indent='')
-
-	if kwargs:
-		snip += "Kwargs:"
-		snip.shift()
-		for kwarg in kwargs:
-			format_arg(snip, kwarg, GOOGLE)
-		snip.unshift()
-		snip.rv += '\n' + snip.mkline('', indent='')
+	write_numpy_docstring_args(args, snip)
 
 
 def write_numpy_docstring_args(args, snip):
@@ -204,11 +147,9 @@ def write_numpy_docstring_args(args, snip):
 
 
 def write_init_body(args, parents, snip):
-	parents = [p.strip() for p in parents.split(",")]
-	parents = [p for p in parents if p != 'object']
-
-	for p in parents:
-		snip += p + ".__init__(self)"
+	parents = any(p.strip() for p in parents.split(","))
+	if parents:
+		snip += 'super().__init__()'
 
 	if parents:
 		snip.rv += '\n' + snip.mkline('', indent='')
@@ -236,8 +177,7 @@ def write_function_docstring(t, snip):
 	if args:
 		write_docstring_args(args, snip)
 
-	style = get_style(snip)
-	format_return(snip, style)
+	format_return(snip, NUMPY)
 	snip.rv += '\n' + snip.mkline('', indent='')
 	snip += triple_quotes(snip)
 
@@ -248,23 +188,22 @@ endglobal
 ########################################
 
 snippet class "class with docstrings" b
-class ${1:MyClass}(${2:object}):
-
-	`!p snip.rv = triple_quotes(snip)`${3:Docstring for $1. }`!p snip.rv = triple_quotes(snip)`
-
-	def __init__(self$4):
-		`!p snip.rv = triple_quotes(snip)`${5:TODO: to be defined1.}`!p
-snip.rv = ""
-snip >> 2
+class ${1:MyClass}(${5:}):`!p 
+snip >> 1
+snip += triple_quotes(snip)
+snip += f'{t[1]}.'
 
 args = get_args(t[4])
-
-write_docstring_args(args, snip)
 if args:
-	snip.rv += '\n' + snip.mkline('', indent='')
-	snip += '{0}'.format(triple_quotes(snip))
+	write_docstring_args(args, snip)
+snip.rv = snip.rv.rstrip()
+snip += triple_quotes(snip)
+`
 
-write_init_body(args, t[2], snip)
+	def __init__(self, $4):`!p
+snip >> 2
+args = get_args(t[4])
+write_init_body(args, t[5], snip)
 `
 		$0
 endsnippet
@@ -281,7 +220,7 @@ write_slots_args(args, snip)
 `
 
 	def __init__(self$4):
-		`!p snip.rv = triple_quotes(snip)`${5:TODO: to be defined.}`!p
+		`!p snip.rv = triple_quotes(snip)`${5:...}`!p
 snip.rv = ""
 snip >> 2
 
@@ -300,94 +239,94 @@ endsnippet
 
 snippet contain "methods for emulating a container type" b
 def __len__(self):
-	${1:pass}
+	${1:...}
 
 def __getitem__(self, key):
-	${2:pass}
+	${2:...}
 
 def __setitem__(self, key, value):
-	${3:pass}
+	${3:...}
 
 def __delitem__(self, key):
-	${4:pass}
+	${4:...}
 
 def __iter__(self):
-	${5:pass}
+	${5:...}
 
 def __reversed__(self):
-	${6:pass}
+	${6:...}
 
 def __contains__(self, item):
-	${7:pass}
+	${7:...}
 endsnippet
 
 
 snippet context "context manager methods" b
 def __enter__(self):
-	${1:pass}
+	${1:...}
 
 def __exit__(self, exc_type, exc_value, traceback):
-	${2:pass}
+	${2:...}
 endsnippet
 
 
 snippet attr "methods for customizing attribute access" b
 def __getattr__(self, name):
-	${1:pass}
+	${1:...}
 
 def __setattr__(self, name, value):
-	${2:pass}
+	${2:...}
 
 def __delattr__(self, name):
-	${3:pass}
+	${3:...}
 endsnippet
 
 
 snippet desc "methods implementing descriptors" b
 def __get__(self, instance, owner):
-	${1:pass}
+	${1:...}
 
 def __set__(self, instance, value):
-	${2:pass}
+	${2:...}
 
 def __delete__(self, instance):
-	${3:pass}
+	${3:...}
 endsnippet
 
 
 snippet cmp "methods implementing rich comparison"
 def __eq__(self, other):
-	${1:pass}
+	${1:...}
 
 def __ne__(self, other):
-	${2:pass}
+	${2:...}
 
 def __lt__(self, other):
-	${3:pass}
+	${3:...}
 
 def __le__(self, other):
-	${4:pass}
+	${4:...}
 
 def __gt__(self, other):
-	${5:pass}
+	${5:...}
 
 def __ge__(self, other):
-	${6:pass}
+	${6:...}
 
 def __cmp__(self, other):
-	${7:pass}
+	${7:...}
 endsnippet
 
 
 snippet repr "methods implementing string representation"
 def __repr__(self):
-	${1:pass}
+	${1:...}
 
 def __str__(self):
-	${2:pass}
+	${2:...}
 
 def __unicode__(self):
-	${3:pass}
+	${3:...}
 endsnippet
 
 
@@ -395,97 +334,98 @@ endsnippet
 # intentionally ommited to reduce verbosity.
 snippet numeric "methods for emulating a numeric type" b
 def __add__(self, other):
-	${1:pass}
+	${1:...}
 
 def __sub__(self, other):
-	${2:pass}
+	${2:...}
 
 def __mul__(self, other):
-	${3:pass}
+	${3:...}
 
 def __div__(self, other):
-	${4:pass}
+	${4:...}
 
 def __truediv__(self, other):
-	${5:pass}
+	${5:...}
 
 def __floordiv__(self, other):
-	${6:pass}
+	${6:...}
 
 
 def __mod__(self, other):
-	${7:pass}
+	${7:...}
 
 def __divmod__(self, other):
-	${8:pass}
+	${8:...}
 
 def __pow__(self, other):
-	${9:pass}
+	${9:...}
 
 
 def __lshift__(self, other):
-	${10:pass}
+	${10:...}
 
 def __rshift__(self, other):
-	${11:pass}
+	${11:...}
 
 def __and__(self, other):
-	${12:pass}
+	${12:...}
 
 def __xor__(self, other):
-	${13:pass}
+	${13:...}
 
 def __or__(self, other):
-	${14:pass}
+	${14:...}
 
 
 def __neg__(self):
-	${15:pass}
+	${15:...}
 
 def __pos__(self):
-	${16:pass}
+	${16:...}
 
 def __abs__(self):
-	${17:pass}
+	${17:...}
 
 def __invert__(self):
-	${18:pass}
+	${18:...}
 
 
 def __complex__(self):
-	${19:pass}
+	${19:...}
 
 def __int__(self):
-	${20:pass}
+	${20:...}
 
 def __long__(self):
-	${21:pass}
+	${21:...}
 
 def __float__(self):
-	${22:pass}
+	${22:...}
 
 
 def __oct__(self):
-	${22:pass}
+	${22:...}
 
 def __hex__(self):
-	${23:pass}
+	${23:...}
 
 
 def __index__(self):
-	${24:pass}
+	${24:...}
 
 def __coerce__(self, other):
-	${25:pass}
+	${25:...}
 endsnippet
 
 snippet def "function with docstrings" b
 def ${1:function}(`!p
 if snip.indent:
 	snip.rv = 'self' + (", " if len(t[2]) else "")`${2:arg1}):
-	`!p snip.rv = triple_quotes(snip)`${4:TODO: Docstring for $1.}`!p
+	`!p snip.rv = triple_quotes(snip)`
+	${4:...}`!p
 write_function_docstring(t, snip) `
-	${0:pass}
+	${0:...}
 endsnippet
 
 
@@ -494,25 +434,27 @@ snippet defc "class method with docstrings" b
 def ${1:function}(`!p
 if snip.indent:
 	snip.rv = 'cls' + (", " if len(t[2]) else "")`${2:arg1}):
-	`!p snip.rv = triple_quotes(snip)`${4:TODO: Docstring for $1.}`!p
+	`!p snip.rv = triple_quotes(snip)`
+	${4:...}`!p
 write_function_docstring(t, snip) `
-	${0:pass}
+	${0:...}
 endsnippet
 
 
 snippet defs "static method with docstrings" b
 @staticmethod
 def ${1:function}(${2:arg1}):
-	`!p snip.rv = triple_quotes(snip)`${4:TODO: Docstring for $1.}`!p
+	`!p snip.rv = triple_quotes(snip)`
+	${4:...}`!p
 write_function_docstring(t, snip) `
-	${0:pass}
+	${0:...}
 endsnippet
 
 
 # doesn't expand when there is a word in front
-snippet /(^|(?<=\W))\./ "self." r
-self.
-endsnippet
+# snippet /(^|(?<=\W))\./ "self." r
+# self.
+# endsnippet
 
 snippet from "from module import name" b
 from ${1:module} import ${2:Stuff}
@@ -529,27 +471,21 @@ def ${1:name}(self):
 endsnippet
 
 snippet rwprop "Read write property" b
+@property
 def ${1:name}():
-	`!p snip.rv = triple_quotes(snip) if t[2] else ''
-`${2:TODO: Docstring for $1.}`!p
-if t[2]:
-	snip >> 1
+	"""
+	${2:...}
+	`!p
+snip >> 1
+format_return(snip, NUMPY)
+snip += triple_quotes(snip)
+`
+	${0:...}
 
-	style = get_style(snip)
-	snip.rv += '\n' + snip.mkline('', indent='')
-	format_return(snip, style)
-	snip.rv += '\n' + snip.mkline('', indent='')
-	snip += triple_quotes(snip)
-else:
-	snip.rv = ""`
-	def fget(self):
-		return self._$1$0
+@$1.setter
+def $1(self, $1):
+	self._$1 = $1
 
-	def fset(self, value):
-		self._$1 = value
-	return locals()
-
-$1 = property(**$1(), doc=$1.__doc__)
 endsnippet
 
 
@@ -558,23 +494,23 @@ endsnippet
 ####################
 snippet if "If" b
 if ${1:condition}:
-	${2:pass}
+	${2:...}
 endsnippet
 
 snippet ife "If / Else" b
 if ${1:condition}:
-	${2:pass}
+	${2:...}
 else:
-	${3:pass}
+	${3:...}
 endsnippet
 
 snippet ifee "If / Elif / Else" b
 if ${1:condition}:
-	${2:pass}
+	${2:...}
 elif ${3:condition}:
-	${4:pass}
+	${4:...}
 else:
-	${5:pass}
+	${5:...}
 endsnippet
 
 
@@ -583,38 +519,38 @@ endsnippet
 ##########################
 snippet try "Try / Except" b
 try:
-	${1:pass}
-except ${2:Exception} as ${3:e}:
+	${1:...}
+except ${2:Exception} as ${3:ex}:
 	${4:raise $3}
 endsnippet
 
 snippet try "Try / Except / Else" b
 try:
-	${1:pass}
-except ${2:Exception} as ${3:e}:
+	${1:...}
+except ${2:Exception} as ${3:ex}:
 	${4:raise $3}
 else:
-	${5:pass}
+	${5:...}
 endsnippet
 
 snippet try "Try / Except / Finally" b
 try:
-	${1:pass}
-except ${2:Exception} as ${3:e}:
+	${1:...}
+except ${2:Exception} as ${3:ex}:
 	${4:raise $3}
 finally:
-	${5:pass}
+	${5:...}
 endsnippet
 
 snippet try "Try / Except / Else / Finally" b
 try:
-	${1:pass}
-except${2: ${3:Exception} as ${4:e}}:
+	${1:...}
+except${2: ${3:Exception} as ${4:ex}}:
 	${5:raise}
 else:
-	${6:pass}
+	${6:...}
 finally:
-	${7:pass}
+	${7:...}
 endsnippet
 
 
@@ -668,13 +604,13 @@ class Test${1:Class}(${2:unittest.TestCase}):
 	`!p snip.rv = triple_quotes(snip)`${3:Test case docstring.}`!p snip.rv = triple_quotes(snip)`
 
 	def setUp(self):
-		${4:pass}
+		${4:...}
 
 	def tearDown(self):
-		${5:pass}
+		${5:...}
 
 	def test_${6:name}(self):
-		${7:pass}
+		${7:...}
 endsnippet
 
 snippet " "triple quoted string (double quotes)" b
@@ -695,4 +631,15 @@ ${1:doc}
 `!p snip.rv = triple_quotes(snip)`
 endsnippet
 
+snippet logger "module logger"
+import logging
+
+logger = logging.getLogger(__name__)
+endsnippet
+
+snippet module_path "module_path"
+import pathlib
+
+MODULE_PATH = pathlib.Path(__file__).parent
+endsnippet
 # vim:ft=snippets:

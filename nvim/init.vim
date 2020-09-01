@@ -39,6 +39,9 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set wildignore+=*\\tmp\\*,*.exe
 set wrap
 
+let g:dotfiles = $HOME . '/dotfiles/'
+let g:python3_host_prog = $HOME . '/mc/envs/nvim/bin/python'
+
 if has('termguicolors')
   set termguicolors
 endif
@@ -74,7 +77,7 @@ endif
 filetype plugin indent on
 syntax on
 
-silent! colorscheme PaperColor
+" silent! colorscheme PaperColor
 
 if exists(":TmuxNavigateLeft")
   " ensure ctrl-h works with splits, at least on osx for now...
@@ -100,16 +103,6 @@ map Q gq
 " select column of same character under cursor, enter visual block mode
 nnoremap <expr> g<C-v> SelectMatchingCharacterColumn()
 
-function! CocRestart()
-  echo "Restarting COC"
-  syntax off
-  CocRestart
-  syntax on
-endfunction
-
-nnoremap <Leader>ca :CocAction<CR>
-nnoremap <Leader>cc :CocCommand<CR>
-nnoremap <Leader>r :call clearmatches()<CR>:call nvim_buf_clear_namespace(bufnr('%'), -1, 0, -1)<CR>:silent! CocRestart<CR>
 nnoremap <Leader>G :BCommits<CR>
 nnoremap <Leader>H :Helptags<CR>
 nnoremap <Leader>T :BTags<CR>
@@ -120,40 +113,14 @@ nnoremap <Leader>o :GitFiles<CR>
 nnoremap <Leader>t :Tagbar<CR>
 nnoremap <Leader>cd :call CdRoot()<CR>:set noacd<CR>
 nnoremap <Leader>lcd :call LcdRoot()<CR>:set noacd<CR>
+nnoremap <Leader><Leader> :ContextPeek<CR>
 nnoremap <c-p>     :exe 'Files ' . FzfFindRoot()<CR>
 nnoremap <c-s-P>   :Files .<CR>
 
-nmap <Leader>as <Plug>(AerojumpSpace)
-nmap <Leader>ab <Plug>(AerojumpBolt)
-nmap <Leader>aa <Plug>(AerojumpFromCursorBolt)
-nmap <Leader>ad <Plug>(AerojumpDefault)
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" nmap <Leader>A <Plug>(AerojumpSpace)
+nmap <Leader>a <Plug>(AerojumpBolt)
+" nmap <Leader>ad <Plug>(AerojumpDefault)
+nmap <Leader>A <Plug>(AerojumpMilk)
 
 " fzf - Mapping selecting mappings (!)
 nmap <leader><tab> <plug>(fzf-maps-n)
@@ -163,7 +130,6 @@ omap <leader><tab> <plug>(fzf-maps-o)
 nmap <silent> <leader>L :windo if &buftype == "quickfix" \|\| &buftype == "locationlist" \| lclose \| endif<CR>
 nmap <script> <silent> <leader>q :copen<cr>
 nmap <script> <silent> <leader>l :lopen<cr>
-nmap <script> <silent> <leader>l :CocList diagnostics<cr>
 
 map <leader>H :lopen<cr>
 map <leader>L :lclose<cr>
@@ -186,7 +152,7 @@ map <leader>k :bprevious<cr>
 map <leader>p :!python %<cr>
 " buffer jump
 " nnoremap <leader>b :ls<cr>:b<space>
-nmap <Leader><Leader> V
+" nmap <Leader><Leader> V
 
 let g:choosewin_overlay_enable = 1
 nmap <Leader>w <Plug>(choosewin)
@@ -195,15 +161,6 @@ nnoremap <Leader>e :cd %:h\|execute "term"\|cd -<cr>
 
 " vim-fugitive Ggrep identifier under cursor
 nnoremap <Leader>* :execute ":Ggrep " . expand("<cword>")<CR>
-
-" background color for omnicomplete
-" highlight Pmenu ctermbg=0 gui=bold
-" signify/gitgutter
-highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
-highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
-highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
-
-highlight CocErrorHighlight ctermfg=Red  guifg=#ff0000
 
 inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
 inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
@@ -258,9 +215,7 @@ if has('nvim')
   map <leader>s :vsplit term://bash<cr>
 endif
 
-let g:python3_host_prog = $HOME . '/mc/envs/nvim/bin/python'
-
-call SourceConfig("airline.vim")
+" call SourceConfig("airline.vim")
 if has("autocmd")
   call SourceConfig("autocmds.vim")
 endif
@@ -278,9 +233,6 @@ let g:netrw_list_hide.='\.hg,'
 let g:netrw_list_hide.='\.py[co],'
 let g:netrw_list_hide.='\.sw[op],'
 
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
-
 " tmux related
 " use the nice separators
 let g:tmuxline_powerline_separators = 1
@@ -289,31 +241,7 @@ let g:tmuxline_theme = 'powerline'
 
 " Tmuxline powerline
 "TmuxlineSnapshot! ~/dotfiles/tmuxline.conf
-
-let g:airline_theme = 'material'
-let g:airline#extensions#tmuxline#enabled = 1
-
-function DarkBackground()
-  set background=dark
-  let g:material_theme_style = 'default'
-  colorscheme material
-  " colorscheme PaperColor
-endfunction
-
-function LightBackground()
-  set background=light
-  " let g:material_theme_style = 'lighter'
-  " colorscheme material
-  colorscheme PaperColor
-endfunction
-
-"nnoremap yol :silent call LightBackground()<cr>
-"nnoremap yod :silent call DarkBackground()<cr>
-"nnoremap yob :silent call SwapBackground()<cr>
-
-" call LightBackground()
-call DarkBackground()
-
+"
 " https://stackoverflow.com/questions/58330034/
 nmap - <Plug>NetrwBrowseUpDir
 
@@ -330,18 +258,11 @@ let g:tagbar_left = 1
 
 let g:indentLine_char_list = ['▏', '┊']
 
-hi TagbarLightBackground guibg=white
-hi TagbarDarkBackground guibg=black
+let g:slime_target = "tmux"
+let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
+let g:slime_python_ipython = 1
 
-hi ActiveWindowLightBackground guibg=white
-hi InactiveWindowLightBackground guibg=gray
+let g:context_enabled = 0
+let g:context_nvim_no_redraw = 0
 
-hi ActiveWindowDarkBackground guibg=#1e282d
-hi InactiveWindowDarkBackground guibg=#33454d
-
-autocmd FileType tagbar
-  \ if &background == "dark" |
-  \   set winhighlight=Normal:TagbarDarkBackground |
-  \ else |
-  \   set winhighlight=Normal:TagbarLightBackground |
-  \ endif
+call SourceConfig("color.vim")

@@ -59,8 +59,10 @@ augroup END
 
 augroup CursorLineOnlyInActiveWindow
   autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  autocmd WinLeave * setlocal nocursorline
+  autocmd VimEnter,WinEnter,BufWinEnter,FocusGained *
+        \ setlocal cursorline
+  autocmd VimLeave,WinLeave,BufLeave,FocusLost *
+        \ setlocal nocursorline
 augroup END
 
 augroup ActiveWindowBackground
@@ -82,4 +84,16 @@ augroup ActiveWindowBackground
         \     set winhighlight=Normal:InactiveWindowLightBackground |
         \   endif |
         \ endif
+augroup END
+
+autocmd FileType jinja setlocal noautoindent nocindent nosmartindent indentexpr=
+
+set number relativenumber
+
+augroup numbertoggle
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter,FocusGained *
+        \ set relativenumber
+  autocmd VimLeave,WinLeave,BufLeave,FocusLost *
+        \ set norelativenumber
 augroup END

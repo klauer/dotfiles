@@ -144,7 +144,7 @@ cdf() {
 
 
 function cdr() {
-    cd $HOME/Repos/$TMUX_SESSION_NAME
+    cd $HOME/Repos/${1:-$TMUX_SESSION_NAME}
 }
 
 caddr() {
@@ -156,4 +156,8 @@ caddr() {
 caddrauto() {
     export EPICS_CA_ADDR_LIST=
     export EPICS_CA_AUTO_ADDR_LIST=YES
+}
+
+signpython() {
+    codesign -s "My Python Certificate" -f $(which python)
 }

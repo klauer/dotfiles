@@ -1,22 +1,21 @@
 let bundle_path=config_path . "/plugged"
 call plug#begin(bundle_path)
 
-" Use release branch
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" clangd / C++:
-" !brew upgrade llvm
-" !ln -s /usr/local/opt/llvm/bin/clangd /usr/local/bin
-" :CocInstall coc-clangd
+" Treesitter/language-server settings
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/completion-treesitter'
+Plug 'neovim/nvim-lsp'
+Plug 'nvim-lua/diagnostic-nvim'
+Plug 'nvim-lua/completion-nvim'
 
 " fzf - fuzzy file searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-
 Plug 'edkolev/tmuxline.vim'
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 
 " -- tpope
 " commentary with motion 'gc'
@@ -34,9 +33,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 " git gutter annotation :GitGutter*
 Plug 'airblade/vim-gitgutter'
-Plug 'jreybert/vimagit'
+" Plug 'jreybert/vimagit'
 " fugitive extension for managing/merging git branches
-Plug 'idanarye/vim-merginal', { 'branch': 'develop' }
+" Plug 'idanarye/vim-merginal', { 'branch': 'develop' }
 
 " -- tmux
 " better tmux integration
@@ -46,23 +45,14 @@ Plug 'tmux-plugins/vim-tmux'
 " Focus event fix for tmux
 Plug 'tmux-plugins/vim-tmux-focus-events'
 
-" " Python position information
-" Plug 'mgedmin/pythonhelper.vim'
-
 " choosewin - toggle an overlay on windows to quickly jump to them
 Plug 't9md/vim-choosewin'
 
 " aerojump - fuzzy find in buffer
 Plug 'ripxorip/aerojump.nvim', { 'do': ':UpdateRemotePlugins' }
 
-" Python coverage
-" Plug 'mgedmin/coverage-highlight.vim'
-
 " EPICS syntax highlighting
 Plug 'NickeZ/epics.vim'
-
-" " toggle location/quickfix list
-" Plug 'milkypostman/vim-togglelist'
 
 " location/quickfix list tools
 Plug 'romainl/vim-qf'
@@ -70,21 +60,26 @@ Plug 'romainl/vim-qf'
 " add emacs/readline style bindings to the command line
 Plug 'vim-utils/vim-husk'
 
-" Python PEP8 indentation
+" Python
+" coverage
+" Plug 'mgedmin/coverage-highlight.vim'
+
+" PEP8 indentation
 Plug 'hynek/vim-python-pep8-indent'
 
-" New neovim linter
-" Plug 'w0rp/ale'
+" Slime
+Plug 'jpalardy/vim-slime'
 
 " colorschemes
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'kaicataldo/material.vim'
+" Plug 'kaicataldo/material.vim'
+Plug 'sainnhe/edge'
 
 " ansi escape sequences
 Plug 'vim-scripts/AnsiEsc.vim'
 
 " IEC 61131-3 syntax
-Plug 'jubnzv/IEC.vim'
+" Plug 'jubnzv/IEC.vim'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -95,5 +90,11 @@ Plug 'majutsushi/tagbar'
 
 " indentation markers
 Plug 'Yggdroot/indentLine'
+
+" Jinja
+Plug 'Glench/Vim-Jinja2-Syntax'
+
+" Code context?
+Plug 'wellle/context.vim'
 
 call plug#end()
