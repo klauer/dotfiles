@@ -39,6 +39,7 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set wildignore+=*\\tmp\\*,*.exe
 set wrap
 
+let g:dotfiles = $HOME . '/dotfiles/'
 let g:python3_host_prog = $HOME . '/mc/envs/nvim/bin/python'
 
 if has('termguicolors')

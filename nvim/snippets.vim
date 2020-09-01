@@ -12,6 +12,11 @@ let g:ultisnips_python_style='numpy'
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
+let g:UltiSnipsSnippetDirectories=[
+            \ g:dotfiles . "UltiSnips",
+            \ g:dotfiles . "nvim/plugged/vim-snippets/UltiSnips"
+            \ ]
+
 " The default value for g:UltiSnipsJumpBackwardTrigger interferes with the
 " built-in complete function: |i_CTRL-X_CTRL-K|. A workaround:
 inoremap <c-x><c-k> <c-x><c-k>
