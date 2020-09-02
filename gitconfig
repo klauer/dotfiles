@@ -1,12 +1,14 @@
+; vi: sw=4 ts=4 sts=4 expandtab
+
 [user]
-	name = K Lauer
-	email = klauer@slac.stanford.edu
+    name = K Lauer
+    email = klauer@slac.stanford.edu
 
 [url "http://git.code.sf.net/"]
-	insteadOf = git://git.code.sf.net/
+    insteadOf = git://git.code.sf.net/
 
 [url "https://github.com"]
-	insteadOf = git://github.com
+    insteadOf = git://github.com
 
 [http]
 
@@ -20,23 +22,30 @@
 
 [color]
     ui = auto
+    diff = never
 
 [core]
-	editor = vim
+    editor = nvim
     
 [push]
-	default = simple
+    default = simple
     
 [diff]
     tool = vimdiff
 
+[pager]
+    diff = ydiff | less
+    show = ydiff | less
+    log = less
+
 [alias]
-ls = log --oneline --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ar)%Creset'
-lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n'' %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
-vimdiff = !sh -c 'git diff | view -'
-linelog = "!fcn() { git log -L $1,$2:$3; }; fcn"
-new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
-st = status -s
-addnw=!sh -c 'git diff -U0 -w --no-color "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
-alltags=log --oneline --decorate --tags --no-walk
-sed=!git grep -z --full-name -l '.' | xargs -0 sed -i '' -e
+    ls = log --oneline --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ar)%Creset'
+    lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n'' %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+    vimdiff = !sh -c 'git diff | view -'
+    linelog = "!fcn() { git log -L $1,$2:$3; }; fcn"
+    new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
+    st = status -s
+    addnw=!sh -c 'git diff -U0 -w --no-color "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
+    alltags=log --oneline --decorate --tags --no-walk
+    sed=!git grep -z --full-name -l '.' | xargs -0 sed -i '' -e
+    grepw="!grepw() { echo \"Finding whole words: $@\"; git grep \"\\<$@\\>\"; }; grepw"
