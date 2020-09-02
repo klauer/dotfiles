@@ -107,15 +107,19 @@ nnoremap <Leader>G :BCommits<CR>
 nnoremap <Leader>H :Helptags<CR>
 nnoremap <Leader>T :BTags<CR>
 nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>hc :silent! HighlightCoverage<CR>
-nnoremap <Leader>g :Commits<CR>
+" nnoremap <Leader>hc :silent! HighlightCoverage<CR>
+nnoremap <Leader>gc :Commits<CR>
+nnoremap <Leader>gb :silent! GitMessenger<CR>
 nnoremap <Leader>o :GitFiles<CR>
 nnoremap <Leader>t :Tagbar<CR>
 nnoremap <Leader>cd :call CdRoot()<CR>:set noacd<CR>
-nnoremap <Leader>lcd :call LcdRoot()<CR>:set noacd<CR>
+nnoremap <Leader>cdl :call LcdRoot()<CR>:set noacd<CR>
 nnoremap <Leader><Leader> :ContextPeek<CR>
 nnoremap <c-p>     :exe 'Files ' . FzfFindRoot()<CR>
 nnoremap <c-s-P>   :Files .<CR>
+
+nnoremap <Leader>h :SidewaysLeft<CR>
+nnoremap <Leader>l :SidewaysRight<CR>
 
 " nmap <Leader>A <Plug>(AerojumpSpace)
 nmap <Leader>a <Plug>(AerojumpBolt)
@@ -128,13 +132,13 @@ xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
 
 nmap <silent> <leader>L :windo if &buftype == "quickfix" \|\| &buftype == "locationlist" \| lclose \| endif<CR>
-nmap <script> <silent> <leader>q :copen<cr>
-nmap <script> <silent> <leader>l :lopen<cr>
+nmap <script> <silent> <leader>Q :copen<cr>
+nmap <script> <silent> <leader>L :lopen<cr>
 
-map <leader>H :lopen<cr>
-map <leader>L :lclose<cr>
-map <leader>K :lprev<cr>
-map <leader>J :lnext<cr>
+" map <leader>H :lopen<cr>
+" map <leader>L :lclose<cr>
+" map <leader>K :lprev<cr>
+" map <leader>J :lnext<cr>
 
 " Make p in Visual mode replace the selected text with the "" register.
 vnoremap p <Esc>:let current_reg = @"<CR>gvs<C-R>=current_reg<CR><Esc>
@@ -264,5 +268,7 @@ let g:slime_python_ipython = 1
 
 let g:context_enabled = 0
 let g:context_nvim_no_redraw = 0
+
+let g:git_messenger_no_default_mappings = v:true
 
 call SourceConfig("color.vim")

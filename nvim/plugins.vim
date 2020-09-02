@@ -33,6 +33,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 " git gutter annotation :GitGutter*
 Plug 'airblade/vim-gitgutter'
+" git blame in a popup
+Plug 'rhysd/git-messenger.vim'
 " Plug 'jreybert/vimagit'
 " fugitive extension for managing/merging git branches
 " Plug 'idanarye/vim-merginal', { 'branch': 'develop' }
@@ -65,7 +67,7 @@ Plug 'vim-utils/vim-husk'
 " Plug 'mgedmin/coverage-highlight.vim'
 
 " PEP8 indentation
-Plug 'hynek/vim-python-pep8-indent'
+Plug 'Vimjas/vim-python-pep8-indent'
 
 " Slime
 Plug 'jpalardy/vim-slime'
@@ -92,9 +94,15 @@ Plug 'majutsushi/tagbar'
 Plug 'Yggdroot/indentLine'
 
 " Jinja
-Plug 'Glench/Vim-Jinja2-Syntax'
+" Plug 'Glench/Vim-Jinja2-Syntax'
 
-" Code context?
+" Code context!
 Plug 'wellle/context.vim'
+
+" Left/right motion for params
+Plug 'AndrewRadev/sideways.vim'
+
+" indentation-level objects (unmaintained original)
+Plug 'klauer/vim-indent-object'
 
 call plug#end()
