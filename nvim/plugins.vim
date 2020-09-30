@@ -4,7 +4,7 @@ call plug#begin(bundle_path)
 " Treesitter/language-server settings
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/completion-treesitter'
-Plug 'neovim/nvim-lsp'
+Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/diagnostic-nvim'
 Plug 'nvim-lua/completion-nvim'
 
@@ -32,7 +32,7 @@ Plug 'tpope/vim-fugitive'
 " enable Gbrowse
 Plug 'tpope/vim-rhubarb'
 " git gutter annotation :GitGutter*
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 " git blame in a popup
 Plug 'rhysd/git-messenger.vim'
 " Plug 'jreybert/vimagit'
@@ -76,6 +76,7 @@ Plug 'jpalardy/vim-slime'
 Plug 'NLKNguyen/papercolor-theme'
 " Plug 'kaicataldo/material.vim'
 Plug 'sainnhe/edge'
+Plug 'Iron-E/nvim-highlite'
 
 " ansi escape sequences
 Plug 'vim-scripts/AnsiEsc.vim'
@@ -85,10 +86,11 @@ Plug 'vim-scripts/AnsiEsc.vim'
 
 " Snippets
 Plug 'SirVer/ultisnips'
+Plug 'klauer/epics-ultisnips'
 Plug 'honza/vim-snippets'
 
 " tagbar
-Plug 'majutsushi/tagbar'
+Plug 'preservim/tagbar'
 
 " indentation markers
 Plug 'Yggdroot/indentLine'

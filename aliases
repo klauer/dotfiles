@@ -107,3 +107,5 @@ alias home120hz='cscreen -i 4e840607 -s 1 -r 120 -d 32 -x 1920 -y 1080'
 
 # for upgrading HEAD formulas:
 alias brewupgrade='brew upgrade --fetch-HEAD'
+alias wireshark='cd /Users/klauer/Repos/cashark && ./run.sh'
+alias tshark='cd /Users/klauer/Repos/cashark && ./tshark.sh'

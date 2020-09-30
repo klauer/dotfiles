@@ -1,5 +1,6 @@
 " vi: sw=2 ts=2 sts=2
 
+" let g:default_dark_theme = 'highlite'
 let g:default_dark_theme = 'edge'
 " let g:default_dark_theme = 'nightfly'
 " let g:default_dark_theme = 'material'
@@ -33,6 +34,11 @@ function DarkBackground()
   elseif g:default_dark_theme == "edge"
     hi ActiveWindowDarkBackground guibg=#2c2e34
     hi InactiveWindowDarkBackground guibg=#3c3e54
+  elseif g:default_dark_theme == "highlite"
+    " hi ActiveWindowDarkBackground guibg=#2c2e34
+    " hi InactiveWindowDarkBackground guibg=#3c3e54
+    hi ActiveWindowDarkBackground guibg=#011627
+    hi InactiveWindowDarkBackground guibg=#404060
   endif
   hi TagbarDarkBackground guibg=black
 endfunction
@@ -48,7 +54,7 @@ endfunction
 
 "nnoremap yol :silent call LightBackground()<cr>
 "nnoremap yod :silent call DarkBackground()<cr>
-"nnoremap yob :silent call SwapBackground()<cr>
+nnoremap yob :silent call SwapBackground()<cr>
 
 " call LightBackground()
 call DarkBackground()

@@ -219,3 +219,10 @@ let g:completion_enable_auto_signature = 1
 let g:completion_enable_fuzzy_match = 1
 let g:completion_matching_ignore_case = 1
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
+
+
+let g:diagnostic_show_sign = 1
+let g:diagnostic_enable_virtual_text = 1
+let g:diagnostic_virtual_text_prefix = ' '
+let g:diagnostic_enable_underline = 1
+let g:diagnostic_auto_popup_while_jump = 1

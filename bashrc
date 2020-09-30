@@ -121,6 +121,16 @@ function cdr() {
     cd $HOME/Repos/${1:-$TMUX_SESSION_NAME}
 }
 
+function cdp() {
+    MODULE=$1
+    prev_path=$PWD
+    cd /
+
+    module_path=$(python -c "import $MODULE, pathlib; print(str(pathlib.Path($MODULE.__file__).parent))")
+    cd $prev_path
+    pushd $module_path
+}
+
 caddr() {
     export EPICS_CA_ADDR_LIST=$1 $2 $3
     export EPICS_CA_AUTO_ADDR_LIST=NO

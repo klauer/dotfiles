@@ -49,3 +49,13 @@
     alltags=log --oneline --decorate --tags --no-walk
     sed=!git grep -z --full-name -l '.' | xargs -0 sed -i '' -e
     grepw="!grepw() { echo \"Finding whole words: $@\"; git grep \"\\<$@\\>\"; }; grepw"
+
+
+# TODO
+# warning: Pulling without specifying how to reconcile divergent branches is
+# discouraged. You can squelch this message by running one of the following
+# commands sometime before your next pull:
+# 
+#   git config pull.rebase false  # merge (the default strategy)
+#   git config pull.rebase true   # rebase
+#   git config pull.ff only       # fast-forward only
