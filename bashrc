@@ -45,42 +45,11 @@ stty -ixoff
 
 export GITHUB_USER=klauer
 export EDITOR=vim
-# export EPICS_BASE=/usr/lib/epics
-# export EDMDATAFILES=.:/usr/lib/epics/op/edl
-
-export TERM=screen-256color
-
-# st-256color
-# if [ -z "$(find /usr/share/terminfo -name st-256color 2> /dev/null)" ]; then
-#     if [ -z "$(find $HOME/.terminfo/ -name st-256color 2> /dev/null)" ]; then
-#         echo "(st-256color not found; using screen-256color)" 1>&2
-#         export TERM=screen-256color
-#     fi
-# fi
-
 export DOTFILES=$HOME/dotfiles
 export PATH=$DOTFILES/bin:$HOME/.local/bin:$PATH
 
 # proxy settings
 export LOCATION=$(python $DOTFILES/bin/get_location.py)
-
-# if [ "${LOCATION}" == "beamline" ]; then
-#     . $DOTFILES/bin/proxy-beamline.sh
-# elif [ "${LOCATION}" == "campus" ]; then
-#     . $DOTFILES/bin/proxy-campus.sh
-# else
-#     if [ -z "${LOCATION}" ]; then
-#         echo "* Unknown location; clearing proxy settings"
-#     else
-#         echo "* Location \"${LOCATION}\": clearing proxy settings"
-#     fi
-#     . $DOTFILES/bin/clear_proxy.sh
-# fi
-
-# EPICS address listings
-# export EPICS_CA_AUTO_ADDR_LIST=NO
-# export EPICS_CA_ADDR_LIST=$(python $DOTFILES/bin/get_ca_bcast_addr.py)
-# export EPICS_CA_MAX_ARRAY_BYTES=20000000
 
 source $DOTFILES/aliases
 
@@ -89,7 +58,12 @@ source $DOTFILES/aliases
 # export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 # Setting ag as the default source for fzf - and ignore stuff in gitignore/hgignore
-export FZF_DEFAULT_COMMAND='ag -g ""'
+if [ ! -z "$(which ag 2> /dev/null)" ]; then
+    export FZF_DEFAULT_COMMAND='ag -g ""'
+else
+    export FZF_DEFAULT_COMMAND='find .'
+fi
+
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # export FZF_DEFAULT_COMMAND='
 #   (git ls-tree -r --name-only HEAD ||
