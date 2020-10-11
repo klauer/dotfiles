@@ -38,7 +38,7 @@ endfunction
 
 
 function! s:to_underscores(name)
-python <<endpython
+pyx <<endpython
 import re
 import vim
 name = vim.eval('a:name')
@@ -79,10 +79,12 @@ endfunction
 
 function! CdRoot()
   execute 'cd ' . FzfFindRoot()
+  set noacd
 endfunction
 
 function! LcdRoot()
   execute 'lcd ' . FzfFindRoot()
+  set noacd
 endfunction
 
 function SwapBackground()
