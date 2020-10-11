@@ -220,7 +220,7 @@ if has('nvim')
   map <leader>s :vsplit term://bash<cr>
 endif
 
-" call SourceConfig("airline.vim")
+call SourceConfig("airline.vim")
 if has("autocmd")
   call SourceConfig("autocmds.vim")
 endif

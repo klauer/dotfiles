@@ -176,9 +176,7 @@ autocmd BufEnter * lua require'completion'.on_attach()
 command! -buffer -nargs=0 LspShowLineDiagnostics lua require'jumpLoc'.openLineDiagnostics()
 nnoremap <buffer><silent> <Leader>d <Cmd>LspShowLineDiagnostics<CR>
 
-let g:diagnostic_auto_popup_while_jump = 1
-
-command! Format  execute 'lua vim.lsp.buf.formatting()'
+command! Format execute 'lua vim.lsp.buf.formatting()'
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -219,25 +217,26 @@ let g:completion_chain_complete_list = {
 \ }
 
 
-" possible value: 'UltiSnips', 'Neosnippet', 'vim-vsnip'
-let g:completion_enable_snippet = 'UltiSnips'
-
+" Completion-nvim
 let g:completion_enable_auto_hover = 0
 let g:completion_enable_auto_signature = 1
 let g:completion_enable_fuzzy_match = 1
+let g:completion_enable_snippet = 'UltiSnips'
 let g:completion_matching_ignore_case = 1
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 
-let g:diagnostic_show_sign = 1
-let g:diagnostic_enable_virtual_text = 0
-let g:space_before_virtual_text = 10
-let g:diagnostic_virtual_text_prefix = ' '
-let g:diagnostic_enable_underline = 1
+" Diagnostic-nvim
 let g:diagnostic_auto_popup_while_jump = 1
+let g:diagnostic_auto_popup_while_jump = 1
+let g:diagnostic_enable_underline = 1
+let g:diagnostic_enable_virtual_text = 0
+let g:diagnostic_show_sign = 1
+let g:diagnostic_virtual_text_prefix = ' '
+let g:space_before_virtual_text = 10   " this is for diagnostic-nvim
 
 
-" Check Python files with flake8 and pylint.
+" ALE linters + fixers
 let g:ale_linters = {
 \   'python': ['flake8'],
 \   'sh': ['shellcheck'],
@@ -248,6 +247,6 @@ let g:ale_fixers = {
 \}
 
 " Disable warnings about trailing whitespace for Python files.
-let g:ale_warn_about_trailing_whitespace = 0
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
+let g:ale_warn_about_trailing_whitespace = 0
