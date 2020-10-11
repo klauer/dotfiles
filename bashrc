@@ -1,4 +1,5 @@
 #!/bin/bash
+# vi: sw=2 ts=2 sts=2
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -89,6 +90,10 @@ fda() {
   cd "$dir"
 }
 
+realpath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
 # fdr - cd to selected parent directory
 fdr() {
   local declare dirs=()
@@ -116,9 +121,23 @@ cdf() {
   cd "$dir"
 }
 
+cdR() {
+  # fzf cd to repo
+  local dir
+  dir=$(find $HOME/Repos -maxdepth 1 -type d 2> /dev/null | fzf +m) &&
+  echo "cd \"$dir\"" &&
+  history -s "cd \"$dir\"" &&
+  cd "$dir"
+}
 
 function cdr() {
-    cd $HOME/Repos/${1:-$TMUX_SESSION_NAME}
+  # cd to repo
+  repo="${1:-$TMUX_SESSION_NAME}"
+  if [ -n "${repo}" ]; then
+      cd "$HOME/Repos/${repo}"
+  else
+      cdR
+  fi
 }
 
 function cdp() {
