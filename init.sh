@@ -49,14 +49,6 @@ else
     echo "** git configuration already exists"
 fi
 
-# -- hg
-echo "* hg"
-if [ ! -a $HOME/.hgrc ]; then
-    ln -sf $DOTFILES/hgrc $HOME/.hgrc
-else
-    echo "** hg configuration already exists"
-fi
-
 # -- conda
 echo "* conda"
 if [ ! -a $HOME/.condarc ]; then

@@ -1,3 +1,4 @@
 show_channel_urls: true
 channels:
 - conda-forge
+channel_priority: strict
