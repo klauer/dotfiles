@@ -44,6 +44,7 @@ lua << EOF
     },
     settings = {
       python = {
+        linting={enabled=true},
         analysis = {
           disabled = {},
           errors = {},
@@ -52,7 +53,10 @@ lua << EOF
       }
     }
   }
+EOF
 
+
+lua << EOF
 require'nvim-treesitter.configs'.setup {
     highlight = {
       enable = true,                    -- false will disable the whole extension
@@ -65,10 +69,10 @@ require'nvim-treesitter.configs'.setup {
       enable = true,
       disable = { },
       keymaps = {                       -- mappings for incremental selection (visual mappings)
-        init_selection = 'gnn',         -- maps in normal mode to init the node/scope selection
-        node_incremental = "grn",       -- increment to the upper named parent
-        scope_incremental = "grc",      -- increment to the upper scope (as defined in locals.scm)
-        node_decremental = "grm",       -- decrement to the previous node
+        init_selection = 'gii',         -- maps in normal mode to init the node/scope selection
+        node_incremental = "gin",       -- increment to the upper named parent
+        scope_incremental = "gis",      -- increment to the upper scope (as defined in locals.scm)
+        node_decremental = "gid",       -- decrement to the previous node
       }
     },
     refactor = {
@@ -81,7 +85,7 @@ require'nvim-treesitter.configs'.setup {
       smart_rename = {
         enable = true,
         keymaps = {
-          smart_rename = "grr"          -- mapping to rename reference under cursor
+          smart_rename = "gsr"          -- mapping to rename reference under cursor
         }
       },
       navigation = {
@@ -202,13 +206,15 @@ inoremap <silent><expr> <TAB>
 
 " Chain completion list
 let g:completion_chain_complete_list = {
-            \ 'default' : {
-            \   'default': [
-            \       {'complete_items': ['lsp', 'snippet']},
-            \       {'mode': '<c-p>'},
-            \       {'mode': '<c-n>'}],
-            \   'comment': [],
-            \   'string' : [{'complete_items': ['path']}]}}
+\  'default' : {
+\    'default': [
+\        {'complete_items': ['lsp', 'snippet']},
+\        {'mode': '<c-p>'},
+\        {'mode': '<c-n>'}],
+\    'comment': [],
+\    'string' : [{'complete_items': ['path']}]
+\   }
+\ }
 
 
 " possible value: 'UltiSnips', 'Neosnippet', 'vim-vsnip'
@@ -222,7 +228,24 @@ let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 
 
 let g:diagnostic_show_sign = 1
-let g:diagnostic_enable_virtual_text = 1
+let g:diagnostic_enable_virtual_text = 0
+let g:space_before_virtual_text = 10
 let g:diagnostic_virtual_text_prefix = ' '
 let g:diagnostic_enable_underline = 1
 let g:diagnostic_auto_popup_while_jump = 1
+
+
+" Check Python files with flake8 and pylint.
+let g:ale_linters = {
+\   'python': ['flake8'],
+\   'sh': ['shellcheck'],
+\}
+
+let g:ale_fixers = {
+\   'python': ['autopep8'],
+\}
+
+" Disable warnings about trailing whitespace for Python files.
+let g:ale_warn_about_trailing_whitespace = 0
+let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 0

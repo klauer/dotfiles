@@ -11,7 +11,8 @@ set secure
 
 " allow backspacing over everything in insert mode
 let mapleader="\<Space>"               " prefix when using <leader> in map
-set acd                                " current directory follows file being edited
+" set acd                                " current directory follows file being edited
+set noacd                              " current directory follows file being edited
 set autoindent                         " always set autoindenting on
 set backspace=2 whichwrap+=<,>,[,]     " backspace and cursor keys wrap to previous/next line
 set expandtab                          " tabs -> spaces (:retab)
@@ -244,8 +245,8 @@ let g:tmuxline_preset = 'minimal'
 let g:tmuxline_theme = 'powerline'
 
 " Tmuxline powerline
-"TmuxlineSnapshot! ~/dotfiles/tmuxline.conf
-"
+" TmuxlineSnapshot! ~/dotfiles/tmuxline.conf
+
 " https://stackoverflow.com/questions/58330034/
 nmap - <Plug>NetrwBrowseUpDir
 

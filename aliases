@@ -3,7 +3,14 @@
 
 alias ln='ln -v'
 alias mkdir='mkdir -p'
-alias ls='ls -G --color'
+
+
+if [ -d /Volumes ]; then
+    alias ls='ls -G'
+else
+    alias ls='ls -G --color'
+fi
+
 alias l='ls'
 alias ll='ls -al'
 alias lh='ls -Alh'

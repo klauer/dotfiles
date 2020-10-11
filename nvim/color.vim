@@ -1,10 +1,12 @@
 " vi: sw=2 ts=2 sts=2
 
 " let g:default_dark_theme = 'highlite'
-let g:default_dark_theme = 'edge'
+" let g:default_dark_theme = 'edge'
+let g:default_dark_theme = 'xcodedark'
 " let g:default_dark_theme = 'nightfly'
 " let g:default_dark_theme = 'material'
-let g:default_light_theme = 'PaperColor'
+" let g:default_light_theme = 'PaperColor'
+let g:default_light_theme = 'xcodelight'
 
 autocmd FileType tagbar
   \ if &background == "dark" |
@@ -13,7 +15,8 @@ autocmd FileType tagbar
   \   set winhighlight=Normal:TagbarLightBackground |
   \ endif
 
-let g:airline_theme = 'edge'
+" let g:airline_theme = 'edge'
+let g:airline_theme = 'xcodedark'
 let g:airline#extensions#tmuxline#enabled = 1
 
 let g:edge_enable_italic = 1
@@ -39,6 +42,9 @@ function DarkBackground()
     " hi InactiveWindowDarkBackground guibg=#3c3e54
     hi ActiveWindowDarkBackground guibg=#011627
     hi InactiveWindowDarkBackground guibg=#404060
+  elseif g:default_dark_theme == "xcodedark"
+    hi ActiveWindowDarkBackground guibg=#292a30
+    hi InactiveWindowDarkBackground guibg=#3c3e54
   endif
   hi TagbarDarkBackground guibg=black
 endfunction

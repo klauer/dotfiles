@@ -4,9 +4,13 @@ call plug#begin(bundle_path)
 " Treesitter/language-server settings
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/completion-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/diagnostic-nvim'
 Plug 'nvim-lua/completion-nvim'
+
+" Flake8 / autopep8 by way of ALE...?
+Plug 'dense-analysis/ale'
 
 " fzf - fuzzy file searching
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -14,7 +18,7 @@ Plug 'junegunn/fzf.vim'
 
 Plug 'edkolev/tmuxline.vim'
 
-" Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 
 " -- tpope
@@ -32,12 +36,9 @@ Plug 'tpope/vim-fugitive'
 " enable Gbrowse
 Plug 'tpope/vim-rhubarb'
 " git gutter annotation :GitGutter*
-" Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 " git blame in a popup
 Plug 'rhysd/git-messenger.vim'
-" Plug 'jreybert/vimagit'
-" fugitive extension for managing/merging git branches
-" Plug 'idanarye/vim-merginal', { 'branch': 'develop' }
 
 " -- tmux
 " better tmux integration
@@ -52,9 +53,6 @@ Plug 't9md/vim-choosewin'
 
 " aerojump - fuzzy find in buffer
 Plug 'ripxorip/aerojump.nvim', { 'do': ':UpdateRemotePlugins' }
-
-" EPICS syntax highlighting
-Plug 'NickeZ/epics.vim'
 
 " location/quickfix list tools
 Plug 'romainl/vim-qf'
@@ -77,6 +75,7 @@ Plug 'NLKNguyen/papercolor-theme'
 " Plug 'kaicataldo/material.vim'
 Plug 'sainnhe/edge'
 Plug 'Iron-E/nvim-highlite'
+Plug 'arzg/vim-colors-xcode'
 
 " ansi escape sequences
 Plug 'vim-scripts/AnsiEsc.vim'
@@ -86,8 +85,11 @@ Plug 'vim-scripts/AnsiEsc.vim'
 
 " Snippets
 Plug 'SirVer/ultisnips'
-Plug 'klauer/epics-ultisnips'
 Plug 'honza/vim-snippets'
+
+" EPICS syntax highlighting + snippets
+Plug 'NickeZ/epics.vim'
+Plug 'klauer/epics-ultisnips'
 
 " tagbar
 Plug 'preservim/tagbar'
@@ -104,7 +106,8 @@ Plug 'wellle/context.vim'
 " Left/right motion for params
 Plug 'AndrewRadev/sideways.vim'
 
-" indentation-level objects (unmaintained original)
-Plug 'klauer/vim-indent-object'
+" " indentation-level objects (unmaintained original)
+" Plug 'klauer/vim-indent-object'
+" Try relying on treesitter for now
 
 call plug#end()
