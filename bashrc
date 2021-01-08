@@ -121,22 +121,28 @@ cdf() {
   cd "$dir"
 }
 
-cdR() {
+cdr() {
   # fzf cd to repo
   local dir
-  dir=$(find $HOME/Repos -maxdepth 1 -type d 2> /dev/null | fzf +m) &&
+ 
+  if [ ! -z "$@" ]; then
+    query_str="-q $@"
+  else
+    query_str=""
+  fi
+  dir=$(find $HOME/Repos -maxdepth 1 -type d 2> /dev/null | fzf +m $query_str) &&
   echo "cd \"$dir\"" &&
   history -s "cd \"$dir\"" &&
   cd "$dir"
 }
 
-function cdr() {
+function cdR() {
   # cd to repo
   repo="${1:-$TMUX_SESSION_NAME}"
   if [ -n "${repo}" ]; then
       cd "$HOME/Repos/${repo}"
   else
-      cdR
+      cdr
   fi
 }
 
@@ -164,3 +170,21 @@ caddrauto() {
 signpython() {
     codesign -s "My Python Certificate" -f $(which python)
 }
+
+if [ ! -z "$TMUX" ]; then
+    export TMUX_SESSION_NAME=$(tmux display-message -p '#S')
+    conda deactivate && conda deactivate
+    CONDA_ENV=base
+    if [ -f "$HOME/Repos/$TMUX_SESSION_NAME/.conda_env" ]; then
+        CONDA_ENV=$(cat "$HOME/Repos/$TMUX_SESSION_NAME/.conda_env")
+        echo "Found .conda_env file in $TMUX_SESSION_NAME repository: $CONDA_ENV"
+    elif [ -n "$TMUX_SESSION_NAME" ] && [ -d "$HOME/mc/envs/$TMUX_SESSION_NAME" ]; then
+        echo "Using tmux session name for conda: $TMUX_SESSION_NAME"
+        CONDA_ENV=$TMUX_SESSION_NAME
+    fi
+    conda activate "$CONDA_ENV"
+    echo "python -> $(which python)"
+    if test -n "$(command -v ipython)"; then
+        echo "ipython -> $(which ipython)"
+    fi
+fi
