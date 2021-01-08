@@ -1,4 +1,4 @@
-priority -60
+priority 0
 
 ###########################################################################
 #                            TEXTMATE SNIPPETS                            #
@@ -456,6 +456,17 @@ write_function_docstring(t, snip) `
 endsnippet
 
 
+snippet adef "async function with docstrings" b
+async def ${1:function}(`!p
+if snip.indent:
+    snip.rv = 'self' + (", " if len(t[2]) else "")`${2:arg1}):
+    `!p snip.rv = triple_quotes(snip)`
+    ${4:...}`!p
+write_function_docstring(t, snip) `
+    ${0:...}
+endsnippet
+
+
 snippet defc "class method with docstrings" b
 @classmethod
 def ${1:function}(`!p
@@ -502,12 +513,8 @@ snippet rwprop "Read write property" b
 def ${1:name}():
     """
     ${2:...}
-    `!p
-snip >> 1
-format_return(snip, NUMPY)
-snip += triple_quotes(snip)
-`
-    ${0:...}
+	"""
+    ${0:return self._$1}
 
 @$1.setter
 def $1(self, $1):
