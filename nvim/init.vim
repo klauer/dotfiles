@@ -36,6 +36,9 @@ set ruler                              " show the cursor position all the time
 set showcmd                            " display incomplete commands
 set smartindent                        " smartindent when starting new line
 set tabstop=4 shiftwidth=4 autoindent
+set undofile
+set undolevels=10000
+set undoreload=20000
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set wildignore+=*\\tmp\\*,*.exe
 set wrap
@@ -70,6 +73,8 @@ else
 endif
 
 execute "source " . g:config_path . "/functions.vim"
+
+execute 'set undodir=' . g:config_path . '/undo/'
 
 if has('python') || has('python3')
   call SourceConfig("plugins.vim")

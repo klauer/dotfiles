@@ -49,6 +49,7 @@
     alltags=log --oneline --decorate --tags --no-walk
     sed=!git grep -z --full-name -l '.' | xargs -0 sed -i '' -e
     grepw="!grepw() { echo \"Finding whole words: $@\"; git grep \"\\<$@\\>\"; }; grepw"
+    grepr=grep --recurse-submodules
 
 
 # TODO
