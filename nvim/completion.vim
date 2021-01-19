@@ -28,9 +28,36 @@ lua << EOF
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.lsp.util.show_line_diagnostics()<CR>', opts)
   end
 
+  lspconfig["pyright"].setup {
+    on_attach = on_attach,
+    filetypes = { "python" },
+    init_options = {
+      analysisUpdates = true,
+      asyncStartup = true,
+      displayOptions = {},
+      interpreter = {
+        properties = {
+          InterpreterPath = vim.g.python_for_completion,
+          Version = "3.7"
+        }
+      }
+    },
+    settings = {
+      python = {
+        linting={enabled=true},
+        analysis = {
+          disabled = {},
+          errors = {},
+          info = {}
+        }
+      }
+    }
+  }
+
   lspconfig["pyls_ms"].setup {
     on_attach = on_attach,
     filetypes = { "python" },
+    cmd = { "dotnet", "exec", "$HOME/.cache/nvim/nvim_lsp/pyls_ms/Microsoft.Python.LanguageServer.dll" },
     init_options = {
       analysisUpdates = true,
       asyncStartup = true,
