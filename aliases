@@ -90,6 +90,12 @@ slac_hash() {
     shasum -a 256 v${VER}.tar.gz
 }
 
+caproto_hash() {
+    VER=$1
+    pip download caproto==${VER} --no-binary=:all:
+    shasum -a 256 caproto-${VER}.tar.gz
+}
+
 gp() {
     REMOTE=${1:-origin}
     BRANCH=${2:-master}
