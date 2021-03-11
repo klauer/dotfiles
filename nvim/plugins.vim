@@ -6,9 +6,10 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/completion-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'neovim/nvim-lspconfig'
-" built-in now:
-" Plug 'nvim-lua/diagnostic-nvim'
 Plug 'nvim-lua/completion-nvim'
+
+" Autodocstring magic to replace my snippets:
+Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
 " Flake8 / autopep8 by way of ALE...?
 Plug 'dense-analysis/ale'
@@ -53,7 +54,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 't9md/vim-choosewin'
 
 " aerojump - fuzzy find in buffer
-Plug 'ripxorip/aerojump.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'ripxorip/aerojump.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " location/quickfix list tools
 Plug 'romainl/vim-qf'
@@ -74,8 +75,8 @@ Plug 'jpalardy/vim-slime'
 " colorschemes
 Plug 'NLKNguyen/papercolor-theme'
 " Plug 'kaicataldo/material.vim'
-Plug 'sainnhe/edge'
-Plug 'Iron-E/nvim-highlite'
+" Plug 'sainnhe/edge'
+" Plug 'Iron-E/nvim-highlite'
 Plug 'arzg/vim-colors-xcode'
 
 " ansi escape sequences

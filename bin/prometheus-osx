@@ -1,0 +1,3 @@
+#!/bin/bash
+
+prometheus --config.file=/usr/local/etc/prometheus.yml
