@@ -1,14 +1,15 @@
 #!/bin/bash
 
 REPO=$1
+PARENT_DIR=${2-Repos}
 
-[ -z "$REPO" ] && echo "Usage: tmuxr [repo_name]" && exit 1
+[ -z "$REPO" ] && echo "Usage: tmuxr [repo_name] [parent_dir]" && exit 1
 
 if tmux has-session -t $REPO; then
     echo "Existing session"
 else
     echo "No session"
-    REPO_PATH=$HOME/Repos/$REPO
+    REPO_PATH=$HOME/$PARENT_DIR/$REPO
 
     if [ ! -d $REPO_PATH ]; then
         echo "Invalid repo name: $REPO"
