@@ -121,6 +121,25 @@ cdf() {
   cd "$dir"
 }
 
+cdd() {
+  # fzf cd to docs
+  local dir
+ 
+  if [ ! -z "$@" ]; then
+    query_str="-q $@"
+  else
+    if [ ! -z "$TMUX_SESSION_NAME" ]; then
+      query_str="-q ${TMUX_SESSION_NAME}"
+    else
+      query_str=""
+    fi
+  fi
+  dir=$(find $HOME/docs -maxdepth 1 -type d 2> /dev/null | fzf +m $query_str) &&
+  echo "cd \"$dir\"" &&
+  history -s "cd \"$dir\"" &&
+  cd "$dir"
+}
+
 cdr() {
   # fzf cd to repo
   local dir
