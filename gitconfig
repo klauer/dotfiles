@@ -49,6 +49,7 @@
     alltags=log --oneline --decorate --tags --no-walk
     sed=!git grep -z --full-name -l '.' | xargs -0 sed -i '' -e
     grepw="!grepw() { echo \"Finding whole words: $@\"; git grep \"\\<$@\\>\"; }; grepw"
+    grepiw="!grepw() { echo \"Finding whole words (case insensitive): $@\"; git grep -i \"\\<$@\\>\"; }; grepw"
     grepr=grep --recurse-submodules
     pyoutline=grep -Hn --color -e '^\\s*class\\s*' -e '^\\s*\\(async \\)\\?def '
     pyclass=grep -Hn -e '^\\s*class\\s*'
@@ -63,3 +64,5 @@
 #   git config pull.rebase false  # merge (the default strategy)
 #   git config pull.rebase true   # rebase
 #   git config pull.ff only       # fast-forward only
+[pull]
+	ff = only
