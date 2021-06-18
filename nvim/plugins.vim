@@ -9,7 +9,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 
 " Autodocstring magic to replace my snippets:
-Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+" Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 
 " Flake8 / autopep8 by way of ALE...?
 Plug 'dense-analysis/ale'
@@ -38,7 +38,10 @@ Plug 'tpope/vim-fugitive'
 " enable Gbrowse
 Plug 'tpope/vim-rhubarb'
 " git gutter annotation :GitGutter*
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'lewis6991/gitsigns.nvim'
+
 " git blame in a popup
 Plug 'rhysd/git-messenger.vim'
 
@@ -97,7 +100,7 @@ Plug 'klauer/epics-ultisnips'
 Plug 'preservim/tagbar'
 
 " indentation markers
-Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim',  {'branch': 'lua'}
 
 " Jinja
 " Plug 'Glench/Vim-Jinja2-Syntax'
@@ -108,8 +111,7 @@ Plug 'wellle/context.vim'
 " Left/right motion for params
 Plug 'AndrewRadev/sideways.vim'
 
-" " indentation-level objects (unmaintained original)
-" Plug 'klauer/vim-indent-object'
-" Try relying on treesitter for now
+" Undo tree
+Plug 'mbbill/undotree'
 
 call plug#end()

@@ -228,6 +228,7 @@ endif
 call SourceConfig("airline.vim")
 if has("autocmd")
   call SourceConfig("autocmds.vim")
+  call SourceConfig("vue.vim")
 endif
 call SourceConfig("completion.vim")
 " if has("cscope")
@@ -266,7 +267,12 @@ let g:tagbar_left = 1
 " set listchars+=precedes:«
 " set listchars+=nbsp:⣿
 
-let g:indentLine_char_list = ['▏', '┊']
+let g:indent_blankline_char_list = ['|', '¦', '┆', '┊']
+let g:indent_blankline_space_char = '.'
+let g:indent_blankline_use_treesitter = v:true
+let g:indent_blankline_show_first_indent_level = v:false
+
+autocmd User ALEFixPost IndentBlanklineRefresh
 
 let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "{last}"}
