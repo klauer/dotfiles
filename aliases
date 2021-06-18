@@ -76,18 +76,23 @@ function github_pr() {
     git fetch origin pull/$1/head:$2
 }
 
+hash_repo() {
+    REPO=$1
+    VER=$2
+    wget https://github.com/$REPO/archive/v${VER}.tar.gz
+    shasum -a 256 v${VER}.tar.gz
+}
+
 pcds_hash() {
     REPO=$1
     VER=$2
-    wget https://github.com/pcdshub/$REPO/archive/v${VER}.tar.gz
-    shasum -a 256 v${VER}.tar.gz
+    hash_repo pcdshub/$REPO $VER
 }
 
 slac_hash() {
     REPO=$1
     VER=$2
-    wget https://github.com/slaclab/$REPO/archive/v${VER}.tar.gz
-    shasum -a 256 v${VER}.tar.gz
+    hash_repo slaclab/$REPO $VER
 }
 
 caproto_hash() {
