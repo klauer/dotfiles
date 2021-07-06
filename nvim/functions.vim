@@ -10,21 +10,6 @@ fun! FzfFindRoot()
 endfun
 
 
-" " Better navigating through omnicomplete option list
-" " See
-" http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
-function! OmniPopup(action)
-    if pumvisible()
-        if a:action == 'j'
-            return "\<C-N>"
-        elseif a:action == 'k'
-            return "\<C-P>"
-        endif
-    endif
-    return a:action
-endfunction
-
-
 " Camel case conversion stuff on visual selection
 function! s:get_visual_selection()
   " http://stackoverflow.com/questions/1533565/how-to-get-visually-selected-text-in-vimscript
