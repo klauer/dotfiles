@@ -103,8 +103,38 @@ def load_config_file(fn: Union[str, pathlib.Path]) -> List[IocInfoDict]:
             ioc["config_file"] = str(fn)
             ioc["name"] = ioc.pop("id")
             ioc["script"] = find_stcmd(ioc["dir"], ioc["name"])
+            ioc["binary"] = find_binary_from_hashbang(ioc["script"])
 
     return iocs
+
+
+def find_binary_from_hashbang(
+    startup_script: Optional[Union[str, pathlib.Path]],
+    must_exist: bool = False,
+) -> Optional[str]:
+    """
+    Find the binary associated with a given startup script by looking at its
+    shebang.
+
+    Returns
+    -------
+    binary_path : str or None
+        The path to the binary, if available.
+    """
+    if startup_script is None:
+        return None
+
+    try:
+        with open(startup_script, "rt") as fp:
+            first_line = fp.read().splitlines()[0]
+    except Exception:
+        return None
+
+    if first_line.startswith("#!"):
+        parent_dir = pathlib.Path(startup_script).parent
+        binary = parent_dir / first_line.lstrip("#!")
+        if not must_exist or binary.exists():
+            return str(binary.resolve())
 
 
 def find_stcmd(directory: str, ioc_id: str) -> str:
@@ -112,13 +142,20 @@ def find_stcmd(directory: str, ioc_id: str) -> str:
     if directory.startswith("ioc"):
         directory = os.path.join(EPICS_SITE_TOP, directory)
 
+    suffix = os.path.join("iocBoot", ioc_id, "st.cmd")
     # Templated IOCs are... different:
-    build_path = os.path.join(directory, "build", "iocBoot", ioc_id)
-    if os.path.exists(build_path):
-        return os.path.join(build_path, "st.cmd")
+    options = [
+        os.path.join(directory, "children", "build", suffix),
+        os.path.join(directory, "build", suffix),
+        os.path.join(directory, suffix),
+        os.path.join(directory, "st.cmd"),
+    ]
 
-    # Otherwise, it should be straightforward:
-    return os.path.join(directory, "iocBoot", ioc_id, "st.cmd")
+    for option in options:
+        if os.path.exists(option):
+            return option
+
+    return ""
 
 
 def get_iocs_from_configs(
@@ -171,16 +208,20 @@ def build_arg_parser(parser=None):
     parser.add_argument(
         "--json", dest="as_json", action="store_true", help="Output raw JSON"
     )
+
+    parser.add_argument(
+        "--columns", nargs="*", type=str, help="Columns to display"
+    )
     return parser
 
 
-def main(configs, as_json=False) -> List[IocInfoDict]:
+def main(configs, as_json=False, columns=None) -> List[IocInfoDict]:
     iocs = get_iocs_from_configs(configs)
     if as_json:
         print(json.dumps(iocs, indent=4))
     else:
         table = prettytable.PrettyTable()
-        table.field_names = ["host", "id", "port", "script"]
+        table.field_names = columns or ["host", "id", "port", "script"]
         for ioc in sorted(iocs, key=lambda ioc: ioc.get("host", '?')):
             table.add_row([str(ioc.get(key, '?')) for key in table.field_names])
 
