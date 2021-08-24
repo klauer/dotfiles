@@ -48,8 +48,8 @@
     addnw=!sh -c 'git diff -U0 -w --no-color "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
     alltags=log --oneline --decorate --tags --no-walk
     sed=!git grep -z --full-name -l '.' | xargs -0 sed -i '' -e
-    grepw="!grepw() { echo \"Finding whole words: $@\"; git grep \"\\<$@\\>\"; }; grepw"
-    grepiw="!grepw() { echo \"Finding whole words (case insensitive): $@\"; git grep -i \"\\<$@\\>\"; }; grepw"
+    grepw="!grepw() { echo \"Finding whole words: $@\"; git grep --recurse-submodules \"\\<$@\\>\"; }; grepw"
+    grepiw="!grepw() { echo \"Finding whole words (case insensitive): $@\"; git grep --recurse-submodules -i \"\\<$@\\>\"; }; grepw"
     grepr=grep --recurse-submodules
     pyoutline=grep -Hn --color -e '^\\s*class\\s*' -e '^\\s*\\(async \\)\\?def '
     pyclass=grep -Hn -e '^\\s*class\\s*'
