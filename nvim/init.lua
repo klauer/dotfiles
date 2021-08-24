@@ -8,6 +8,7 @@ vim.g.config_path = vim.env.HOME .. "/.config/nvim"
 local dotfiles = vim.env.HOME .. '/dotfiles/nvim'
 local conda_env_root = vim.env.HOME .. '/mc/envs'
 local nvim_conda_python = conda_env_root .. '/nvim/bin/python'
+local nvim_debugpy_python = conda_env_root .. '/debugpy/bin/python'
 
 local packer_path  = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 local packer_repo = 'wbthomason/packer.nvim'
@@ -15,6 +16,10 @@ if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
   execute('!git clone https://github.com/' .. packer_repo .. ' ' .. packer_path)
 end
 
+vim.g.python_for_completion = vim.env.CONDA_PREFIX .. "/bin/python"
+if vim.fn.empty(vim.g.python_for_completion) > 0 then
+    vim.g.python_for_completion = nvim_conda_python
+end
 
 -- Install packer if necessary
 local start_path = dotfiles .. '/start'
@@ -43,7 +48,7 @@ require('packer').startup(function()
 
     -- UI to select things (files, grep results, open buffers...)
     use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}} }
-    use 'joshdick/onedark.vim'                -- Theme inspired by Atom
+    use {'joshdick/onedark.vim', branch = 'main' } -- Theme inspired by Atom
     use 'itchyny/lightline.vim'               -- Fancier statusline
     use 't9md/vim-choosewin'                  -- Choose a window with an overlay
     use 'romainl/vim-qf'                      -- location/quickfix list tools
@@ -68,16 +73,28 @@ require('packer').startup(function()
     use 'hrsh7th/nvim-compe'                  -- Autocompletion plugin
     
     -- Python
-    -- use 'Vimjas/vim-python-pep8-indent'       -- PEP8 indentation
+    use 'Vimjas/vim-python-pep8-indent'       -- PEP8 indentation
     use 'preservim/tagbar'
     use 'wellle/context.vim'                  -- Code context
     -- use 'AndrewRadev/sideways.vim'            -- Left/right motion for params
     -- Flake8 / autopep8 by way of ALE...?
     -- use 'dense-analysis/ale'
 
-
     -- Miscellaneous
     use 'vim-scripts/AnsiEsc.vim'             -- ANSI escape sequences
+    use { 
+        'idbrii/textobj-word-column.vim',     -- Column selection (ic, aC)
+        requires = { 'kana/vim-textobj-user' },
+    }
+
+    -- Web dev
+    use 'mattn/emmet-vim'                     -- Easier tags, at least
+
+    -- Debugging / debug adapter protocol
+    use { 
+        'rcarriga/nvim-dap-ui', 
+        requires = {'mfussenegger/nvim-dap'} 
+    }
 
     -- Snippets
     use 'SirVer/ultisnips'
@@ -89,6 +106,7 @@ require('packer').startup(function()
 
     -- colorschemes
     use 'arzg/vim-colors-xcode'
+    use 'kaicataldo/material.vim'
 
 end)
 
@@ -240,6 +258,8 @@ vim.api.nvim_set_keymap('v', '<CR>', ':', { noremap = true })
 vim.api.nvim_set_keymap('v', '<leader>u', ':call Selection_CamelToUnderscores()<cr>', { noremap = true })
 -- Make p in Visual mode replace the selected text with the "" register.
 vim.api.nvim_set_keymap('v', 'p', '<Esc>:let current_reg = @"<CR>gvs<C-R>=current_reg<CR><Esc>', { noremap = true} )
+-- Matching characters in column
+vim.api.nvim_set_keymap('n', 'g<C-v>', ':call SelectMatchingCharacterColumn()<cr>', { noremap = true, silent = true })
 
 -- remember to use: [b ]b from unimpaired now
 -- vim.api.nvim_set_keymap('n', '<leader>j', ':bnext<cr>', { noremap = true })
@@ -253,7 +273,8 @@ vim.api.nvim_set_keymap('n', '<Leader>b', ':Telescope buffers<CR>', { noremap = 
 vim.api.nvim_set_keymap('n', '<Leader>gb', ':GitMessenger<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>o', ':Telescope git_files<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>t', ':Tagbar<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader><Leader>', ':ContextPeek<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>cc', ':ContextPeek<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader><Leader>', '<C-^>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-P>', ':Telescope find_files<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>fg', ':Telescope live_grep<CR>', { noremap = true, silent = true })
 
@@ -286,18 +307,20 @@ ToggleMouse = function()
     vim.cmd[[IndentBlanklineDisable]]
     vim.wo.signcolumn='no'
     vim.o.mouse = 'v'
+    vim.wo.relativenumber = false
     vim.wo.number = false
     print("Mouse disabled")
   else
     vim.cmd[[IndentBlanklineEnable]]
     vim.wo.signcolumn='yes'
     vim.o.mouse = 'a'
+    vim.wo.relativenumber = true
     vim.wo.number = true
     print("Mouse enabled")
   end
 end
 
-vim.api.nvim_set_keymap('n', '<F10>', '<cmd>lua ToggleMouse()<cr>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<F12>', '<cmd>lua ToggleMouse()<cr>', { noremap = true })
 
 -- Don't use Ex mode, use Q for formatting (TODO remap)
 vim.api.nvim_set_keymap('n', 'Q', 'gq', { noremap = false, silent = true })
@@ -377,7 +400,7 @@ local on_attach = function(_client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gk', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
@@ -392,9 +415,9 @@ local on_attach = function(_client, bufnr)
 
     -- Set some keybinds conditional on server capabilities
     if _client.resolved_capabilities.document_formatting then
-        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+        buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
     elseif _client.resolved_capabilities.document_range_formatting then
-        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+        buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
     end
 
     -- Set autocommands conditional on server_capabilities
@@ -415,33 +438,6 @@ end
 lspconfig["pyright"].setup {
     on_attach = on_attach,
     filetypes = { "python" },
-    init_options = {
-      analysisUpdates = true,
-      asyncStartup = true,
-      displayOptions = {},
-      interpreter = {
-        properties = {
-          InterpreterPath = vim.g.python_for_completion,
-          Version = "3.7"
-        }
-      }
-    },
-    settings = {
-      python = {
-        linting={enabled=true},
-        analysis = {
-          disabled = {},
-          errors = {},
-          info = {}
-        }
-      }
-    }
-}
-
-lspconfig["pyls_ms"].setup {
-    on_attach = on_attach,
-    filetypes = { "python" },
-    cmd = { "dotnet", "exec", "$HOME/.cache/nvim/nvim_lsp/pyls_ms/Microsoft.Python.LanguageServer.dll" },
     init_options = {
       analysisUpdates = true,
       asyncStartup = true,
@@ -519,10 +515,10 @@ require'nvim-treesitter.configs'.setup {
               -- or you use the queries from supported languages with textobjects.scm
               ["af"] = "@function.outer",
               ["if"] = "@function.inner",
-              ["aC"] = "@class.outer",
-              ["iC"] = "@class.inner",
-              ["ac"] = "@conditional.outer",
-              ["ic"] = "@conditional.inner",
+              -- ["aC"] = "@class.outer",
+              -- ["iC"] = "@class.inner",
+              -- ["ac"] = "@conditional.outer",
+              -- ["ic"] = "@conditional.inner",
               ["ae"] = "@block.outer",
               ["ie"] = "@block.inner",
               ["al"] = "@loop.outer",
@@ -566,8 +562,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 -- Gitsigns config (TODO)
 require('gitsigns').setup {
     signs = {
-        add          = {hl = 'GitSignsAdd'   , text = '│+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-        change       = {hl = 'GitSignsChange', text = '│~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+        add          = {hl = 'GitSignsAdd'   , text = '+', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+        change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
         delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
         topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
         changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
@@ -599,7 +595,6 @@ require('gitsigns').setup {
     sign_priority = 6,
     update_debounce = 100,
     status_formatter = nil, -- Use default
-    use_decoration_api = true,
     use_internal_diff = true,  -- If luajit is present
 }
 
@@ -755,6 +750,95 @@ vim.api.nvim_exec([[
     augroup END
 ]], true)
 
+-- HTML stuff
+vim.g.user_emmet_install_global = 0
+vim.g.user_emmet_mode = "a"  -- all functions in all modes
+vim.g.user_emmet_leader_key = "<C-Y>"   -- <c-y> then comma 
+vim.api.nvim_exec([[
+    autocmd FileType html,css,vue EmmetInstall
+    autocmd FileType html,css,vue setlocal sw=2 ts=2 sts=2 expandtab
+]], true)
+
+
+require("dapui").setup({
+  icons = { expanded = "▾", collapsed = "▸" },
+  mappings = {
+    -- Use a table to apply multiple mappings
+    expand = { "<CR>", "<2-LeftMouse>" },
+    open = "o",
+    remove = "d",
+    edit = "e",
+    repl = "r",
+  },
+  sidebar = {
+    open_on_start = true,
+    -- You can change the order of elements in the sidebar
+    elements = {
+      -- Provide as ID strings or tables with "id" and "size" keys
+      {
+        id = "scopes",
+        size = 0.25, -- Can be float or integer > 1
+      },
+      { id = "breakpoints", size = 0.25 },
+      { id = "stacks", size = 0.25 },
+      { id = "watches", size = 00.25 },
+    },
+    width = 40,
+    position = "left", -- Can be "left" or "right"
+  },
+  tray = {
+    open_on_start = true,
+    elements = { "repl" },
+    height = 10,
+    position = "bottom", -- Can be "bottom" or "top"
+  },
+  floating = {
+    max_height = nil, -- These can be integers or a float between 0 and 1.
+    max_width = nil, -- Floats will be treated as percentage of your screen.
+    mappings = {
+      close = { "q", "<Esc>" },
+    },
+  },
+  windows = { indent = 1 },
+})
+
+vim.api.nvim_set_keymap('n', '<S-<f5>>', ":lua require'dap'.run()<cr>", { noremap = true })
+vim.api.nvim_set_keymap('n', '<f5>', ":lua require'dap'.continue()<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<f10>', ":lua require'dap'.step_over()<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<f11>', ":lua require'dap'.step_into()<cr>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<f9>', ":lua require'dap'.toggle_breakpoint()<cr>", { noremap = true, silent = true })
+
+local dap = require('dap')
+dap.configurations.python = {
+  {
+    type = 'python';
+    request = 'launch';
+    name = "Launch file";
+    program = "${file}";
+    pythonPath = function()
+      return vim.g.python_for_completion
+    end;
+  },
+}
+
+dap.adapters.python = {
+  type = 'executable';
+  command = nvim_debugpy_python;
+  args = { '-m', 'debugpy.adapter' };
+}
+
+-- Text object customization / column selection
+-- vim.g.textobj_wordcolumn_no_default_key_mappings = 1
+
+-- defaults: ic; iC
+
+-- Legacy vim settings
+
+-- Not-yet-ported functions and color settings
 execute ("source " .. vim.g.config_path .. "/color.vim")
 execute ("source " .. vim.g.config_path .. "/functions.vim")
 -- execute ("source " .. vim.g.config_path .. "/cscope.vim")
+--
+vim.g.material_theme_style = "darker"
+
+execute ("colorscheme material")
