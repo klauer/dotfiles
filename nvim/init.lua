@@ -158,7 +158,9 @@ vim.o.updatetime = 100
 vim.wo.signcolumn = "yes"
 
 --Set colorscheme (order is important here)
-vim.o.termguicolors = true
+if vim.env.TERM == "screen-256color" then
+    vim.o.termguicolors = true
+end
 
 -- ignore options
 vim.opt.wildignore = {

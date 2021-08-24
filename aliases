@@ -130,5 +130,6 @@ alias tshark='cd /Users/klauer/Repos/cashark && ./tshark.sh'
 alias gg="git grep"
 alias ggi="git grep -i"
 alias gd="git diff"
+# I typo this way too often after a paginated git output; don't fix the problem, patch it
 alias qgit="git"
 alias tldrl="tldr --platform linux"
