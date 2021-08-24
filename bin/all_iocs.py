@@ -102,6 +102,12 @@ def load_config_file(fn: Union[str, pathlib.Path]) -> List[IocInfoDict]:
             # Add "config_file" and rename some keys:
             ioc["config_file"] = str(fn)
             ioc["name"] = ioc.pop("id")
+            alias = ioc.get("alias", None)
+            if alias and alias != ioc["name"]:
+                ioc["name_alias"] = "{name} ({alias})".format(**ioc)
+            else:
+                ioc["name_alias"] = "{name}".format(**ioc)
+            ioc["host_port"] = f'{ioc["host"]}:{ioc["port"]}'
             ioc["script"] = find_stcmd(ioc["dir"], ioc["name"])
             ioc["binary"] = find_binary_from_hashbang(ioc["script"])
 
@@ -221,7 +227,7 @@ def main(configs, as_json=False, columns=None) -> List[IocInfoDict]:
         print(json.dumps(iocs, indent=4))
     else:
         table = prettytable.PrettyTable()
-        table.field_names = columns or ["host", "id", "port", "script"]
+        table.field_names = columns or ["host_port", "name_alias", "script"]
         for ioc in sorted(iocs, key=lambda ioc: ioc.get("host", '?')):
             table.add_row([str(ioc.get(key, '?')) for key in table.field_names])
 
