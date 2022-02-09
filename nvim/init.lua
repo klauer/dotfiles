@@ -410,7 +410,7 @@ local on_attach = function(_client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
@@ -508,12 +508,12 @@ require'nvim-treesitter.configs'.setup {
           disable = {},
           enable = true,
           keymaps = {
-              ["iL"] = { -- you can define your own textobjects directly here
-              python = "(function_definition) @function",
-              cpp = "(function_definition) @function",
-              c = "(function_definition) @function",
-              java = "(method_declaration) @function"
-              },
+              -- ["iL"] = { -- you can define your own textobjects directly here
+              -- python = "(function_definition) @function",
+              -- cpp = "(function_definition) @function",
+              -- c = "(function_definition) @function",
+              -- java = "(method_declaration) @function"
+              -- },
               -- or you use the queries from supported languages with textobjects.scm
               ["af"] = "@function.outer",
               ["if"] = "@function.inner",
@@ -591,8 +591,8 @@ require('gitsigns').setup {
         ['o ih'] = ':<C-U>lua require"gitsigns".text_object()<CR>',
         ['x ih'] = ':<C-U>lua require"gitsigns".text_object()<CR>'
     },
-    watch_index = {
-    interval = 1000
+    watch_gitdir = {
+        interval = 1000
     },
     sign_priority = 6,
     update_debounce = 100,
@@ -654,7 +654,21 @@ vim.g.lightline = {
 }
 
 -- Not-yet-converted vimscript - augroups and other files
---
+
+-- Formatter settings
+vim.api.nvim_exec([[
+    augroup formatting 
+      autocmd!
+      autocmd FileType sh setlocal formatprg=shfmt\ -i\ 4
+      autocmd FileType markdown setlocal formatprg=prettier\ --parser\ markdown
+      autocmd FileType css setlocal formatprg=prettier\ --parser\ css
+      autocmd FileType html setlocal formatprg=prettier\ --parser\ html
+      autocmd FileType json setlocal formatprg=prettier\ --parser\ json
+      autocmd FileType python setlocal formatprg=black-partial
+      autocmd BufEnter *.lark setlocal formatprg=lark-format
+    augroup END
+]], false)
+
 -- When editing a file, always jump to the last known cursor position.  Don't
 -- do it when the position is invalid or when inside an event handler (happens
 -- when dropping a file on gvim).
@@ -757,8 +771,8 @@ vim.g.user_emmet_install_global = 0
 vim.g.user_emmet_mode = "a"  -- all functions in all modes
 vim.g.user_emmet_leader_key = "<C-Y>"   -- <c-y> then comma 
 vim.api.nvim_exec([[
-    autocmd FileType html,css,vue EmmetInstall
-    autocmd FileType html,css,vue setlocal sw=2 ts=2 sts=2 expandtab
+    autocmd FileType html,css,vue,tsx EmmetInstall
+    autocmd FileType html,css,vue,tsx setlocal sw=2 ts=2 sts=2 expandtab
 ]], true)
 
 
@@ -773,7 +787,7 @@ require("dapui").setup({
     repl = "r",
   },
   sidebar = {
-    open_on_start = true,
+    -- open_on_start = true,
     -- You can change the order of elements in the sidebar
     elements = {
       -- Provide as ID strings or tables with "id" and "size" keys
@@ -785,13 +799,13 @@ require("dapui").setup({
       { id = "stacks", size = 0.25 },
       { id = "watches", size = 00.25 },
     },
-    width = 40,
+    -- width = 40,
     position = "left", -- Can be "left" or "right"
   },
   tray = {
-    open_on_start = true,
+    -- open_on_start = true,
     elements = { "repl" },
-    height = 10,
+    -- height = 10,
     position = "bottom", -- Can be "bottom" or "top"
   },
   floating = {
@@ -841,6 +855,8 @@ execute ("source " .. vim.g.config_path .. "/color.vim")
 execute ("source " .. vim.g.config_path .. "/functions.vim")
 -- execute ("source " .. vim.g.config_path .. "/cscope.vim")
 --
-vim.g.material_theme_style = "darker"
+vim.g.material_theme_style = "light"
 
-execute ("colorscheme material")
+-- execute ("colorscheme material")
+-- execute ("colorscheme xcodelight")
+execute ("colorscheme xcodedark")
