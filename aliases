@@ -133,3 +133,8 @@ alias gd="git diff"
 # I typo this way too often after a paginated git output; don't fix the problem, patch it
 alias qgit="git"
 alias tldrl="tldr --platform linux"
+alias devpython="PYTHONPATH=$HOME/dev_path:$PYTHONPATH python"
+alias devipython="PYTHONPATH=$HOME/dev_path:$PYTHONPATH ipython"
+alias devtyphos="devpython -m typhos"
+alias devlucid="devpython -m lucid"
+alias devhappi="devpython -m happi"

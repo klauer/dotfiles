@@ -806,6 +806,10 @@ require("dapui").setup({
     -- open_on_start = true,
     elements = { "repl" },
     -- height = 10,
+    position = "left", -- Can be "left" or "right"
+  },
+  tray = {
+    elements = { "repl" },
     position = "bottom", -- Can be "bottom" or "top"
   },
   floating = {
