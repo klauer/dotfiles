@@ -1,5 +1,3 @@
 #!/bin/bash
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-
-/reg/g/pcds/pyps/conda/py36/envs/dev/bin/python ${DIR}/all_iocs.py /reg/g/pcds/pyps/config/*/iocmanager.cfg $@
+/cds/group/pcds/pyps/conda/py39/envs/pcds-5.2.1/bin/whatrecord iocmanager-loader /reg/g/pcds/pyps/config/*/iocmanager.cfg $@

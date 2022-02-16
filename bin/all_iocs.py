@@ -5,11 +5,12 @@ configuration files.
 
 import argparse
 import ast
+import json
 import logging
 import os
 import pathlib
 import re
-from typing import Any, Callable, List, Optional, Union, Dict
+from typing import Any, Callable, Dict, List, Optional, Union
 
 import prettytable
 
