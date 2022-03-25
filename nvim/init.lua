@@ -58,6 +58,9 @@ require('packer').startup(function()
     use 'tmux-plugins/vim-tmux'               -- tmux syntax highlighting
     use 'jpalardy/vim-slime'                  -- send text to other panes
 
+    -- clipboard-related
+    use 'klauer/vim-oscyank'                  -- use OSC-52 to copy through tmux/vim/etc (set clipboard below)
+
     -- use 'tmux-plugins/vim-tmux-focus-events'  -- Focus events fix (obsolete)
     -- Add indentation guides even on blank lines
     use 'lukas-reineke/indent-blankline.nvim'
@@ -907,6 +910,18 @@ vim.g.gutentags_ctags_extra_args = {'--tag-relative=yes', '--fields=+ailmnS', }
 -- vim.g.textobj_wordcolumn_no_default_key_mappings = 1
 
 -- defaults: ic; iC
+
+-- Clipboard via osc52
+
+vim.cmd([[
+let g:clipboard = {
+        \   'name': 'osc52',
+        \   'copy': {'+': {lines, regtype -> OSCYankString(join(lines, "\n"))}},
+        \   'paste': {'+': {-> [split(getreg(''), '\n'), getregtype('')]}},
+        \ }
+]])
+
+vim.g.oscyank_term = "tmux" -- TODO, but most likely correct
 
 -- Legacy vim settings
 
