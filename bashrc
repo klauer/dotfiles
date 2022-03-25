@@ -211,3 +211,19 @@ if [ ! -z "$TMUX" ]; then
         echo "ipython -> $(which ipython)"
     fi
 fi
+
+
+# sshcd - ssh to a host, retaining your current directory
+#   Usage:   sshcd hostname [optional command to run]
+#   Example: sshcd lfe-console ls -l
+sshcd() {
+    host=$1;
+    shift;
+    command="$*";
+    ssh -t "$host" "
+        cd '${PWD}'
+        echo 'Current working directory: $PWD'
+        ${command}
+        bash
+    ";
+}
