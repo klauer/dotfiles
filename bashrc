@@ -212,7 +212,6 @@ if [ ! -z "$TMUX" ]; then
     fi
 fi
 
-
 # sshcd - ssh to a host, retaining your current directory
 #   Usage:   sshcd hostname [optional command to run]
 #   Example: sshcd lfe-console ls -l
