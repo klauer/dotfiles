@@ -909,6 +909,10 @@ vim.g.gutentags_generate_on_empty_buffer = true
 vim.cmd([[command! -nargs=0 GutentagsClearCache call system('rm ' . g:gutentags_cache_dir . '/*')]])
 vim.g.gutentags_ctags_extra_args = {'--tag-relative=yes', '--fields=+ailmnS', }
 
+-- Disable provider warnings in :checkhealth
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+
 -- Text object customization / column selection
 -- vim.g.textobj_wordcolumn_no_default_key_mappings = 1
 
