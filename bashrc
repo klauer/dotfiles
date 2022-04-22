@@ -49,9 +49,6 @@ export EDITOR=vim
 export DOTFILES=$HOME/dotfiles
 export PATH=$DOTFILES/bin:$HOME/.local/bin:$PATH
 
-# proxy settings
-export LOCATION=$(python $DOTFILES/bin/get_location.py)
-
 source $DOTFILES/aliases
 
 # neovim TUI config (note: may change)
