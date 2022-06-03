@@ -1,4 +1,4 @@
--- vi: sw=4 ts=4 sts=4 expandtab
+-- vi: sw=2 ts=2 sts=2 expandtab
 --
 -- Install packer, if needed
 local execute = vim.api.nvim_command
@@ -443,6 +443,7 @@ end
 lspconfig["pyright"].setup {
     on_attach = on_attach,
     filetypes = { "python" },
+    cmd = { "pyright-langserver", "--stdio" },
     init_options = {
       analysisUpdates = true,
       asyncStartup = true,
@@ -450,17 +451,16 @@ lspconfig["pyright"].setup {
       interpreter = {
         properties = {
           InterpreterPath = vim.g.python_for_completion,
-          Version = "3.7"
+          -- Version = "3.8"
         }
       }
     },
     settings = {
       python = {
-        linting={enabled=true},
         analysis = {
-          disabled = {},
-          errors = {},
-          info = {}
+          autoSearchPaths = true,
+          diagnosticMode = "workspace",
+          useLibraryCodeForTypes = true
         }
       }
     }
@@ -615,8 +615,11 @@ require('telescope').setup {
         ["<C-d>"] = false,
       },
     },
-    generic_sorter =  require'telescope.sorters'.get_fzy_sorter,
-    file_sorter =  require'telescope.sorters'.get_fzy_sorter,
+    generic_sorter = require'telescope.sorters'.get_fzy_sorter,
+    file_sorter = require'telescope.sorters'.get_fzy_sorter,
+    preview = {
+      filesize_limit=0.05,
+    }
   }
 }
 
