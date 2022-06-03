@@ -65,7 +65,7 @@ alias cclip='xclip -selection clipboard'
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
 
 PYQTDESIGNERPATH=/Users/klauer/docs/Repos/typhos/etc:/Users/klauer/Repos/pydm/
-alias designer=/Users/klauer/mc/envs/lucid/bin/Designer.app/Contents/MacOS/Designer
+alias designer=/Users/klauer/mc/envs/designer/bin/Designer.app/Contents/MacOS/Designer
 alias test-stand-external='ssh rhel6-64k.slac.stanford.edu "ssh lcls-dev3 test-stand"'
 alias dev3-external='ssh -J rhel6-64k.slac.stanford.edu lcls-dev3'
 alias sshpass='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no'

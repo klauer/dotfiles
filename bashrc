@@ -188,7 +188,9 @@ caddrauto() {
 }
 
 signpython() {
-    codesign -s "My Python Certificate" -f $(which python)
+    codesign -s "My Python Certificate 2022" -f $(which python)
+
+    # GDB? https://sourceware.org/gdb/wiki/PermissionsDarwin
 }
 
 if [ ! -z "$TMUX" ]; then

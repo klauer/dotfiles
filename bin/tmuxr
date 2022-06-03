@@ -3,25 +3,31 @@
 REPO=$1
 PARENT_DIR=${2-Repos}
 
-[ -z "$REPO" ] && echo "Usage: tmuxr [repo_name] [parent_dir]" && exit 1
+if [ -z "$REPO" ]; then
+    if [[ "$PWD" =~ $HOME/$PARENT_DIR/ ]]; then
+        REPO=$(basename "$PWD")
+    else
+        echo "Usage: tmuxr [repo_name] [parent_dir]" && exit 1
+    fi
+fi
 
-if tmux has-session -t $REPO; then
+if tmux has-session -t "$REPO"; then
     echo "Existing session"
 else
     echo "No session"
-    REPO_PATH=$HOME/$PARENT_DIR/$REPO
+    REPO_PATH="$HOME/$PARENT_DIR/$REPO"
 
-    if [ ! -d $REPO_PATH ]; then
+    if [ ! -d "$REPO_PATH" ]; then
         echo "Invalid repo name: $REPO"
         exit 1
     fi
-    tmux new-session -s $REPO -c $REPO_PATH -d
+    tmux new-session -s "$REPO" -c "$REPO_PATH" -d
 fi
 
-if [ ! -z "$TMUX" ]; then
+if [ -n "$TMUX" ]; then
     # Inside tmux
-    tmux switch-client -t $REPO
+    tmux switch-client -t "$REPO"
 else
     # Outside tmux
-    tmux attach-session -t $REPO
+    tmux attach-session -t "$REPO"
 fi
