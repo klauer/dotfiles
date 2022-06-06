@@ -2,6 +2,7 @@
 *.sw[op]
 nvim/plugged/*
 /nvim/undo
+undo/
 vim/plugged/*
 tmux/plugins/*
 *.old
