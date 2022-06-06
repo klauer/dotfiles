@@ -1,6 +1,7 @@
 .DS_Store
 *.sw[op]
 nvim/plugged/*
+/nvim/undo
 vim/plugged/*
 tmux/plugins/*
 *.old
