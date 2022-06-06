@@ -1,5 +1,4 @@
 local options = {
-  autochdir = true,
   backup = false,                          -- creates a backup file
   clipboard = "unnamedplus",               -- allows neovim to access the system clipboard
   cmdheight = 2,                           -- more space in the neovim command line for displaying messages
@@ -20,7 +19,9 @@ local options = {
   -- termguicolors = true,                    -- set term gui colors (most terminals support this)
   timeoutlen = 100,                        -- time to wait for a mapped sequence to complete (in milliseconds)
   undofile = true,                         -- enable persistent undo
-  updatetime = 300,                        -- faster completion (4000ms default)
+  undolevels = 10000,
+  undoreload = 20000,
+  updatetime = 100,                        -- faster completion (4000ms default)
   writebackup = false,                     -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
   expandtab = true,                        -- convert tabs to spaces
   shiftwidth = 2,                          -- the number of spaces inserted for each indentation
@@ -40,6 +41,11 @@ vim.opt.shortmess:append "c"
 
 for k, v in pairs(options) do
   vim.opt[k] = v
+end
+
+--Set colorscheme (order is important here)
+if vim.env.TERM == "screen-256color" then
+    vim.o.termguicolors = true
 end
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"

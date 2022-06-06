@@ -15,7 +15,7 @@ configs.setup {
     disable = { "" }, -- list of language that will be disabled
     additional_vim_regex_highlighting = true,
   },
-  indent = { enable = true, disable = { "yaml" } },
+  indent = { enable = true, disable = { "yaml", "python" } }, -- https://github.com/LunarVim/Neovim-from-scratch/pull/140
   context_commentstring = {
     enable = true,
     enable_autocmd = false,

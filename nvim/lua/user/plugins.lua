@@ -12,16 +12,16 @@ if fn.empty(fn.glob(install_path)) > 0 then
     install_path,
   }
   print "Installing packer close and reopen Neovim..."
-  vim.cmd [[packadd packer.nvim]]
+  require('packer').packadd = 'packer.nvim'
 end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]]
+local group = vim.api.nvim_create_augroup("packer_user_config", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+  command = "source <afile> | PackerSync",
+  pattern = "plugins.lua",
+  group = group,
+})
 
 -- Use a protected call so we don't error out on first use
 local status_ok, packer = pcall(require, "packer")
@@ -105,6 +105,16 @@ return packer.startup(function(use)
 
   -- Git
   use "lewis6991/gitsigns.nvim"
+  use 'tpope/vim-fugitive'                  -- Git commands in nvim
+  use 'tpope/vim-rhubarb'                   -- Fugitive-companion to interact with github
+  use 'tpope/vim-commentary'                -- "gc" to comment visual regions/lines
+  use 'tpope/vim-surround'                  -- 
+  use 'tpope/vim-unimpaired'                -- mappings for [ and ], such as buffer, args, quickfix, loc, tags (b, a, q, l, t)
+
+  -- Python
+  use 'Vimjas/vim-python-pep8-indent'       -- PEP8 indentation
+  use 'preservim/tagbar'
+  use 'wellle/context.vim'                  -- Code context
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
