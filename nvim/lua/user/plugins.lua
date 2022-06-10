@@ -62,12 +62,14 @@ return packer.startup(function(use)
   -- Colorschemes
   use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "lunarvim/darkplus.nvim"
+  use "folke/tokyonight.nvim"
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
   use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
+  use "lukas-reineke/cmp-under-comparator" -- dunder methods at end
   -- use "hrsh7th/cmp-nvim-lsp-signature-help"
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
@@ -116,7 +118,7 @@ return packer.startup(function(use)
   -- Python
   use 'Vimjas/vim-python-pep8-indent'       -- PEP8 indentation
   use 'preservim/tagbar'
-  use 'wellle/context.vim'                  -- Code context
+  use 'nvim-treesitter/nvim-treesitter-context'                  -- Code context
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
