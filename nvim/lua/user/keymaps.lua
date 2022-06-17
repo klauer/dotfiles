@@ -26,7 +26,7 @@ vim.g.maplocalleader = " "
 -- keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- CR -> :
-vim.api.nvim_set_keymap('n', '<CR>', ':', { noremap = true })
+vim.api.nvim_set_keymap("n", "<CR>", ":", { noremap = true })
 
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
@@ -57,7 +57,7 @@ keymap("v", "<A-k>", ":m .-2<CR>==", opts)
 keymap("v", "p", '"_dP', opts)
 
 -- CR -> :
-vim.api.nvim_set_keymap('v', '<CR>', ':', { noremap = true })
+vim.api.nvim_set_keymap("v", "<CR>", ":", { noremap = true })
 
 -- Visual Block --
 -- Move text up and down
@@ -73,11 +73,13 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 -- keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 -- keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 
-keymap('n', '<leader>p', '!python %<cr>', { noremap = true })
-keymap('n', '<Leader>G', ':Telescope git_bcommits<CR>', opts)
-keymap('n', '<Leader>b', ':Telescope git_commits<CR>', opts)
-keymap('n', '<Leader>H', ':Telescope help_tags<CR>', opts)
-keymap('n', '<Leader>T', ':Telescope current_buffer_tags<CR>', opts)
-keymap('n', '<Leader>b', ':Telescope buffers<CR>', opts)
-keymap('n', '<Leader>gb', ':GitMessenger<CR>', opts)
-keymap('n', '<Leader>o', ':Telescope git_files<CR>', opts)
+keymap("n", "<leader>p", "!python %<cr>", { noremap = true })
+keymap("n", "<Leader>G", ":Telescope git_bcommits<CR>", opts)
+keymap("n", "<Leader>b", ":Telescope git_commits<CR>", opts)
+keymap("n", "<Leader>H", ":Telescope help_tags<CR>", opts)
+keymap("n", "<Leader>T", ":Telescope current_buffer_tags<CR>", opts)
+keymap("n", "<Leader>b", ":Telescope buffers<CR>", opts)
+keymap("n", "<Leader>gb", ":GitMessenger<CR>", opts)
+keymap("n", "<Leader>o", ":Telescope git_files<CR>", opts)
+
+keymap("n", "<Leader>d", ":lua require('neogen').generate({annotation_convention={python='numpydoc'}})<CR>", opts)

@@ -78,19 +78,24 @@ return packer.startup(function(use)
   -- snippets
   use "L3MON4D3/LuaSnip" --snippet engine
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
-  use "quangnguyen30192/cmp-nvim-ultisnips"
-  use 'SirVer/ultisnips'
   use 'honza/vim-snippets'
 
   -- EPICS
   use 'NickeZ/epics.vim'
-  use 'klauer/epics-ultisnips'
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+
+  use {
+      "danymat/neogen",
+      config = function()
+          require('neogen').setup {}
+      end,
+      requires = "nvim-treesitter/nvim-treesitter",
+  }
 
   -- tmux-related
   use 'christoomey/vim-tmux-navigator'
@@ -112,13 +117,33 @@ return packer.startup(function(use)
   use 'tpope/vim-fugitive'                  -- Git commands in nvim
   use 'tpope/vim-rhubarb'                   -- Fugitive-companion to interact with github
   use 'tpope/vim-commentary'                -- "gc" to comment visual regions/lines
-  use 'tpope/vim-surround'                  -- 
+  -- use 'tpope/vim-surround'                  -- 
   use 'tpope/vim-unimpaired'                -- mappings for [ and ], such as buffer, args, quickfix, loc, tags (b, a, q, l, t)
 
   -- Python
   use 'Vimjas/vim-python-pep8-indent'       -- PEP8 indentation
   use 'preservim/tagbar'
   use 'nvim-treesitter/nvim-treesitter-context'                  -- Code context
+
+  -- testing / debugging
+  use "mfussenegger/nvim-dap"
+  use {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+    }
+  }
+
+  use {
+    "nvim-neotest/neotest-python",
+    requires = {
+      "nvim-neotest/neotest",
+    }
+  }
+
+  use 'echasnovski/mini.nvim'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
