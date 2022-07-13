@@ -3,9 +3,62 @@ if not status_ok then
 	return
 end
 
+local item = require("neogen.types.template").item
+
+local numpydoc_tweaked = {
+	{ nil, '""" $1 """', { no_results = true, type = { "class", "func" } } },
+	{ nil, '"""$1', { no_results = true, type = { "file" } } },
+	{ nil, "", { no_results = true, type = { "file" } } },
+	{ nil, "$1", { no_results = true, type = { "file" } } },
+	{ nil, '"""', { no_results = true, type = { "file" } } },
+	{ nil, "", { no_results = true, type = { "file" } } },
+
+	{ nil, "# $1", { no_results = true, type = { "type" } } },
+
+	{ nil, '"""$1' },
+	{ item.HasParameter, "", { type = { "func" } } },
+	{ item.HasParameter, "PARAMETERS", { type = { "func" } } },
+	{ item.HasParameter, "----------", { type = { "func" } } },
+	{
+		item.Parameter,
+		"%s : $1",
+		{ after_each = "    $1", type = { "func" } },
+	},
+	{
+		{ item.Parameter, item.Type },
+		"%s : %s",
+		{ after_each = "    $1", required = "typed_parameters", type = { "func" } },
+	},
+	{
+		item.ArbitraryArgs,
+		"%s",
+		{ after_each = "    $1", type = { "func" } },
+	},
+	{
+		item.Kwargs,
+		"%s",
+		{ after_each = "    $1", type = { "func" } },
+	},
+	{ item.ClassAttribute, "%s : $1", { before_first_item = { "", "Attributes", "----------" } } },
+	{ item.HasReturn, "", { type = { "func" } } },
+	{ item.HasReturn, "Returns", { type = { "func" } } },
+	{ item.HasReturn, "-------", { type = { "func" } } },
+	{
+		item.ReturnTypeHint,
+		"%s",
+		{ after_each = "    $1" },
+	},
+	{
+		item.Return,
+		"$1",
+		{ after_each = "    $1" },
+	},
+	{ nil, '"""' },
+}
+
 neogen.setup({
 	-- Enables Neogen capabilities
-	enabled = true,
+	enabled = false,
 
 	-- Go to annotation after insertion, and change to insert mode
 	input_after_comment = true,
@@ -41,9 +94,15 @@ neogen.setup({
 		},
 		python = {
 			template = {
-				annotation_convention = "numpydoc",
-				-- my_annotation = annotation
+				annotation_convention = "numpydoc_tweaked",
+				numpydoc_tweaked = numpydoc_tweaked,
 			},
 		},
 	},
 })
+
+-- neogen.configuration.languages.python.template.add_custom_annotation({
+-- 	name = "numpydoc_tweaked",
+-- 	annotation = numpydoc_tweaked,
+-- 	default = true,
+-- })

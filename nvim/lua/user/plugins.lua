@@ -59,6 +59,9 @@ return packer.startup(function(use)
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim"
 
+  -- lua
+  use "bfredl/nvim-luadev"
+
   -- Colorschemes
   use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "lunarvim/darkplus.nvim"
@@ -125,6 +128,12 @@ return packer.startup(function(use)
   use 'preservim/tagbar'
   use 'nvim-treesitter/nvim-treesitter-context'                  -- Code context
 
+  -- Debugging / debug adapter protocol
+  use {
+      'rcarriga/nvim-dap-ui',
+      requires = {'mfussenegger/nvim-dap', 'mfussenegger/nvim-dap-python'}
+  }
+
   -- testing / debugging
   use "mfussenegger/nvim-dap"
   use {
@@ -144,6 +153,12 @@ return packer.startup(function(use)
   }
 
   use 'echasnovski/mini.nvim'
+
+  -- Org mode trial
+  -- use {'nvim-orgmode/orgmode', config = function()
+  --   require('orgmode').setup{}
+  -- end
+  -- }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

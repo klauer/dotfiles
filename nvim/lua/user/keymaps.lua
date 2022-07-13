@@ -83,3 +83,11 @@ keymap("n", "<Leader>gb", ":GitMessenger<CR>", opts)
 keymap("n", "<Leader>o", ":Telescope git_files<CR>", opts)
 
 keymap("n", "<Leader>d", ":lua require('neogen').generate({annotation_convention={python='numpydoc'}})<CR>", opts)
+
+
+-- LSP (see also user/lsp/handlers.lua)
+
+vim.keymap.set('n', '<Leader>E', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<Leader>q', vim.diagnostic.setloclist, opts)
