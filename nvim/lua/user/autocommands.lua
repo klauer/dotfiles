@@ -50,6 +50,7 @@ vim.api.nvim_exec([[
       autocmd FileType html setlocal formatprg=prettier\ --parser\ html
       autocmd FileType json setlocal formatprg=prettier\ --parser\ json
       autocmd FileType python setlocal formatprg=black-partial
+      autocmd FileType lua setlocal formatprg=stylua\ --stdin-filepath\ %h\ -
       autocmd BufEnter *.lark setlocal formatprg=lark-format
     augroup END
 ]], false)
