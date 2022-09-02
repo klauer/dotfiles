@@ -1,15 +1,21 @@
-local status_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
+local status_ok, mason = pcall(require, "mason")
 if not status_ok then
 	return
 end
+
+local mason_lspconfig_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
+if not mason_lspconfig_ok then
+	return
+end
+
+mason.setup()
+mason_lspconfig.setup()
 
 local lspconfig = require("lspconfig")
 
 local servers = { "jsonls", "sumneko_lua", "pyright" }
 
-lsp_installer.setup {
-	ensure_installed = servers
-}
+mason.setup({ ensure_installed = servers })
 
 for _, server in pairs(servers) do
 	local opts = {
