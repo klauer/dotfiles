@@ -69,8 +69,8 @@ local setup = {
   },
 }
 
-local opts = {
-  mode = "n", -- NORMAL mode
+local normal_mode_opts = {
+  mode = "n",
   prefix = "<leader>",
   buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
   silent = true, -- use `silent` when creating keymaps
@@ -78,12 +78,12 @@ local opts = {
   nowait = true, -- use `nowait` when creating keymaps
 }
 
-local mappings = {
-  ["a"] = { "<cmd>Alpha<cr>", "Alpha" },
+local normal_mappings = {
   ["b"] = {
     "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     "Buffers",
   },
+  ["d"] = { "<cmd>lua require('neogen').generate({annotation_convention={python='numpydoc'}})<CR>", "Numpy Docstring" },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
@@ -93,7 +93,10 @@ local mappings = {
     "Find files",
   },
   ["F"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
+  ["o"] = { "<cmd>Telescope git_files<cr>", "Open file from repo" },
+  ["O"] = { "<cmd>Telescope find_files<cr>", "Open any file" },
   ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
+  ["T"] = { "<cmd>Telescope current_buffer_tags<cr>", "Buffer tags" },
 
   p = {
     name = "Packer",
@@ -121,6 +124,7 @@ local mappings = {
     o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+    C = { "<cmd>Telescope git_bcommits<cr>", "Commits for this file" },
     d = {
       "<cmd>Gitsigns diffthis HEAD<cr>",
       "Diff",
@@ -130,8 +134,9 @@ local mappings = {
   l = {
     name = "LSP",
     a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+    c = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     d = {
-      "<cmd>Telescope lsp_document_diagnostics<cr>",
+      "<cmd>Telescope <cr>",
       "Document Diagnostics",
     },
     w = {
@@ -142,15 +147,18 @@ local mappings = {
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     j = {
-      "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
+      "<cmd>lua vim.diagnostic.goto_next()<CR>",
       "Next Diagnostic",
     },
     k = {
-      "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
+      "<cmd>lua vim.diagnostic.goto_prev()<cr>",
       "Prev Diagnostic",
     },
-    l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
-    q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
+    l = {
+      "<cmd>lua vim.diagnostic.open_float()<cr>",
+      "Line diagnostics",
+    },
+    q = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Diag -> Quickfix" },
     r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
     s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
     S = {
@@ -162,7 +170,7 @@ local mappings = {
     name = "Search",
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
-    h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
+    h = { "<cmd>Telescope help_tags<cr>", "Help tags" },
     M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
     r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
     R = { "<cmd>Telescope registers<cr>", "Registers" },
@@ -182,5 +190,18 @@ local mappings = {
   },
 }
 
+local visual_mode_opts = {
+  mode = "v",
+  prefix = "<leader>",
+  buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
+  silent = true, -- use `silent` when creating keymaps
+  noremap = true, -- use `noremap` when creating keymaps
+  nowait = true, -- use `nowait` when creating keymaps
+}
+
+local visual_mappings = {
+}
+
 which_key.setup(setup)
-which_key.register(mappings, opts)
+which_key.register(normal_mappings, normal_mode_opts)
+which_key.register(visual_mappings, normal_mode_opts)
