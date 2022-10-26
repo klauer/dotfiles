@@ -7,8 +7,13 @@ if [ -z "$REPO" ]; then
     if [[ "$PWD" =~ $HOME/$PARENT_DIR/ ]]; then
         REPO=$(basename "$PWD")
     else
-        echo "Usage: tmuxr [repo_name] [parent_dir]" && exit 1
+        REPO=$(cd $HOME/$PARENT_DIR && ls -d */ | tr -d "/" | fzf)
     fi
+fi
+
+if [ -z "$REPO" ]; then
+  echo "Usage: tmuxr [repo_name] [parent_dir]"
+  exit 1
 fi
 
 if tmux has-session -t "$REPO"; then
