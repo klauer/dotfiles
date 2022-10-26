@@ -83,7 +83,7 @@ local normal_mappings = {
     "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     "Buffers",
   },
-  ["d"] = { "<cmd>lua require('neogen').generate({annotation_convention={python='numpydoc'}})<CR>", "Numpy Docstring" },
+  ["d"] = { "<cmd>lua require('neogen').generate({annotation_convention={python='numpydoc_tweaked'}})<CR>", "Numpy Docstring" },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },

@@ -3,10 +3,10 @@ if not status_ok then
 	return
 end
 
-local item = require("neogen.types.template").item
+local i = require("neogen.types.template").item
 
 local numpydoc_tweaked = {
-	{ nil, '""" $1 """', { no_results = true, type = { "class", "func" } } },
+	{ nil, '"""$1"""', { no_results = true, type = { "class", "func" } } },
 	{ nil, '"""$1', { no_results = true, type = { "file" } } },
 	{ nil, "", { no_results = true, type = { "file" } } },
 	{ nil, "$1", { no_results = true, type = { "file" } } },
@@ -15,41 +15,47 @@ local numpydoc_tweaked = {
 
 	{ nil, "# $1", { no_results = true, type = { "type" } } },
 
-	{ nil, '"""$1' },
-	{ item.HasParameter, "", { type = { "func" } } },
-	{ item.HasParameter, "PARAMETERS", { type = { "func" } } },
-	{ item.HasParameter, "----------", { type = { "func" } } },
+	{ nil, '"""' },
+	{ nil, "$1" },
+	{ i.HasParameter, "", { type = { "func" } } },
+	{ i.HasParameter, "Parameters/", { type = { "func" } } },
+	{ i.HasParameter, "----------", { type = { "func" } } },
 	{
-		item.Parameter,
+		i.Parameter,
 		"%s : $1",
 		{ after_each = "    $1", type = { "func" } },
 	},
 	{
-		{ item.Parameter, item.Type },
+		{ i.Parameter, i.Type },
 		"%s : %s",
 		{ after_each = "    $1", required = "typed_parameters", type = { "func" } },
 	},
 	{
-		item.ArbitraryArgs,
-		"%s",
+		{ i.Parameter, i.Type, i.DefaultValue },
+		"%s : %s, optional",
+		{ after_each = "    $1", required = "default_parameters", type = { "func" } },
+	},
+	{
+		i.ArbitraryArgs,
+		"%s :",
 		{ after_each = "    $1", type = { "func" } },
 	},
 	{
-		item.Kwargs,
-		"%s",
+		i.Kwargs,
+		"%s :",
 		{ after_each = "    $1", type = { "func" } },
 	},
-	{ item.ClassAttribute, "%s : $1", { before_first_item = { "", "Attributes", "----------" } } },
-	{ item.HasReturn, "", { type = { "func" } } },
-	{ item.HasReturn, "Returns", { type = { "func" } } },
-	{ item.HasReturn, "-------", { type = { "func" } } },
+	{ i.ClassAttribute, "%s : $1", { before_first_item = { "", "Attributes", "----------" } } },
+	{ i.HasReturn, "", { type = { "func" } } },
+	{ i.HasReturn, "Returns", { type = { "func" } } },
+	{ i.HasReturn, "-------", { type = { "func" } } },
 	{
-		item.ReturnTypeHint,
+		i.ReturnTypeHint,
 		"%s",
 		{ after_each = "    $1" },
 	},
 	{
-		item.Return,
+		i.Return,
 		"$1",
 		{ after_each = "    $1" },
 	},
@@ -58,7 +64,7 @@ local numpydoc_tweaked = {
 
 neogen.setup({
 	-- Enables Neogen capabilities
-	enabled = false,
+	enabled = true,
 
 	-- Go to annotation after insertion, and change to insert mode
 	input_after_comment = true,
@@ -81,7 +87,7 @@ neogen.setup({
 		["type"] = "[TODO:type]",
 		["attribute"] = "[TODO:attribute]",
 		["args"] = "[TODO:args]",
-		["kwargs"] = "[TODO:kwargs]",
+		["kwargs"] = "[TODO:kwargs/]",
 	},
 
 	-- Placeholders highlights to use. If you don't want custom highlight, pass "None"
@@ -95,14 +101,14 @@ neogen.setup({
 		python = {
 			template = {
 				annotation_convention = "numpydoc_tweaked",
-				numpydoc_tweaked = numpydoc_tweaked,
+				-- numpydoc_tweaked = numpydoc_tweaked,
 			},
 		},
 	},
 })
 
--- neogen.configuration.languages.python.template.add_custom_annotation({
--- 	name = "numpydoc_tweaked",
--- 	annotation = numpydoc_tweaked,
--- 	default = true,
--- })
+-- local python_tpl = neogen.get_template("python")
+-- python_tpl:add_custom_annotation("numpydoc_tweaked", numpydoc_tweaked, true)
+
+-- local conf = require("neogen.config").get()
+-- python_tpl:add_custom_annotation("numpydoc_tweaked", numpydoc_tweaked, true)
