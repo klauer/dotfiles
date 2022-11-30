@@ -1,6 +1,6 @@
 #!/bin/sh
 "true" '''\'
-exec $HOME/mc/bin/python3 "$0" "$@"
+exec env -i HOME=$HOME $HOME/mc/bin/python3 "$0" "$@"
 '''
 # Borrowed from here, unchanged:
 # https://raw.githubusercontent.com/wbolster/black-macchiato/master/macchiato.py
