@@ -19,10 +19,9 @@ vim.g.maplocalleader = " "
 --   command_mode = "c",
 
 -- CR -> :
-vim.api.nvim_set_keymap("n", "<CR>", ":", { noremap = true })
+keymap("n", "<CR>", ":", { noremap = true })
 
--- Move text up and down
 keymap("v", "p", '"_dP', opts)
 
 -- CR -> :
-vim.api.nvim_set_keymap("v", "<CR>", ":", { noremap = true })
+keymap("v", "<CR>", ":", { noremap = true })
