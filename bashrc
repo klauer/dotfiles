@@ -218,9 +218,15 @@ sshcd() {
     host=$1;
     shift;
     command="$*";
+    path="$PWD"
+
+    if [[ "$path" =~ $HOME/.* ]]; then
+      path=${path#"$HOME/"}
+      echo 'Adjusting path for $HOME:' "$path"
+    fi
+
     ssh -t "$host" "
-        cd '${PWD}'
-        echo 'Current working directory: $PWD'
+        cd '$path'
         ${command}
         bash
     ";
