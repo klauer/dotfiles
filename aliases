@@ -70,7 +70,11 @@ alias test-stand-external='ssh rhel6-64k.slac.stanford.edu "ssh lcls-dev3 test-s
 alias dev3-external='ssh -J rhel6-64k.slac.stanford.edu lcls-dev3'
 alias sshpass='ssh -o PreferredAuthentications=password -o PubkeyAuthentication=no'
 alias simdet='cd /Users/klauer/epics/R7.0.1.1/support/areadetector/3-2/ADSimDetector/iocs/simDetectorIOC/iocBoot/iocSimDetector; ../../bin/darwin-x86/simDetectorApp st.cmd'
-function wherep() { which python; python -c "import $1; print('$1 is', $1.__file__)"; }
+function wherep() {
+    which python
+    lib=$1
+    python -c "import os, $lib; print('$lib=', $lib.__file__, '\ncd ', os.path.dirname($lib.__file__), '\nversion=', getattr($lib, '__version__', '?'));";
+}
 function github_pr() {
     echo "PR $1 from origin into branch $2:"
     git fetch origin pull/$1/head:$2
@@ -134,7 +138,9 @@ alias gd="git diff"
 alias qgit="git"
 alias tldrl="tldr --platform linux"
 alias devpath="PYTHONPATH=$HOME/dev_path:\$PYTHONPATH "
+alias dev="devpath"
 alias devpython="devpath python"
+alias devmake="devpath make"
 alias devipython="devpath ipython"
 alias devvim="devpath vim"
 alias devtyphos="PYDM_DISPLAYS_PATH=$HOME/Repos/pcdsdevices/pcdsdevices/ui:\$PYDM_DISPLAYS_PATH devpython -m typhos"
