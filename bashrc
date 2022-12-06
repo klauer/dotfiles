@@ -214,6 +214,20 @@ fi
 # sshcd - ssh to a host, retaining your current directory
 #   Usage:   sshcd hostname [optional command to run]
 #   Example: sshcd lfe-console ls -l
+sshrun() {
+    host=$1;
+    shift;
+    command="$*";
+
+    ssh -t "$host" "
+        bash --init-file <(
+          echo \"source ~/.bash_profile;
+          ${command} 
+          \"
+        )
+      "
+}
+
 sshcd() {
     host=$1;
     shift;
@@ -225,9 +239,10 @@ sshcd() {
       echo 'Adjusting path for $HOME:' "$path"
     fi
 
-    ssh -t "$host" "
-        cd '$path'
-        ${command}
-        bash
-    ";
+    sshrun "$host" "
+      cd '$path';
+      pwd;
+      source pcds_conda;
+      ${command}
+    "
 }
