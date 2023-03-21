@@ -1,0 +1,29 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+    -   id: no-commit-to-branch
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-ast
+    -   id: check-case-conflict
+    -   id: check-json
+    -   id: check-merge-conflict
+    -   id: check-symlinks
+    -   id: check-xml
+    -   id: check-yaml
+    -   id: debug-statements
+
+-   repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.9.0.2
+    hooks:
+    - id: shellcheck
+      types: []  # Skips non-.sh files without this
+      files: \.(bashrc|bash_profile|sh)$
+
+- repo: https://github.com/charliermarsh/ruff-pre-commit
+  rev: v0.0.255
+  hooks:
+    - id: ruff

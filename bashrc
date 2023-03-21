@@ -112,7 +112,7 @@ fdr() {
 cdf() {
   local file
   local dir
-  file=$(fzf +m -q "$1") && dir=$(dirname "$file") && 
+  file=$(fzf +m -q "$1") && dir=$(dirname "$file") &&
   echo "cd \"$dir\"" &&
   history -s "cd \"$dir\"" &&
   cd "$dir"
@@ -121,7 +121,7 @@ cdf() {
 cdd() {
   # fzf cd to docs
   local dir
- 
+
   if [ ! -z "$@" ]; then
     query_str="-q $@"
   else
@@ -140,7 +140,7 @@ cdd() {
 cdr() {
   # fzf cd to repo
   local dir
- 
+
   if [ ! -z "$@" ]; then
     query_str="-q $@"
   else
@@ -222,7 +222,7 @@ sshrun() {
     ssh -t "$host" "
         bash --init-file <(
           echo \"source ~/.bash_profile;
-          ${command} 
+          ${command}
           \"
         )
       "

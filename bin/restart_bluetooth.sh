@@ -21,7 +21,7 @@ if [ -f "$BT" ]; then
 		then
 		echo "Bluetooth on, restarting ..."
 		($("$BT" -p 0) &> /dev/null && echo "Bluetooth Module stopped") || (err "Couldn't stop Bluetooth Module" && exit 1)
-		($("$BT" -p 1) &> /dev/null && echo "Bluetooth Module started") || (err "Couldn't start Bluetooth Module" && exit 1) 
+		($("$BT" -p 1) &> /dev/null && echo "Bluetooth Module started") || (err "Couldn't start Bluetooth Module" && exit 1)
 		log "Successfully restarted Bluetooth" && exit 0
 	else
 		echo "Bluetooth is off, nothing to do ..."

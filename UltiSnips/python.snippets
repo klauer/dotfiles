@@ -155,7 +155,7 @@ def write_numpy_docstring_args(args, snip):
     '''
     kwargs = [arg for arg in args if arg.is_kwarg()]
     args = [arg for arg in args if not arg.is_kwarg()]
-    
+
     if args or kwargs:
         snip += "Parameters"
         snip += "----------"
@@ -215,7 +215,7 @@ endglobal
 ########################################
 
 snippet class "class with docstrings" b
-class ${1:MyClass}(${5:}):`!p 
+class ${1:MyClass}(${5:}):`!p
 snip >> 1
 snip += triple_quotes(snip)
 snip += f'{t[1]}.'

@@ -6,4 +6,3 @@ echo "channels:
 always_yes: true
 binstar_upload: true
 anaconda_upload: yes" > ~/.condarc
-

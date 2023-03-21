@@ -25,13 +25,13 @@ do
         to="$(echo $[($size*$c/$parts)-1])"
     else
         to="$(echo $[$size*$c/$parts])"
-    fi 
+    fi
 
     out="$(printf 'temp.part'$c)"
-    
+
    echo "curl --silent --range $from-$to -o $out $url &"
     curl --silent --range $from-$to -o $out $url &
-    
+
 done
 
 wait

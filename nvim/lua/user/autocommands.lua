@@ -1,8 +1,8 @@
 vim.cmd [[
   augroup _general_settings
     autocmd!
-    autocmd FileType qf,help,man,lspinfo nnoremap <silent> <buffer> q :close<CR> 
-    autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'Visual', timeout = 200}) 
+    autocmd FileType qf,help,man,lspinfo nnoremap <silent> <buffer> q :close<CR>
+    autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'Visual', timeout = 200})
     autocmd BufWinEnter * :set formatoptions-=cro
     autocmd FileType qf set nobuflisted
   augroup end
@@ -21,7 +21,7 @@ vim.cmd [[
 
   augroup _auto_resize
     autocmd!
-    autocmd VimResized * tabdo wincmd = 
+    autocmd VimResized * tabdo wincmd =
   augroup end
 
   augroup _alpha
@@ -42,7 +42,7 @@ vim.cmd [[
 
 -- Formatter settings
 vim.api.nvim_exec([[
-    augroup formatting 
+    augroup formatting
       autocmd!
       autocmd FileType sh setlocal formatprg=shfmt\ -i\ 4
       autocmd FileType markdown setlocal formatprg=prettier\ --parser\ markdown
@@ -114,7 +114,7 @@ vim.api.nvim_exec([[
     augroup ActiveWindowBackground
         autocmd!
         let g:background_blacklist = ["tagbar"]
-      
+
         function! BackgroundChangeEnter()
             if index(g:background_blacklist, &ft) < 0
                 if &background == "dark"
@@ -124,7 +124,7 @@ vim.api.nvim_exec([[
                 endif
             endif
         endfunction
-      
+
         function! BackgroundChangeLeave()
             if index(g:background_blacklist, &ft) < 0
                 if &background == "dark"
@@ -134,7 +134,7 @@ vim.api.nvim_exec([[
                 endif
             endif
         endfunction
-      
+
         autocmd VimEnter,WinEnter,BufWinEnter,FocusGained * call BackgroundChangeEnter()
         autocmd VimLeave,WinLeave,BufLeave,FocusLost * call BackgroundChangeLeave()
     augroup END

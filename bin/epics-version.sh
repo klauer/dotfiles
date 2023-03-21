@@ -55,8 +55,8 @@ for line in lines:
 version_vars = []
 path_vars = []
 
-for sub_path in [os.path.join("lib", host_arch, "*.a"), 
-                 os.path.join("db", "*.db"), 
+for sub_path in [os.path.join("lib", host_arch, "*.a"),
+                 os.path.join("db", "*.db"),
                  os.path.join("dbd", "*.dbd")]:
     print("***", sub_path, "***")
     for path, module_list in modules.items():

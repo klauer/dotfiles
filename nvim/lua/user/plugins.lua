@@ -130,7 +130,7 @@ return packer.startup(function(use)
   use 'tpope/vim-fugitive'                  -- Git commands in nvim
   use 'tpope/vim-rhubarb'                   -- Fugitive-companion to interact with github
   use 'tpope/vim-commentary'                -- "gc" to comment visual regions/lines
-  -- use 'tpope/vim-surround'                  -- 
+  -- use 'tpope/vim-surround'                  --
   use 'tpope/vim-unimpaired'                -- mappings for [ and ], such as buffer, args, quickfix, loc, tags (b, a, q, l, t)
 
   -- Python
