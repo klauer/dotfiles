@@ -73,26 +73,25 @@ local function lsp_keymaps(bufnr)
 	-- 	opts
 	-- )
 
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local opts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-  vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, opts)
-  vim.keymap.set('n', '<Leader>D', vim.lsp.buf.type_definition, opts)
-  vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, opts)
-  vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, opts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-  -- vim.keymap.set('n', '<Leader>f', vim.lsp.buf.formatting, opts)
+	-- See `:help vim.lsp.*` for documentation on any of the below functions
+	local opts = { noremap = true, silent = true, buffer = bufnr }
+	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+	vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
+	vim.keymap.set("n", "<Leader>D", vim.lsp.buf.type_definition, opts)
+	vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, opts)
+	vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, opts)
+	vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+	-- vim.keymap.set('n', '<Leader>f', vim.lsp.buf.formatting, opts)
 
-  vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, opts)
-  vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
-  vim.keymap.set('n', '<Leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, opts)
+	vim.keymap.set("n", "<Leader>wa", vim.lsp.buf.add_workspace_folder, opts)
+	vim.keymap.set("n", "<Leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
+	vim.keymap.set("n", "<Leader>wl", function()
+		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+	end, opts)
 	vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
-
 end
 
 M.on_attach = function(client, bufnr)
@@ -101,8 +100,8 @@ M.on_attach = function(client, bufnr)
 	if client.name == "tsserver" then
 		client.resolved_capabilities.document_formatting = false
 	end
-    -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+	-- Enable completion triggered by <c-x><c-o>
+	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 	lsp_keymaps(bufnr)
 	lsp_highlight_document(client)
 end

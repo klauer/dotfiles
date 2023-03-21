@@ -1,6 +1,6 @@
 local status_ok, ls = pcall(require, "luasnip")
 if not status_ok then
-  return
+	return
 end
 
 local s = ls.snippet
@@ -18,7 +18,6 @@ local fmt = require("luasnip.extras.fmt").fmt
 local m = require("luasnip.extras").m
 local lambda = require("luasnip.extras").l
 local postfix = require("luasnip.extras.postfix").postfix
-
 
 ls.add_snippets("python", {
 	s("annotations", {

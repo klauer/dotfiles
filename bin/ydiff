@@ -6,15 +6,16 @@
 #   $ git config --global color.diff never
 
 import signal
+import difflib
+import sys
+from os import environ, get_terminal_size
+
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
-import sys
-import difflib
-from os import get_terminal_size, environ
-
 # XXX: Since I'm using ydiff like `git diff | ydiff | less`,
-# both stdin and stdout are redirected, so we'll get inappropriate ioctl for those devices.
+# both stdin and stdout are redirected, so we'll get inappropriate ioctl for
+# those devices.
 # But we can use stderr (fd 2)!
 terminal_width = int(environ.get("YDIFF_WIDTH") or get_terminal_size(2)[0])
 
@@ -50,7 +51,7 @@ def strsplit(text, width):
         if text[0] == "\x1b":
             color_end = text.find("m")
             if color_end != -1:
-                color = text[:color_end+1]
+                color = text[: color_end + 1]
                 if color == COLOR_RESET:
                     found_colors = ""
                 else:
@@ -92,7 +93,7 @@ class Hunk(object):
 
     def append(self, hunk_line):
         """hunk_line is a 2-element tuple: (attr, text), where attr is:
-                '-': old, '+': new, ' ': common
+        '-': old, '+': new, ' ': common
         """
         self._hunk_list.append(hunk_line)
 
@@ -141,10 +142,7 @@ class UnifiedDiff(object):
         return line.startswith("+++ ")
 
     def is_hunk_meta(self, line):
-        return (
-            line.startswith("@@ -")
-            and line.find(" @@") >= 8
-        )
+        return line.startswith("@@ -") and line.find(" @@") >= 8
 
     def parse_hunk_meta(self, hunk_meta):
         # @@ -3,7 +3,6 @@
@@ -168,10 +166,7 @@ class UnifiedDiff(object):
         return line[0], line[1:]
 
     def is_old(self, line):
-        return (
-            line.startswith("-")
-            and not self.is_old_path(line)
-        )
+        return line.startswith("-") and not self.is_old_path(line)
 
     def is_new(self, line):
         return line.startswith("+") and not self.is_new_path(line)
@@ -276,17 +271,17 @@ class DiffMarker(object):
             out = COLOR_PLAIN
             while text:
                 if text.startswith("\x00-"):
-                    out += f'{COLOR_REVERSE}{COLOR_RED}'
+                    out += f"{COLOR_REVERSE}{COLOR_RED}"
                     text = text[2:]
                 elif text.startswith("\x00+"):
-                    out += f'{COLOR_REVERSE}{COLOR_GREEN}'
+                    out += f"{COLOR_REVERSE}{COLOR_GREEN}"
                     text = text[2:]
                 elif text.startswith("\x00^"):
-                    out += f'{COLOR_REVERSE}{COLOR_YELLOW}'
+                    out += f"{COLOR_REVERSE}{COLOR_YELLOW}"
                     text = text[2:]
                 elif text.startswith("\x01"):
                     if len(text) > 1:
-                        out += f'{COLOR_RESET}{COLOR_PLAIN}'
+                        out += f"{COLOR_RESET}{COLOR_PLAIN}"
                     text = text[1:]
                 else:
                     # FIXME: utf-8 wchar might break the rule here, e.g.
@@ -338,7 +333,9 @@ class DiffMarker(object):
                     right_num = " "
 
                 left = old[1].replace("\t", " " * 8).replace("\n", "").replace("\r", "")
-                right = new[1].replace("\t", " " * 8).replace("\n", "").replace("\r", "")
+                right = (
+                    new[1].replace("\t", " " * 8).replace("\n", "").replace("\r", "")
+                )
 
                 if changed:
                     if not old[0]:
@@ -377,7 +374,10 @@ class DiffMarker(object):
                         # XXX: this doesn't work lol
                         # lcur = f"{lcur: <{width}}"
 
-                    yield f"{COLOR_GRAY}{lncur:>{num_width}}{COLOR_RESET} {lcur} {COLOR_GRAY}{rncur:>{num_width}}{COLOR_RESET} {rcur}\n"
+                    yield (
+                        f"{COLOR_GRAY}{lncur:>{num_width}}{COLOR_RESET} {lcur} "
+                        f"{COLOR_GRAY}{rncur:>{num_width}}{COLOR_RESET} {rcur}\n"
+                    )
 
                     # Clean line numbers for further iterations
                     lncur = ""

@@ -1,29 +1,29 @@
-require "user.options"
-require "user.keymaps"
-require "user.global"
-require "user.plugins"
-require "user.colorscheme"
-require "user.cmp"
-require "user.lsp"
-require "user.telescope"
-require "user.treesitter"
-require "user.autopairs"
-require "user.mini_surround"
-require "user.neogen"
-require "user.dap"
-require "user.comment"
-require "user.gitsigns"
-require "user.nvim-tree"
-require "user.bufferline"
-require "user.lualine"
-require "user.toggleterm"
-require "user.project"
-require "user.impatient"
-require "user.indentline"
-require "user.snippets"
+require("user.options")
+require("user.keymaps")
+require("user.global")
+require("user.plugins")
+require("user.colorscheme")
+require("user.cmp")
+require("user.lsp")
+require("user.telescope")
+require("user.treesitter")
+require("user.autopairs")
+require("user.mini_surround")
+require("user.neogen")
+require("user.dap")
+require("user.comment")
+require("user.gitsigns")
+require("user.nvim-tree")
+require("user.bufferline")
+require("user.lualine")
+require("user.toggleterm")
+require("user.project")
+require("user.impatient")
+require("user.indentline")
+require("user.snippets")
 -- require "user.alpha"
-require "user.neotest"
-require "user.whichkey"
-require "user.signature"
-require "user.autocommands"
+require("user.neotest")
+require("user.whichkey")
+require("user.signature")
+require("user.autocommands")
 -- require "user.orgmode"

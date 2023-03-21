@@ -6,9 +6,9 @@ import re
 
 
 def replace_bcast(inp):
-    l = inp.rsplit('.', 1)
-    l[-1] = '.255'
-    return ''.join(l)
+    addr = inp.rsplit('.', 1)
+    addr[-1] = '.255'
+    return ''.join(addr)
 
 
 def get_bcast():
