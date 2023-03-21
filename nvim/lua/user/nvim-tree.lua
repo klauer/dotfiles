@@ -65,13 +65,13 @@ nvim_tree.setup {
   },
   disable_netrw = false,
   hijack_netrw = true,
-  open_on_setup = false,
-  ignore_ft_on_setup = {
-    "startify",
-    "dashboard",
-    "alpha",
-  },
-  open_on_tab = false,
+  -- open_on_setup = false,
+  -- ignore_ft_on_setup = {
+  --   "startify",
+  --   "dashboard",
+  --   "alpha",
+  -- },
+  -- open_on_tab = false,
   hijack_cursor = false,
   update_cwd = true,
   diagnostics = {
@@ -103,7 +103,7 @@ nvim_tree.setup {
   },
   view = {
     width = 30,
-    height = 30,
+    -- height = 30,
     hide_root_folder = false,
     side = "left",
     mappings = {

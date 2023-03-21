@@ -21,11 +21,12 @@ alias ue='tmux update-env'
 vimenv=$HOME/mc/envs/py36
 
 # Use neovim if available:
+use_nvim=0
 (which nvim 2> /dev/null > /dev/null) && use_nvim=1
 
-if [[ -n "$use_nvim" ]]; then
+if [[ "$use_nvim" -eq 1 ]]; then
     # -X stops from connecting to X server
-    alias nvim="PATH=\"$vimenv/bin:$vimenv/scripts:$PATH\" `which nvim`"
+    # alias nvim="PATH=\"$vimenv/bin:$vimenv/scripts:$PATH\" `which nvim`"
     alias vi='nvim'
     alias vim='nvim'
     alias view='nvim -R'

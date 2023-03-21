@@ -26,7 +26,7 @@ else
         echo "Invalid repo name: $REPO"
         exit 1
     fi
-    tmux new-session -s "$REPO" -c "$REPO_PATH" -d
+    tmux new-session -e "REPO=$REPO_PATH" -s "$REPO" -c "$REPO_PATH" -d
 fi
 
 if [ -n "$TMUX" ]; then

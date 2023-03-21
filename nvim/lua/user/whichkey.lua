@@ -143,7 +143,7 @@ local normal_mappings = {
       "<cmd>Telescope lsp_workspace_diagnostics<cr>",
       "Workspace Diagnostics",
     },
-    f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+    f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
     j = {
@@ -200,8 +200,11 @@ local visual_mode_opts = {
 }
 
 local visual_mappings = {
+  l = {
+    f = { "!black-partial<CR>", "Reformat with black-partial" },
+  },
 }
 
 which_key.setup(setup)
 which_key.register(normal_mappings, normal_mode_opts)
-which_key.register(visual_mappings, normal_mode_opts)
+which_key.register(visual_mappings, visual_mode_opts)
