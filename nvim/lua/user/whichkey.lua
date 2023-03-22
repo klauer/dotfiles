@@ -204,6 +204,7 @@ local visual_mode_opts = {
 
 local visual_mappings = {
 	l = {
+		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
 		f = { "!black-partial<CR>", "Reformat with black-partial" },
 	},
 }

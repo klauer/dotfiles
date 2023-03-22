@@ -3,6 +3,8 @@ if not null_ls_status_ok then
 	return
 end
 
+-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/code_actions
+local actions = null_ls.builtins.code_actions
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 local formatting = null_ls.builtins.formatting
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
@@ -17,5 +19,7 @@ null_ls.setup({
 		diagnostics.flake8,
 		diagnostics.ruff,
 		formatting.ruff,
+		actions.shellcheck,
+		actions.refactoring,
 	},
 })
