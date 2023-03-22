@@ -1,6 +1,6 @@
 local status_ok, ls = pcall(require, "luasnip")
 if not status_ok then
-	return
+  return
 end
 
 local s = ls.snippet
@@ -20,12 +20,12 @@ local lambda = require("luasnip.extras").l
 local postfix = require("luasnip.extras.postfix").postfix
 
 ls.add_snippets("python", {
-	s("annotations", {
-		t({ "from __future__ import annotations" }),
-	}),
-	s("logger", {
-		-- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
-		-- i(1, "cond"), t(" ? "), i(2, "then"), t(" : "), i(3, "else")
-		t({ "import logging", "", "logger = logging.getLogger(__name__)", "" }),
-	}),
+  s("annotations", {
+    t({ "from __future__ import annotations" }),
+  }),
+  s("logger", {
+    -- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
+    -- i(1, "cond"), t(" ? "), i(2, "then"), t(" : "), i(3, "else")
+    t({ "import logging", "", "logger = logging.getLogger(__name__)", "" }),
+  }),
 })

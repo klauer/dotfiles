@@ -1,16 +1,16 @@
 local loaded_neotest, neotest = pcall(require, "neotest")
 if not loaded_neotest then
-	return
+  return
 end
 
 local loaded_neotest_python, neotest_python = pcall(require, "neotest-python")
 if not loaded_neotest_python then
-	return
+  return
 end
 
 local loaded_neotest_plenary, neotest_plenary = pcall(require, "neotest-plenary")
 if not loaded_neotest_plenary then
-	return
+  return
 end
 
 -- neotest.setup({
@@ -29,38 +29,38 @@ end
 --   },
 -- })
 require("neotest").setup({
-	adapters = {
-		require("neotest-python")({
-			dap = { justMyCode = false },
-		}),
-		require("neotest-plenary"),
-	},
+  adapters = {
+    require("neotest-python")({
+      dap = { justMyCode = false },
+    }),
+    require("neotest-plenary"),
+  },
 })
 
 local dap = require("dap")
 dap.configurations.python = {
-	{
-		-- The first three options are required by nvim-dap
-		type = "python", -- the type here established the link to the adapter definition: `dap.adapters.python`
-		request = "launch",
-		name = "Launch file",
+  {
+    -- The first three options are required by nvim-dap
+    type = "python", -- the type here established the link to the adapter definition: `dap.adapters.python`
+    request = "launch",
+    name = "Launch file",
 
-		-- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
+    -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
 
-		program = "${file}", -- This configuration will launch the current file if used.
-		pythonPath = function()
-			-- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
-			-- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
-			-- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
-			return vim.g.python_for_completion
-			-- local cwd = vim.fn.getcwd()
-			-- if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
-			--   return cwd .. '/venv/bin/python'
-			-- elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
-			--   return cwd .. '/.venv/bin/python'
-			-- else
-			--   return '/usr/bin/python'
-			-- end
-		end,
-	},
+    program = "${file}", -- This configuration will launch the current file if used.
+    pythonPath = function()
+      -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+      -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+      -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+      return vim.g.python_for_completion
+      -- local cwd = vim.fn.getcwd()
+      -- if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
+      --   return cwd .. '/venv/bin/python'
+      -- elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
+      --   return cwd .. '/.venv/bin/python'
+      -- else
+      --   return '/usr/bin/python'
+      -- end
+    end,
+  },
 }
