@@ -109,7 +109,8 @@ caproto_hash() {
 gp() {
     REMOTE=${1:-origin}
     BRANCH=${2:-master}
-    git pull ${REMOTE} ${BRANCH}
+    FALLBACK_BRANCH=${3:-main}
+    git pull ${REMOTE} ${BRANCH} || git pull "${REMOTE}" "${FALLBACK_BRANCH}"
 }
 
 dotf() {
