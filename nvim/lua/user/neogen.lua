@@ -100,7 +100,8 @@ neogen.setup({
     },
     python = {
       template = {
-        annotation_convention = "numpydoc_tweaked",
+        annotation_convention = "numpydoc",
+        -- annotation_convention = "numpydoc_tweaked",
         -- numpydoc_tweaked = numpydoc_tweaked,
       },
     },

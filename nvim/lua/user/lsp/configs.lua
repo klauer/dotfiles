@@ -13,7 +13,7 @@ mason_lspconfig.setup()
 
 local lspconfig = require("lspconfig")
 
-local servers = { "jsonls", "lua_ls", "ruff_lsp", "pyright", "graphql" }
+local servers = { "jsonls", "lua_ls", "ruff_lsp", "pyright", "graphql", "volar", "actionlint" }
 
 mason.setup({ ensure_installed = servers })
 

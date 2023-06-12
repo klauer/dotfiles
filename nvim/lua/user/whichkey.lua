@@ -84,7 +84,7 @@ local normal_mappings = {
     "Buffers",
   },
   ["d"] = {
-    "<cmd>lua require('neogen').generate({annotation_convention={python='numpydoc_tweaked'}})<CR>",
+    "<cmd>lua require('neogen').generate({annotation_convention={python='numpydoc'}})<CR>",
     "Numpy Docstring",
   },
   ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
