@@ -150,7 +150,7 @@ cdr() {
       query_str=""
     fi
   fi
-  dir=$(find $HOME/Repos -maxdepth 1 -type d 2> /dev/null | fzf +m $query_str) &&
+  dir=$(ls -d $HOME/Repos/*/ 2> /dev/null | fzf +m $query_str) &&
   echo "cd \"$dir\"" &&
   history -s "cd \"$dir\"" &&
   cd "$dir"
