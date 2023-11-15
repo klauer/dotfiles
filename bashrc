@@ -246,3 +246,15 @@ sshcd() {
       ${command}
     "
 }
+
+psb_scp_to_here() {
+    file="$1";
+    path="$PWD"
+
+    if [[ "$path" =~ $HOME/.* ]]; then
+      path=${path#"$HOME/"}
+      echo 'Adjusting path for $HOME:' "$path"
+    fi
+
+    scp "psbuild:$path/$file" .
+}

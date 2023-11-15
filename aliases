@@ -76,6 +76,12 @@ function wherep() {
     lib=$1
     python -c "import os, $lib; print('$lib=', $lib.__file__, '\ncd ', os.path.dirname($lib.__file__), '\nversion=', getattr($lib, '__version__', '?'));";
 }
+function cdp() {
+    lib=$1
+    libdir=$(python -c "import os, $lib; print(os.path.dirname($lib.__file__))")
+    echo "Path for $lib is $libdir"
+    cd "$libdir"
+}
 function github_pr() {
     echo "PR $1 from origin into branch $2:"
     git fetch origin pull/$1/head:$2
@@ -153,3 +159,4 @@ alias iocs="cat /cds/data/iocData/.all_iocs/iocs.txt"
 alias gdbpython="gdb --args `which python`"
 alias gdbdevpython="PYTHONPATH=$HOME/dev_path:$PYTHONPATH gdb --args `which python`"
 alias psb="sshcd psbuild"
+alias ghfork="gh repo fork --remote-name klauer"
