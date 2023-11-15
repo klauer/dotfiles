@@ -1,0 +1,11 @@
+#!/bin/bash
+
+REPO=$1
+
+[ -z "$REPO" ] && exit 1
+
+cd $HOME/Repos
+
+git clone $REPO
+
+tmuxr $(basename $REPO)

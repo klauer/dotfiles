@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Requires: IPython, jupyter-console
+# ensure locally running in `base` env
+
+echo "Run 'jupyter console --existing kernel-WXYZ.json' after this"
+gdb --eval-command="python from IPython import embed_kernel; embed_kernel()" $@

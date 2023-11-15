@@ -1,0 +1,47 @@
+#!/bin/bash
+
+
+export PKGS="$1"
+if [ -z "$PKGS" ]; then
+    PKGS="pcdsdevices"
+fi
+
+shift
+export ENVS="$*"
+
+if [ -z "$ENVS" ]; then
+    ENVS="mfx tmo xcs cxi rix tst xpp mec ued"
+fi
+
+export SRC='
+source $ENV_PATH >/dev/null 2>/dev/null
+
+for pkg in "$PKGS"; do
+    python -u -c "
+import os
+import sys
+import json
+import $pkg
+version_info = dict(
+    env_name=os.environ[\"ENV_NAME\"],
+    pkg=\"$pkg\",
+    file=$pkg.__file__,
+    version=$pkg.__version__,
+    python=sys.executable,
+    conda_prefix=os.environ[\"CONDA_PREFIX\"],
+)
+print(json.dumps(version_info, indent=4), flush=True)
+"
+done
+'
+
+(
+    echo "["
+    for ENV_NAME in $ENVS; do
+        ENV_PATH="/cds/group/pcds/pyps/apps/hutch-python/$ENV_NAME/${ENV_NAME}env"
+        bash --norc -c "export ENV_PATH=$ENV_PATH; export ENV_NAME=$ENV_NAME; export PKGS=$PKGS; $SRC"
+        echo ","
+    done
+    echo "{}"
+    echo "]"
+) | tee versions.txt | jq -r ".[] | [.env_name, .conda_prefix, .pkg, .version, .file] | @tsv"

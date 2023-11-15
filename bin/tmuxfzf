@@ -1,0 +1,11 @@
+#!/bin/bash
+
+PARENT_DIR=${2-Repos}
+REPO=$(cd $HOME/$PARENT_DIR && ls -d */ | tr -d "/" | fzf)
+
+if [ -z "$REPO" ]; then
+    exit 1
+fi
+
+history -s "tmuxr $REPO"
+tmuxr $REPO

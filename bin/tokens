@@ -1,0 +1,5 @@
+#!/bin/bash
+
+export KRB5CCNAME=$HOME/.kerb
+kinit -R || kinit -l 14d -r 14d -c $HOME/.kerb
+aklog -d

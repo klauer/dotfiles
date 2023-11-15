@@ -1,0 +1,6 @@
+#!/bin/bash
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+ls /reg/g/pcds/pyps/config/*/iocmanager.cfg | \
+    /reg/g/pcds/pyps/conda/py36/envs/dev/bin/python ${DIR}/all_stcmd.py $@
